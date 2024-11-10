@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
@@ -14,12 +14,29 @@ const navigation = [
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 0);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <header className="fixed w-full bg-white shadow-sm z-50">
+    <header className={`fixed w-full z-50 transition-all duration-300 ${
+      scrolled ? 'bg-white shadow-md' : 'bg-transparent'
+    }`}>
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
-          <Link href="/" className="text-2xl font-bold text-primary-600">
+          <Link 
+            href="/" 
+            className={`text-2xl font-bold transition-colors duration-300 ${
+              scrolled ? 'text-primary-600' : 'text-white'
+            }`}
+          >
             Global Logistics
           </Link>
 
@@ -28,7 +45,9 @@ export default function Header() {
               <Link
                 key={link.name}
                 href={link.href}
-                className="text-gray-700 hover:text-primary-600 transition-colors"
+                className={`transition-colors duration-300 ${
+                  scrolled ? 'text-gray-700 hover:text-primary-600' : 'text-white hover:text-gray-200'
+                }`}
               >
                 {link.name}
               </Link>
@@ -37,7 +56,9 @@ export default function Header() {
 
           <button
             type="button"
-            className="md:hidden"
+            className={`md:hidden transition-colors duration-300 ${
+              scrolled ? 'text-gray-700' : 'text-white'
+            }`}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             {mobileMenuOpen ? (
@@ -53,7 +74,7 @@ export default function Header() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="md:hidden"
+            className="md:hidden bg-white shadow-lg rounded-b-lg"
           >
             <div className="space-y-1 px-4 pb-3 pt-2">
               {navigation.map((link) => (
