@@ -82,7 +82,7 @@ export default function Hero() {
             repeat: Infinity,
             ease: "linear",
           }}
-          style={{ top: '10%', left: '20%' }}
+          style={{ top: '10%', left: '30%' }}
         />
         <motion.div
           className="absolute w-96 h-96 rounded-full bg-secondary-500/10 blur-3xl"
@@ -105,7 +105,7 @@ export default function Hero() {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="max-w-4xl"
+          className="max-w-4xl mx-auto ml-auto lg:ml-[15%]"
         >
           <div className="flex flex-col gap-8">
             {/* Main heading */}
@@ -119,7 +119,7 @@ export default function Hero() {
                 Advanced 3PL Solutions
               </motion.div>
               <motion.h1 
-                className="text-6xl font-bold text-white leading-tight"
+                className="text-5xl lg:text-6xl font-bold text-white leading-tight"
                 variants={textRevealVariants}
               >
                 Streamline Your <span className="text-primary-500">Supply Chain</span>
@@ -130,7 +130,7 @@ export default function Hero() {
             {/* Description */}
             <motion.p 
               variants={itemVariants}
-              className="text-xl text-gray-200 max-w-2xl"
+              className="text-lg lg:text-xl text-gray-200 max-w-2xl"
             >
               Comprehensive warehousing and third-party logistics solutions tailored 
               to optimize your distribution network and enhance operational efficiency.
@@ -139,7 +139,7 @@ export default function Hero() {
             {/* Features */}
             <motion.div 
               variants={itemVariants}
-              className="flex gap-8 mb-8"
+              className="flex flex-col sm:flex-row gap-4 sm:gap-8 mb-8"
             >
               {features.map((feature) => (
                 <motion.div
