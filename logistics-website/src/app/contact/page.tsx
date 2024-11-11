@@ -18,7 +18,7 @@ export default function ContactPage() {
   const emailAddress = 'info@saiyanapharmacare.com';
   const phoneNumber = '+91 9440649884';
   const address = 'Kowluru Arcade, Opp: Papaji Dhaba Lane, Shivam Rd, New Nallakunta, Hyderabad, Telangana 500044, India';
-  const googleMapsUrl = 'https://www.google.com/maps/search/?api=1&query=Saiyana+Pharmacare+Hyderabad';
+  const googleMapsUrl = 'https://maps.app.goo.gl/X9p99j1DyjYbfLzH8';
 
   const handleCopyEmail = async () => {
     try {
