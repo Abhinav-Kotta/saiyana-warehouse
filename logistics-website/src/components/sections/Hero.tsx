@@ -69,7 +69,6 @@ export default function Hero() {
         style={{ backgroundImage: 'url(/api/placeholder/1200/600)' }}
       />
 
-
       {/* Animated background shapes */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
