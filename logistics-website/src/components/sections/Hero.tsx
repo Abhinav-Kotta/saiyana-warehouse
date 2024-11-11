@@ -141,7 +141,7 @@ export default function Hero() {
               variants={itemVariants}
               className="flex gap-8 mb-8"
             >
-              {features.map((feature, index) => (
+              {features.map((feature) => (
                 <motion.div
                   key={feature.text}
                   variants={floatingIconVariants}
