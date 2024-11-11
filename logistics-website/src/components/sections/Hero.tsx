@@ -74,9 +74,9 @@ export default function Hero() {
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1, delay: 0.5 }}
-        className="absolute right-0 top-[20%] z-0"  // Changed from top-1/2 -translate-y-1/2 to top-[20%]
+        className="absolute right-0 top-0 z-0"  // Changed positioning
       >
-        <svg width="800" height="1000" viewBox="0 0 800 1000" className="opacity-50">
+        <svg width="400" height="500" viewBox="0 0 800 1000" className="opacity-50"> {/* Reduced width and height */}
           <defs>
             <linearGradient id="sGradient" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" stopColor="#0ea5e9" stopOpacity="0.3"/>
