@@ -70,34 +70,43 @@ export default function Hero() {
       />
 
       {/* Large Letter S with Image */}
+      {/* Large Letter S with Image */}
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1, delay: 0.5 }}
-        className="absolute -right-[10%] top-1/2 -translate-y-1/2 z-0 w-[800px] h-[1000px] overflow-hidden opacity-30"
+        className="absolute right-0 top-1/2 -translate-y-1/2 z-0"
       >
-        <div className="relative w-full h-full">
-          <div className="absolute inset-0 mix-blend-screen">
-            <motion.div
-              initial={{ backgroundPosition: '0% 50%' }}
-              animate={{ backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
-              transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
-              className="w-full h-full bg-gradient-to-r from-primary-400/30 via-white/50 to-primary-400/30"
-              style={{ 
-                maskImage: 'url("/S.svg")',
-                WebkitMaskImage: 'url("/S.svg")',
-                maskSize: 'contain',
-                WebkitMaskSize: 'contain',
-                maskRepeat: 'no-repeat',
-                WebkitMaskRepeat: 'no-repeat',
-                maskPosition: 'center',
-                WebkitMaskPosition: 'center'
-              }}
-            />
-          </div>
-        </div>
+        <svg width="800" height="1000" viewBox="0 0 800 1000" className="opacity-50">
+          <defs>
+            <linearGradient id="sGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#0ea5e9" stopOpacity="0.3"/>
+              <stop offset="50%" stopColor="white" stopOpacity="0.5"/>
+              <stop offset="100%" stopColor="#0ea5e9" stopOpacity="0.3"/>
+            </linearGradient>
+          </defs>
+          
+          {/* Base S Shape */}
+          <path
+            d="M600,750 
+              C600,850 500,900 350,900 
+              C200,900 100,850 90,750 
+              L200,750 
+              C210,800 250,825 350,825 
+              C450,825 475,800 475,750 
+              C475,650 90,700 90,450 
+              C90,350 190,300 340,300 
+              C490,300 590,350 600,450 
+              L490,450 
+              C480,400 440,375 340,375 
+              C240,375 215,400 215,450 
+              C215,550 600,500 600,750 Z"
+            fill="url(#sGradient)"
+            stroke="rgba(255,255,255,0.2)"
+            strokeWidth="2"
+          />
+        </svg>
       </motion.div>
-
       {/* Animated background shapes */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
