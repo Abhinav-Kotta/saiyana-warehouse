@@ -25,12 +25,13 @@ export default function Footer() {
             <div>
               <h3 className="text-xl font-bold mb-6 text-white flex items-center gap-2">
                 <Package className="w-5 h-5 text-primary-400" />
-                Saiyana
+                Saiyana Group
               </h3>
               <p className="text-gray-300 mb-6">
-                Your strategic partner in global logistics and supply chain solutions. 
-                Delivering excellence through innovative 3PL services and advanced 
-                warehousing technology.
+                Founded in 1996 by Namburi Sekhar, Saiyana Group has evolved from 
+                stationery product marketing to becoming pioneers in warehousing and 
+                logistics. We pride ourselves on building lasting relationships and 
+                delivering cost-effective solutions for distributors and retailers.
               </p>
               <div className="flex space-x-4">
                 <div className="w-12 h-12 rounded-lg bg-gray-800 flex items-center justify-center hover:bg-primary-600 transition-colors">
@@ -52,7 +53,7 @@ export default function Footer() {
                 <li>
                   <Link href="/about" className="text-gray-300 hover:text-primary-400 flex items-center gap-2 group">
                     <span className="w-1.5 h-1.5 bg-primary-500 rounded-full group-hover:w-2 transition-all" />
-                    About Saiyana
+                    About Us
                   </Link>
                 </li>
                 <li>
@@ -62,9 +63,9 @@ export default function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/facilities" className="text-gray-300 hover:text-primary-400 flex items-center gap-2 group">
+                  <Link href="/history" className="text-gray-300 hover:text-primary-400 flex items-center gap-2 group">
                     <span className="w-1.5 h-1.5 bg-primary-500 rounded-full group-hover:w-2 transition-all" />
-                    Facilities
+                    Our Journey
                   </Link>
                 </li>
                 <li>
@@ -83,25 +84,25 @@ export default function Footer() {
                 <li>
                   <Link href="/services#warehousing" className="text-gray-300 hover:text-primary-400 flex items-center gap-2 group">
                     <span className="w-1.5 h-1.5 bg-primary-500 rounded-full group-hover:w-2 transition-all" />
-                    Smart Warehousing
+                    Warehousing Solutions
                   </Link>
                 </li>
                 <li>
                   <Link href="/services#distribution" className="text-gray-300 hover:text-primary-400 flex items-center gap-2 group">
                     <span className="w-1.5 h-1.5 bg-primary-500 rounded-full group-hover:w-2 transition-all" />
-                    Distribution Network
+                    Distribution Services
                   </Link>
                 </li>
                 <li>
-                  <Link href="/services#inventory" className="text-gray-300 hover:text-primary-400 flex items-center gap-2 group">
+                  <Link href="/services#logistics" className="text-gray-300 hover:text-primary-400 flex items-center gap-2 group">
                     <span className="w-1.5 h-1.5 bg-primary-500 rounded-full group-hover:w-2 transition-all" />
-                    Inventory Management
+                    Logistics Management
                   </Link>
                 </li>
                 <li>
-                  <Link href="/services#technology" className="text-gray-300 hover:text-primary-400 flex items-center gap-2 group">
+                  <Link href="/services#retail" className="text-gray-300 hover:text-primary-400 flex items-center gap-2 group">
                     <span className="w-1.5 h-1.5 bg-primary-500 rounded-full group-hover:w-2 transition-all" />
-                    Supply Chain Technology
+                    Retail Solutions
                   </Link>
                 </li>
               </ul>
@@ -144,7 +145,7 @@ export default function Footer() {
           {/* Copyright */}
           <div className="border-t border-gray-800 mt-12 pt-8 text-center">
             <p className="text-gray-400">
-              &copy; {currentYear} Saiyana Logistics & Warehousing. All rights reserved.
+              &copy; {currentYear} Saiyana Group - Pioneering Logistics Since 1996. All rights reserved.
             </p>
           </div>
         </div>

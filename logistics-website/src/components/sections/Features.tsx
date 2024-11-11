@@ -1,28 +1,28 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Shield, Clock, Users, Trophy } from 'lucide-react';
+import { ShieldCheck, Boxes, HeadphonesIcon, BarChart3 } from 'lucide-react';
 
 const features = [
   {
-    title: 'Enterprise Security',
-    description: 'Military-grade encryption and blockchain tracking',
-    icon: Shield,
+    title: 'Secure Storage',
+    description: '24/7 monitored facilities with inventory protection',
+    icon: ShieldCheck,
   },
   {
-    title: 'Real-Time Delivery',
-    description: 'Live tracking with predictive ETA technology',
-    icon: Clock,
+    title: 'Flexible Space',
+    description: 'Scalable warehousing with multi-client capabilities',
+    icon: Boxes,
   },
   {
-    title: 'Expert Solutions',
-    description: 'Industry veterans and AI-powered support',
-    icon: Users,
+    title: 'Dedicated Support',
+    description: 'Professional account management and live assistance',
+    icon: HeadphonesIcon,
   },
   {
-    title: 'Premium Service',
-    description: '99.9% satisfaction rate with 24/7 support',
-    icon: Trophy,
+    title: 'Real-Time Visibility',
+    description: 'Inventory tracking and performance analytics',
+    icon: BarChart3,
   },
 ];
 
@@ -75,7 +75,7 @@ export default function Features() {
         >
           <h2 className="text-4xl font-bold mb-4 text-white">Why Choose Saiyana</h2>
           <p className="text-gray-400 text-lg">
-            Next-level logistics excellence powered by innovation
+            Your trusted partner in third-party logistics excellence
           </p>
         </motion.div>
 

@@ -1,30 +1,30 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Truck, Package, BarChart3, Globe2 } from 'lucide-react';
+import { Package, TruckIcon, ClipboardCheck, CircuitBoard } from 'lucide-react';
 import Card from '@/components/ui/Card';
 
 const services = [
   {
-    title: 'Smart Warehousing',
+    title: 'Warehousing & Storage',
     description:
-      'AI-powered inventory management with real-time tracking and automation',
+      'Climate-controlled facilities, inventory management, and advanced security systems for safe storage',
     icon: Package,
   },
   {
-    title: 'Intelligent Distribution',
-    description: 'Machine learning optimized routing across global networks',
-    icon: Truck,
+    title: 'Order Fulfillment',
+    description: 'End-to-end pick, pack, and ship services with real-time order tracking',
+    icon: ClipboardCheck,
   },
   {
-    title: 'Predictive Analytics',
-    description: 'Advanced forecasting and supply chain optimization',
-    icon: BarChart3,
+    title: 'Transportation',
+    description: 'Integrated shipping solutions with LTL, FTL, and last-mile delivery options',
+    icon: TruckIcon,
   },
   {
-    title: 'Global Network',
-    description: 'Seamless integration with international logistics partners',
-    icon: Globe2,
+    title: 'Technology Solutions',
+    description: 'WMS integration, inventory tracking, and automated reporting systems',
+    icon: CircuitBoard,
   },
 ];
 
@@ -96,9 +96,9 @@ export default function Services() {
           transition={{ duration: 0.6 }}
           className="text-center max-w-3xl mx-auto mb-16"
         >
-          <h2 className="text-4xl font-bold mb-4 text-gray-900">Our Solutions</h2>
+          <h2 className="text-4xl font-bold mb-4 text-gray-900">3PL Services</h2>
           <p className="text-gray-700 text-lg">
-            Next-generation logistics powered by cutting-edge technology
+            End-to-end warehousing and logistics solutions for your business
           </p>
         </motion.div>
 
