@@ -7,8 +7,15 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Global Logistics Solutions",
-  description: "Professional warehousing and logistics services",
+  title: "Saiyana - Pharmaceutical Care Solutions",
+  description: "Professional pharmaceutical care and distribution services. Located in Hyderabad, providing quality healthcare solutions across India.",
+  keywords: "pharmaceutical, healthcare, medicine distribution, Hyderabad, pharmaceutical care",
+  authors: [{ name: "Saiyana" }],
+  openGraph: {
+    title: "Saiyana - Pharmaceutical Care Solutions",
+    description: "Professional pharmaceutical care and distribution services in Hyderabad",
+    type: "website",
+  }
 };
 
 export default function RootLayout({
