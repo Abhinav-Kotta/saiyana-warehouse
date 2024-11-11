@@ -93,7 +93,7 @@ export default function Contact() {
             viewport={{ once: true }}
           >
             <motion.div variants={itemVariants} className="text-center mb-12">
-              <h2 className="text-4xl font-bold mb-4">Get Started with Saiyana</h2>
+              <h2 className="text-4xl font-bold mb-4 text-gray-900">Get Started with Saiyana</h2>
               <p className="text-gray-700 text-lg">
                 Ready to transform your supply chain? Let&apos;s discuss your logistics needs.
               </p>
