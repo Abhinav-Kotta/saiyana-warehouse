@@ -16,10 +16,10 @@ interface CounterProps {
 }
 
 const stats: Stat[] = [
-  { label: 'Warehouses', value: 50, suffix: '+' },
-  { label: 'Countries Served', value: 30, suffix: '+' },
-  { label: 'Happy Clients', value: 1000, suffix: '+' },
-  { label: 'Deliveries', value: 1, suffix: 'M+' },
+  { label: 'Global Warehouses', value: 50, suffix: '+' },
+  { label: 'Countries Connected', value: 30, suffix: '+' },
+  { label: 'Enterprise Clients', value: 1000, suffix: '+' },
+  { label: 'Annual Shipments', value: 1, suffix: 'M+' },
 ];
 
 const Counter = ({ value, suffix, duration = 2 }: CounterProps) => {
@@ -55,7 +55,7 @@ const Counter = ({ value, suffix, duration = 2 }: CounterProps) => {
   }, [value, duration, isInView]);
 
   return (
-    <span ref={elementRef}>
+    <span ref={elementRef} className="relative">
       {count.toLocaleString()}{suffix}
     </span>
   );
@@ -63,8 +63,31 @@ const Counter = ({ value, suffix, duration = 2 }: CounterProps) => {
 
 export default function Stats() {
   return (
-    <section className="py-20 bg-primary-600">
-      <div className="container mx-auto px-4">
+    <section className="py-20 bg-gradient-to-r from-primary-600 to-primary-700 relative overflow-hidden">
+      {/* Animated background pattern */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 opacity-10">
+          <motion.div
+            className="absolute w-full h-full"
+            style={{
+              backgroundImage: `radial-gradient(circle at 3px 3px, white 1px, transparent 0)`,
+              backgroundSize: '30px 30px',
+            }}
+            animate={{
+              x: [0, -15],
+              y: [0, -15],
+            }}
+            transition={{
+              duration: 5,
+              repeat: Infinity,
+              repeatType: 'reverse',
+              ease: 'linear',
+            }}
+          />
+        </div>
+      </div>
+
+      <div className="container relative mx-auto px-4">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
           {stats.map((stat, index) => (
             <motion.div
@@ -72,16 +95,20 @@ export default function Stats() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.2 }}
-              className="text-center text-white"
+              className="text-center text-white relative group"
             >
-              <div className="text-4xl font-bold mb-2">
+              <motion.div
+                className="text-5xl font-bold mb-3"
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
                 <Counter 
                   value={stat.value} 
                   suffix={stat.suffix}
                   duration={2} 
                 />
-              </div>
-              <div className="text-lg">{stat.label}</div>
+              </motion.div>
+              <div className="text-lg text-primary-100">{stat.label}</div>
             </motion.div>
           ))}
         </div>
