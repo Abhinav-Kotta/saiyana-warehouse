@@ -44,7 +44,7 @@ export default function ContactPage() {
             className="max-w-6xl mx-auto"
           >
             <div className="text-center mb-12">
-              <h1 className="text-4xl font-bold mb-4">Contact Us</h1>
+              <h1 className="text-4xl font-bold mb-4 text-gray-900">Contact Us</h1>
               <p className="text-gray-600">Get in touch with our team</p>
             </div>
 
