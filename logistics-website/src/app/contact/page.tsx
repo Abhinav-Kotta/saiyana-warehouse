@@ -17,7 +17,7 @@ export default function ContactPage() {
 
   const emailAddress = 'info@saiyanapharmacare.com';
   const phoneNumber = '+91 9440649884';
-  const address = '2-2-1109/5/1, Vaibhav Colony, Bagh Amberpet, Amberpet, Hyderabad, Telangana 500013, India';
+  const address = 'Kowluru Arcade, Opp: Papaji Dhaba Lane, Shivam Rd, New Nallakunta, Hyderabad, Telangana 500044, India';
   const googleMapsUrl = 'https://www.google.com/maps/search/?api=1&query=Saiyana+Pharmacare+Hyderabad';
 
   const handleCopyEmail = async () => {
