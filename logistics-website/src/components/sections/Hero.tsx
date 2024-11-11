@@ -132,7 +132,7 @@ export default function Hero() {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, delay: 0.5 }}
-              className="absolute -right-[60%] top-[20%] z-0"
+              className="absolute -right-[50%] top-[20%] z-0"
             >
               <svg width="300" height="375" viewBox="0 0 800 1000" className="opacity-50">
                 <defs>
