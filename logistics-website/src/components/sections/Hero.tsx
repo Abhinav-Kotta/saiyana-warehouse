@@ -69,43 +69,6 @@ export default function Hero() {
         style={{ backgroundImage: 'url(/api/placeholder/1200/600)' }}
       />
 
-      {/* Large Letter S with Image */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1, delay: 0.5 }}
-        className="absolute right-0 top-0 z-0"  // Changed positioning
-      >
-        <svg width="400" height="500" viewBox="0 0 800 1000" className="opacity-50"> {/* Reduced width and height */}
-          <defs>
-            <linearGradient id="sGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#0ea5e9" stopOpacity="0.3"/>
-              <stop offset="50%" stopColor="white" stopOpacity="0.5"/>
-              <stop offset="100%" stopColor="#0ea5e9" stopOpacity="0.3"/>
-            </linearGradient>
-          </defs>
-          
-          {/* Base S Shape */}
-          <path
-            d="M600,750 
-              C600,850 500,900 350,900 
-              C200,900 100,850 90,750 
-              L200,750 
-              C210,800 250,825 350,825 
-              C450,825 475,800 475,750 
-              C475,650 90,700 90,450 
-              C90,350 190,300 340,300 
-              C490,300 590,350 600,450 
-              L490,450 
-              C480,400 440,375 340,375 
-              C240,375 215,400 215,450 
-              C215,550 600,500 600,750 Z"
-            fill="url(#sGradient)"
-            stroke="rgba(255,255,255,0.2)"
-            strokeWidth="2"
-          />
-        </svg>
-      </motion.div>
 
       {/* Animated background shapes */}
       <div className="absolute inset-0 overflow-hidden">
@@ -143,7 +106,7 @@ export default function Hero() {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="max-w-4xl mx-auto lg:mr-[35%]"
+          className="max-w-4xl mx-auto lg:mr-[35%] relative" // Added relative positioning
         >
           <div className="flex flex-col gap-8">
             {/* Main heading */}
@@ -163,6 +126,43 @@ export default function Hero() {
                 Streamline Your <span className="text-primary-500">Supply Chain</span>
                 <br />With Saiyana
               </motion.h1>
+            </motion.div>
+
+            {/* S Letter positioned relative to the heading */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, delay: 0.5 }}
+              className="absolute -right-[60%] top-[20%] z-0"
+            >
+              <svg width="300" height="375" viewBox="0 0 800 1000" className="opacity-50">
+                <defs>
+                  <linearGradient id="sGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#0ea5e9" stopOpacity="0.3"/>
+                    <stop offset="50%" stopColor="white" stopOpacity="0.5"/>
+                    <stop offset="100%" stopColor="#0ea5e9" stopOpacity="0.3"/>
+                  </linearGradient>
+                </defs>
+                
+                <path
+                  d="M600,750 
+                    C600,850 500,900 350,900 
+                    C200,900 100,850 90,750 
+                    L200,750 
+                    C210,800 250,825 350,825 
+                    C450,825 475,800 475,750 
+                    C475,650 90,700 90,450 
+                    C90,350 190,300 340,300 
+                    C490,300 590,350 600,450 
+                    L490,450 
+                    C480,400 440,375 340,375 
+                    C240,375 215,400 215,450 
+                    C215,550 600,500 600,750 Z"
+                  fill="url(#sGradient)"
+                  stroke="rgba(255,255,255,0.2)"
+                  strokeWidth="2"
+                />
+              </svg>
             </motion.div>
 
             {/* Description */}
