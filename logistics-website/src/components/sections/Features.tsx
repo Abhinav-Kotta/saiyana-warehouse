@@ -1,59 +1,108 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Shield, Clock, Users, Trophy } from 'lucide-react';
+import { ShieldCheck, Boxes, HeadphonesIcon, BarChart3 } from 'lucide-react';
 
 const features = [
   {
-    title: 'Security First',
-    description: 'Advanced security systems and 24/7 monitoring',
-    icon: Shield,
+    title: 'Secure Storage',
+    description: '24/7 monitored facilities with inventory protection',
+    icon: ShieldCheck,
   },
   {
-    title: 'Fast Delivery',
-    description: 'Optimized routes and efficient delivery networks',
-    icon: Clock,
+    title: 'Flexible Space',
+    description: 'Scalable warehousing with multi-client capabilities',
+    icon: Boxes,
   },
   {
-    title: 'Expert Team',
-    description: 'Highly trained and experienced professionals',
-    icon: Users,
+    title: 'Dedicated Support',
+    description: 'Professional account management and live assistance',
+    icon: HeadphonesIcon,
   },
   {
-    title: 'Quality Service',
-    description: 'Award-winning customer service and support',
-    icon: Trophy,
+    title: 'Real-Time Visibility',
+    description: 'Inventory tracking and performance analytics',
+    icon: BarChart3,
   },
 ];
 
 export default function Features() {
-  return (
-    <section className="py-20">
-      <div className="container mx-auto px-4">
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <h2 className="text-3xl font-bold mb-4">Why Choose Us</h2>
-          <p className="text-gray-600">
-            Experience excellence in logistics with our premium features
-          </p>
-        </div>
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {features.map((feature, index) => (
+  const itemVariants = {
+    hidden: { opacity: 0, scale: 0.9 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 0.6,
+      },
+    },
+  };
+
+  return (
+    <section className="py-20 bg-gray-900 relative overflow-hidden">
+      {/* Animated background */}
+      <div className="absolute inset-0">
+        <motion.div
+          className="absolute w-full h-full bg-[radial-gradient(circle_at_50%_50%,rgba(14,165,233,0.1),transparent_70%)]"
+          animate={{
+            scale: [1, 1.1, 1],
+            opacity: [0.3, 0.5, 0.3],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+        />
+      </div>
+
+      <div className="container relative mx-auto px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center max-w-3xl mx-auto mb-16"
+        >
+          <h2 className="text-4xl font-bold mb-4 text-white">Why Choose Saiyana</h2>
+          <p className="text-gray-400 text-lg">
+            Your trusted partner in third-party logistics excellence
+          </p>
+        </motion.div>
+
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
+        >
+          {features.map((feature) => (
             <motion.div
               key={feature.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.2 }}
-              className="text-center"
+              variants={itemVariants}
+              className="text-center group"
             >
-              <div className="mb-4 inline-block p-4 bg-primary-50 rounded-full">
-                <feature.icon className="h-8 w-8 text-primary-500" />
+              <div className="mb-6 inline-block relative">
+                <div className="absolute inset-0 bg-primary-500/20 blur-xl rounded-full transform group-hover:scale-110 transition-transform" />
+                <div className="relative p-5 bg-gray-800 rounded-2xl border border-gray-700">
+                  <feature.icon className="h-8 w-8 text-primary-400" />
+                </div>
               </div>
-              <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-              <p className="text-gray-600">{feature.description}</p>
+              <h3 className="text-xl font-semibold mb-3 text-white">{feature.title}</h3>
+              <p className="text-gray-400">{feature.description}</p>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -1,60 +1,135 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Truck, Package, BarChart3, Globe2 } from 'lucide-react';
+import { Package, TruckIcon, ClipboardCheck, CircuitBoard } from 'lucide-react';
 import Card from '@/components/ui/Card';
 
 const services = [
   {
-    title: 'Warehousing',
+    title: 'Warehousing & Storage',
     description:
-      'State-of-the-art facilities with climate control and 24/7 security',
+      'Climate-controlled facilities, inventory management, and advanced security systems for safe storage',
     icon: Package,
   },
   {
-    title: 'Distribution',
-    description: 'Efficient distribution networks covering major global markets',
-    icon: Truck,
+    title: 'Order Fulfillment',
+    description: 'End-to-end pick, pack, and ship services with real-time order tracking',
+    icon: ClipboardCheck,
   },
   {
-    title: 'Inventory Management',
-    description: 'Real-time tracking and advanced inventory solutions',
-    icon: BarChart3,
+    title: 'Transportation',
+    description: 'Integrated shipping solutions with LTL, FTL, and last-mile delivery options',
+    icon: TruckIcon,
   },
   {
-    title: 'Global Logistics',
-    description: 'End-to-end supply chain management and optimization',
-    icon: Globe2,
+    title: 'Technology Solutions',
+    description: 'WMS integration, inventory tracking, and automated reporting systems',
+    icon: CircuitBoard,
   },
 ];
 
 export default function Services() {
-  return (
-    <section className="py-20 bg-gray-50">
-      <div className="container mx-auto px-4">
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <h2 className="text-3xl font-bold mb-4">Our Services</h2>
-          <p className="text-gray-600">
-            Comprehensive logistics solutions tailored to your needs
-          </p>
-        </div>
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {services.map((service, index) => (
+  const cardVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+      },
+    },
+    hover: {
+      y: -8,
+      transition: {
+        duration: 0.3,
+      },
+    },
+  };
+
+  return (
+    <section className="py-24 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
+      {/* Decorative elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <motion.div
+          className="absolute w-96 h-96 rounded-full bg-primary-500/5 blur-3xl"
+          animate={{
+            x: [0, 50, 0],
+            y: [0, 25, 0],
+          }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+          style={{ top: '20%', left: '10%' }}
+        />
+        <motion.div
+          className="absolute w-96 h-96 rounded-full bg-secondary-500/5 blur-3xl"
+          animate={{
+            x: [0, -30, 0],
+            y: [0, 40, 0],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+          style={{ bottom: '10%', right: '10%' }}
+        />
+      </div>
+
+      <div className="container relative mx-auto px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center max-w-3xl mx-auto mb-16"
+        >
+          <h2 className="text-4xl font-bold mb-4 text-gray-900">3PL Services</h2>
+          <p className="text-gray-700 text-lg">
+            End-to-end warehousing and logistics solutions for your business
+          </p>
+        </motion.div>
+
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
+        >
+          {services.map((service) => (
             <motion.div
               key={service.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.2 }}
+              variants={cardVariants}
+              whileHover="hover"
+              className="group"
             >
-              <Card className="h-full">
-                <service.icon className="h-10 w-10 text-primary-500 mb-4" />
-                <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
-                <p className="text-gray-600">{service.description}</p>
+              <Card className="h-full p-6 backdrop-blur-sm bg-white/90 hover:shadow-lg transition-all duration-300 border border-gray-100">
+                <div className="mb-4 inline-block p-3 bg-primary-50 rounded-xl group-hover:bg-primary-100 transition-colors duration-300">
+                  <service.icon className="h-8 w-8 text-primary-500" />
+                </div>
+                <h3 className="text-xl font-semibold mb-3 text-gray-900 group-hover:text-primary-600 transition-colors duration-300">
+                  {service.title}
+                </h3>
+                <p className="text-gray-700">
+                  {service.description}
+                </p>
               </Card>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

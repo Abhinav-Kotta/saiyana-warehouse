@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="1000" viewBox="0 0 800 1000" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="gridPattern" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+    </pattern>
+    <linearGradient id="sGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0ea5e9" stop-opacity="0.3"/>
+      <stop offset="50%" stop-color="white" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#0ea5e9" stop-opacity="0.3"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background Grid -->
+  <rect width="800" height="1000" fill="url(#gridPattern)"/>
+
+  <!-- Base S Shape -->
+  <path
+    d="M600,750 
+       C600,850 500,900 350,900 
+       C200,900 100,850 90,750 
+       L200,750 
+       C210,800 250,825 350,825 
+       C450,825 475,800 475,750 
+       C475,650 90,700 90,450 
+       C90,350 190,300 340,300 
+       C490,300 590,350 600,450 
+       L490,450 
+       C480,400 440,375 340,375 
+       C240,375 215,400 215,450 
+       C215,550 600,500 600,750 Z"
+    fill="url(#sGradient)"
+    stroke="rgba(255,255,255,0.2)"
+    stroke-width="2"
+  />
+
+  <!-- Warehouse Design Elements -->
+  <g stroke="rgba(255,255,255,0.2)" fill="none">
+    <!-- Horizontal Grid Lines -->
+    <line x1="100" y1="400" x2="700" y2="400" stroke-width="1"/>
+    <line x1="100" y1="450" x2="700" y2="450" stroke-width="1"/>
+    <line x1="100" y1="500" x2="700" y2="500" stroke-width="1"/>
+    <line x1="100" y1="550" x2="700" y2="550" stroke-width="1"/>
+    <line x1="100" y1="600" x2="700" y2="600" stroke-width="1"/>
+    <line x1="100" y1="650" x2="700" y2="650" stroke-width="1"/>
+    <line x1="100" y1="700" x2="700" y2="700" stroke-width="1"/>
+    <line x1="100" y1="750" x2="700" y2="750" stroke-width="1"/>
+    <line x1="100" y1="800" x2="700" y2="800" stroke-width="1"/>
+
+    <!-- Vertical Support Lines -->
+    <line x1="200" y1="300" x2="200" y2="900" stroke-width="1"/>
+    <line x1="300" y1="300" x2="300" y2="900" stroke-width="1"/>
+    <line x1="400" y1="300" x2="400" y2="900" stroke-width="1"/>
+    <line x1="500" y1="300" x2="500" y2="900" stroke-width="1"/>
+    <line x1="600" y1="300" x2="600" y2="900" stroke-width="1"/>
+  </g>
+
+  <!-- Box Elements -->
+  <g fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.2)">
+    <rect x="150" y="400" width="80" height="80"/>
+    <rect x="270" y="400" width="80" height="80"/>
+    <rect x="390" y="400" width="80" height="80"/>
+    <rect x="150" y="550" width="80" height="80"/>
+    <rect x="270" y="550" width="80" height="80"/>
+    <rect x="390" y="550" width="80" height="80"/>
+    <rect x="150" y="700" width="80" height="80"/>
+    <rect x="270" y="700" width="80" height="80"/>
+    <rect x="390" y="700" width="80" height="80"/>
+  </g>
+</svg>
