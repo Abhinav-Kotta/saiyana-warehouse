@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { Truck, Package, BarChart3, Globe2, Boxes, Clock, Shield, Users } from 'lucide-react';
 import Card from '@/components/ui/Card';
+import Image from 'next/image';
 
 const mainServices = [
   {
@@ -106,12 +107,12 @@ export default function ServicesPage() {
             {/* Main Services */}
             <div className="mb-20">
               <div className="grid md:grid-cols-2 gap-8">
-                {mainServices.map((service, index) => (
+                {mainServices.map((service, i) => (
                   <motion.div
                     key={service.title}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.1 }}
+                    transition={{ delay: i * 0.1 }}
                   >
                     <Card className="h-full p-6 bg-white shadow-sm border border-gray-100">
                       <div className="mb-4">
@@ -136,15 +137,13 @@ export default function ServicesPage() {
             </div>
 
             {/* Additional Features */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
-              className="grid grid-cols-2 lg:grid-cols-4 gap-8"
-            >
-              {additionalFeatures.map((feature, index) => (
-                <div
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+              {additionalFeatures.map((feature, i) => (
+                <motion.div
                   key={feature.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.6 + (i * 0.1) }}
                   className="text-center p-6 bg-white rounded-2xl shadow-sm border border-gray-100"
                 >
                   <div className="inline-block p-3 bg-primary-50 rounded-xl mb-4">
@@ -152,9 +151,9 @@ export default function ServicesPage() {
                   </div>
                   <div className="text-xl font-semibold text-gray-900 mb-2">{feature.title}</div>
                   <div className="text-gray-700">{feature.description}</div>
-                </div>
+                </motion.div>
               ))}
-            </motion.div>
+            </div>
           </motion.div>
         </div>
       </section>
