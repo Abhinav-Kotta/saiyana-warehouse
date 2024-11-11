@@ -70,12 +70,11 @@ export default function Hero() {
       />
 
       {/* Large Letter S with Image */}
-      {/* Large Letter S with Image */}
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1, delay: 0.5 }}
-        className="absolute right-0 top-1/2 -translate-y-1/2 z-0"
+        className="absolute right-0 top-[20%] z-0"  // Changed from top-1/2 -translate-y-1/2 to top-[20%]
       >
         <svg width="800" height="1000" viewBox="0 0 800 1000" className="opacity-50">
           <defs>
@@ -107,6 +106,7 @@ export default function Hero() {
           />
         </svg>
       </motion.div>
+
       {/* Animated background shapes */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
