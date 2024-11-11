@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { motion } from 'framer-motion';
 import { Truck, Package, BarChart3, Globe2, Mail, Phone, Clock, MapPin } from 'lucide-react';
 
 export default function Footer() {
@@ -7,7 +6,7 @@ export default function Footer() {
 
   return (
     <footer className="bg-gray-900 text-white relative overflow-hidden">
-      {/* Subtle animated background pattern */}
+      {/* Subtle background pattern */}
       <div className="absolute inset-0 opacity-5">
         <div
           className="absolute inset-0"
