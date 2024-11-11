@@ -1,13 +1,65 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
+import { useRef, useState, useEffect } from 'react';
 
-const stats = [
-  { label: 'Warehouses', value: '50+' },
-  { label: 'Countries Served', value: '30+' },
-  { label: 'Happy Clients', value: '1000+' },
-  { label: 'Deliveries', value: '1M+' },
+interface Stat {
+  label: string;
+  value: number;
+  suffix: string;
+}
+
+interface CounterProps {
+  value: number;
+  suffix: string;
+  duration?: number;
+}
+
+const stats: Stat[] = [
+  { label: 'Warehouses', value: 50, suffix: '+' },
+  { label: 'Countries Served', value: 30, suffix: '+' },
+  { label: 'Happy Clients', value: 1000, suffix: '+' },
+  { label: 'Deliveries', value: 1, suffix: 'M+' },
 ];
+
+const Counter = ({ value, suffix, duration = 2 }: CounterProps) => {
+  const [count, setCount] = useState(0);
+  const elementRef = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(elementRef, { once: true, margin: "-100px" });
+
+  useEffect(() => {
+    if (!isInView) return;
+
+    let startTime: number;
+    let animationFrameId: number;
+
+    const animate = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+      const progress = (timestamp - startTime) / (duration * 1000);
+
+      if (progress < 1) {
+        setCount(Math.min(Math.floor(value * progress), value));
+        animationFrameId = requestAnimationFrame(animate);
+      } else {
+        setCount(value);
+      }
+    };
+
+    animationFrameId = requestAnimationFrame(animate);
+
+    return () => {
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
+    };
+  }, [value, duration, isInView]);
+
+  return (
+    <span ref={elementRef}>
+      {count.toLocaleString()}{suffix}
+    </span>
+  );
+};
 
 export default function Stats() {
   return (
@@ -22,7 +74,13 @@ export default function Stats() {
               transition={{ delay: index * 0.2 }}
               className="text-center text-white"
             >
-              <div className="text-4xl font-bold mb-2">{stat.value}</div>
+              <div className="text-4xl font-bold mb-2">
+                <Counter 
+                  value={stat.value} 
+                  suffix={stat.suffix}
+                  duration={2} 
+                />
+              </div>
               <div className="text-lg">{stat.label}</div>
             </motion.div>
           ))}
