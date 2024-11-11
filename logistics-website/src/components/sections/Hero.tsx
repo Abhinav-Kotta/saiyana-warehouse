@@ -59,7 +59,7 @@ export default function Hero() {
   ];
 
   return (
-    <section className="relative min-h-screen flex items-center">
+    <section className="relative min-h-screen flex items-center overflow-hidden">
       {/* Gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-r from-gray-900/80 via-gray-900/70 to-transparent z-10" />
       
@@ -68,6 +68,36 @@ export default function Hero() {
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: 'url(/api/placeholder/1200/600)' }}
       />
+
+      {/* Large Letter S with Image */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1, delay: 0.5 }}
+        className="absolute -right-[10%] top-1/2 -translate-y-1/2 z-0 w-[800px] h-[1000px] overflow-hidden opacity-30"
+      >
+        <div className="relative w-full h-full">
+          {/* SVG Container */}
+          <div className="absolute inset-0 mix-blend-screen">
+            <motion.div
+              initial={{ backgroundPosition: '0% 50%' }}
+              animate={{ backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
+              transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
+              className="w-full h-full bg-gradient-to-r from-primary-400/30 via-white/50 to-primary-400/30"
+              style={{ 
+                maskImage: 'url("/S.svg")',
+                WebkitMaskImage: 'url("/S.svg")',
+                maskSize: 'contain',
+                WebkitMaskSize: 'contain',
+                maskRepeat: 'no-repeat',
+                WebkitMaskRepeat: 'no-repeat',
+                maskPosition: 'center',
+                WebkitMaskPosition: 'center'
+              }}
+            />
+          </div>
+        </div>
+      </motion.div>
 
       {/* Animated background shapes */}
       <div className="absolute inset-0 overflow-hidden">
@@ -105,7 +135,7 @@ export default function Hero() {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="max-w-4xl mx-auto ml-auto lg:ml-[15%]"
+          className="max-w-4xl mx-auto lg:mr-[35%]"
         >
           <div className="flex flex-col gap-8">
             {/* Main heading */}
