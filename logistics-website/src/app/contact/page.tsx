@@ -56,7 +56,7 @@ export default function ContactPage() {
                     <div className="flex items-start space-x-4">
                       <MapPin className="w-6 h-6 text-primary-600 mt-1 flex-shrink-0" />
                       <div>
-                        <h3 className="font-semibold mb-2">Office Location</h3>
+                        <h3 className="font-semibold mb-2 text-gray-900">Office Location</h3>
                         <p className="text-gray-600 mb-2">{address}</p>
                         <a 
                           href={googleMapsUrl}
@@ -73,7 +73,7 @@ export default function ContactPage() {
                     <div className="flex items-start space-x-4">
                       <Mail className="w-6 h-6 text-primary-600 mt-1 flex-shrink-0" />
                       <div>
-                        <h3 className="font-semibold mb-2">Email</h3>
+                        <h3 className="font-semibold mb-2 text-gray-900">Email</h3>
                         <div className="space-y-2">
                           <p className="text-gray-600">{emailAddress}</p>
                           <div className="flex space-x-2">
@@ -98,7 +98,7 @@ export default function ContactPage() {
                     <div className="flex items-start space-x-4">
                       <Phone className="w-6 h-6 text-primary-600 mt-1 flex-shrink-0" />
                       <div>
-                        <h3 className="font-semibold mb-2">Phone</h3>
+                        <h3 className="font-semibold mb-2 text-gray-900">Phone</h3>
                         <a 
                           href={`tel:${phoneNumber}`}
                           className="text-gray-600 hover:text-primary-600"
@@ -111,7 +111,7 @@ export default function ContactPage() {
                     <div className="flex items-start space-x-4">
                       <Clock className="w-6 h-6 text-primary-600 mt-1 flex-shrink-0" />
                       <div>
-                        <h3 className="font-semibold mb-2">Working Hours</h3>
+                        <h3 className="font-semibold mb-2 text-gray-900">Working Hours</h3>
                         <p className="text-gray-600">MON-SAT | 9am to 6pm</p>
                         <p className="text-gray-600">SUN | 9am to 5pm</p>
                       </div>
