@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Button from '@/components/ui/Button';
-import { ArrowRight, Shield, Activity, Heart } from 'lucide-react';
+import { ArrowRight, Boxes, BarChart2, Truck } from 'lucide-react';
 
 export default function Hero() {
   const containerVariants = {
@@ -53,9 +53,9 @@ export default function Hero() {
   };
 
   const features = [
-    { icon: Shield, text: "Quality Assurance" },
-    { icon: Activity, text: "Healthcare Innovation" },
-    { icon: Heart, text: "Patient Care" },
+    { icon: Boxes, text: "Warehouse Management" },
+    { icon: Truck, text: "Distribution Solutions" },
+    { icon: BarChart2, text: "Supply Chain Optimization" },
   ];
 
   return (
@@ -116,14 +116,14 @@ export default function Hero() {
                 animate={{ scale: [1, 1.05, 1] }}
                 transition={{ duration: 2, repeat: Infinity }}
               >
-                Leading Healthcare Solutions
+                Advanced 3PL Solutions
               </motion.div>
               <motion.h1 
                 className="text-6xl font-bold text-white leading-tight"
                 variants={textRevealVariants}
               >
-                Transforming <span className="text-primary-500">Healthcare</span>
-                <br />Through Innovation
+                Streamline Your <span className="text-primary-500">Supply Chain</span>
+                <br />With Saiyana
               </motion.h1>
             </motion.div>
 
@@ -132,8 +132,8 @@ export default function Hero() {
               variants={itemVariants}
               className="text-xl text-gray-200 max-w-2xl"
             >
-              Delivering excellence in pharmaceutical care with cutting-edge solutions
-              and unwavering commitment to quality healthcare services.
+              Comprehensive warehousing and third-party logistics solutions tailored 
+              to optimize your distribution network and enhance operational efficiency.
             </motion.p>
 
             {/* Features */}
@@ -165,7 +165,7 @@ export default function Hero() {
                   size="lg"
                   className="group relative overflow-hidden transition-transform hover:scale-105 active:scale-95"
                 >
-                  Get Started
+                  Request a Quote
                   <motion.span
                     className="relative inline-block ml-2"
                     animate={{ x: [0, 5, 0] }}
@@ -180,7 +180,7 @@ export default function Hero() {
                 variant="outline" 
                 className="text-white border-white hover:bg-white hover:text-gray-900 backdrop-blur-sm transition-transform hover:scale-105 active:scale-95"
               >
-                Learn More
+                View Services
               </Button>
             </motion.div>
           </div>
