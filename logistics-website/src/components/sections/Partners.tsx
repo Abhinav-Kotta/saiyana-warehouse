@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import { motion, useAnimationControls } from 'framer-motion';
+import Image from 'next/image';
 
 interface LogoConfig {
   src: string;
@@ -99,13 +100,16 @@ export default function Partners({ logos }: PartnersProps) {
                 }}
               >
                 <div className="p-4 rounded-xl bg-white">
-                  <img
-                    src={logo.src}
-                    alt={logo.alt}
-                    className="h-full w-full object-contain"
-                    style={getLogoStyles(logo.src)}
-                    loading="eager"
-                  />
+                  <div className="relative h-full w-full">
+                    <Image
+                      src={logo.src}
+                      alt={logo.alt}
+                      fill
+                      className="object-contain"
+                      style={getLogoStyles(logo.src)}
+                      priority
+                    />
+                  </div>
                 </div>
               </motion.div>
             ))}

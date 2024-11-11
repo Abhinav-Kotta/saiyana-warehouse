@@ -3,7 +3,6 @@
 import { motion } from 'framer-motion';
 import { Truck, Package, BarChart3, Globe2, Boxes, Clock, Shield, Users } from 'lucide-react';
 import Card from '@/components/ui/Card';
-import Image from 'next/image';
 
 const mainServices = [
   {

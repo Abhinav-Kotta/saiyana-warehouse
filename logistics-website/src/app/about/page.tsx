@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Building2, Clock, Users, BarChart } from 'lucide-react';
+import Image from 'next/image';
 
 const stats = [
   { label: 'Founded', value: '1996', icon: Building2 },
@@ -95,12 +96,16 @@ export default function AboutPage() {
                 className="relative"
               >
                 <div className="aspect-[3/4] rounded-2xl bg-gray-100 overflow-hidden">
-                  <img 
-                    src="/api/placeholder/600/800" 
-                    alt="Namburi Sekhar - Founder of Saiyana Group"
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900/40 to-transparent" />
+                  <div className="relative w-full h-full">
+                    <Image 
+                      src="/api/placeholder/600/800"
+                      alt="Namburi Sekhar - Founder of Saiyana Group"
+                      fill
+                      className="object-cover"
+                      priority
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-gray-900/40 to-transparent" />
+                  </div>
                 </div>
               </motion.div>
             </div>
