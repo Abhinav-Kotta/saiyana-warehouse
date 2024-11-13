@@ -60,17 +60,34 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Enhanced gradient overlay for warehouse image */}
+      {/* Enhanced gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-r from-gray-900/95 via-gray-900/80 to-gray-900/40 z-10" />
       
-      {/* Warehouse background image */}
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ 
-          backgroundImage: 'url(/close-up-warehouse-view.jpg)',
-          backgroundPosition: '50% 50%'
-        }}
-      />
+      {/* Scrolling background images */}
+      <div className="absolute inset-0 bg-gray-900">
+        <div className="absolute inset-0 animate-slideshow">
+          <div 
+            className="absolute inset-0 bg-cover bg-center transition-opacity duration-1000"
+            style={{ 
+              backgroundImage: 'url(/close-up-warehouse-view.jpg)',
+            }}
+          />
+          <div 
+            className="absolute inset-0 bg-cover bg-center transition-opacity duration-1000"
+            style={{ 
+              backgroundImage: 'url(/workers-carrying-sacks.png)',
+              animationDelay: '8s'
+            }}
+          />
+          <div 
+            className="absolute inset-0 bg-cover bg-center transition-opacity duration-1000"
+            style={{ 
+              backgroundImage: 'url(/row-of-trucks.PNG)',
+              animationDelay: '16s'
+            }}
+          />
+        </div>
+      </div>
 
       {/* Animated background accents */}
       <div className="absolute inset-0 overflow-hidden">
