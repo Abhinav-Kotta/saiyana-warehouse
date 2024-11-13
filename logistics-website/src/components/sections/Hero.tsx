@@ -60,34 +60,30 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Enhanced gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-gray-900/95 via-gray-900/80 to-gray-900/40 z-10" />
-      
       {/* Scrolling background images */}
-      <div className="absolute inset-0 bg-gray-900">
-        <div className="absolute inset-0 animate-slideshow">
-          <div 
-            className="absolute inset-0 bg-cover bg-center transition-opacity duration-1000"
-            style={{ 
-              backgroundImage: 'url(/close-up-warehouse-view.jpg)',
-            }}
-          />
-          <div 
-            className="absolute inset-0 bg-cover bg-center transition-opacity duration-1000"
-            style={{ 
-              backgroundImage: 'url(/workers-carrying-sacks.png)',
-              animationDelay: '8s'
-            }}
-          />
-          <div 
-            className="absolute inset-0 bg-cover bg-center transition-opacity duration-1000"
-            style={{ 
-              backgroundImage: 'url(/row-of-trucks.PNG)',
-              animationDelay: '16s'
-            }}
-          />
+      <div className="absolute inset-0 bg-gray-900 overflow-hidden">
+        <div className="absolute inset-0">
+          <div className="animate-slideshow h-full">
+            <div 
+              className="relative h-full bg-center bg-no-repeat bg-cover float-left w-full"
+              style={{ 
+                backgroundImage: 'url(/close-up-warehouse-view.jpg)',
+                backgroundPosition: '50% 35%',
+              }}
+            />
+            <div 
+              className="relative h-full bg-center bg-no-repeat bg-cover float-left w-full"
+              style={{ 
+                backgroundImage: 'url(/row-of-trucks.PNG)',
+                backgroundPosition: '50% 35%',
+              }}
+            />
+          </div>
         </div>
       </div>
+
+      {/* Enhanced gradient overlay - moved after images */}
+      <div className="absolute inset-0 bg-gradient-to-r from-gray-900/95 via-gray-900/80 to-gray-900/40 z-10" />
 
       {/* Animated background accents */}
       <div className="absolute inset-0 overflow-hidden">
