@@ -37,7 +37,7 @@ export default function Header() {
               scrolled ? 'text-primary-600' : 'text-white'
             }`}
           >
-            Saiyana
+            Saiyana 3PL
           </Link>
 
           <div className="hidden md:flex items-center space-x-8">
