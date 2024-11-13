@@ -130,42 +130,6 @@ export default function Hero() {
               </motion.h1>
             </motion.div>
 
-            {/* S Letter logo */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1, delay: 0.5 }}
-              className="absolute -right-[40%] top-[0%] z-0"
-            >
-              <svg width="300" height="375" viewBox="0 0 800 1000" className="opacity-30">
-                <defs>
-                  <linearGradient id="sGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="#0ea5e9" stopOpacity="0.2"/>
-                    <stop offset="50%" stopColor="#ffffff" stopOpacity="0.3"/>
-                    <stop offset="100%" stopColor="#0ea5e9" stopOpacity="0.2"/>
-                  </linearGradient>
-                </defs>
-                <path
-                  d="M600,750 
-                    C600,850 500,900 350,900 
-                    C200,900 100,850 90,750 
-                    L200,750 
-                    C210,800 250,825 350,825 
-                    C450,825 475,800 475,750 
-                    C475,650 90,700 90,450 
-                    C90,350 190,300 340,300 
-                    C490,300 590,350 600,450 
-                    L490,450 
-                    C480,400 440,375 340,375 
-                    C240,375 215,400 215,450 
-                    C215,550 600,500 600,750 Z"
-                  fill="url(#sGradient)"
-                  stroke="rgba(255,255,255,0.1)"
-                  strokeWidth="2"
-                />
-              </svg>
-            </motion.div>
-
             {/* Description */}
             <motion.p 
               variants={itemVariants}
