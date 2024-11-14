@@ -1,4 +1,4 @@
-// components/sections/QuoteRequestForm.tsx
+// src/components/sections/QuoteRequestForm.tsx
 'use client';
 
 import { useState } from 'react';
@@ -63,13 +63,22 @@ export default function QuoteRequestForm() {
         throw new Error('Failed to send message');
       }
 
-      setSubmissionStatus({ 
-        status: 'success',
-        message: 'Your quote request has been sent successfully! We\'ll get back to you soon.'
-      });
-      setFormState(initialFormState);
+      const data = await response.json();
+
+      if (data.success) {
+        setSubmissionStatus({ 
+          status: 'success',
+          message: 'Your quote request has been sent successfully! We\'ll get back to you soon.'
+        });
+        setFormState(initialFormState);
+      } else {
+        setSubmissionStatus({
+          status: 'error',
+          message: data.error || 'Failed to send message. Please try again later.'
+        });
+      }
       
-    } catch (error) {
+    } catch {
       setSubmissionStatus({ 
         status: 'error',
         message: 'Failed to send message. Please try again later.'
