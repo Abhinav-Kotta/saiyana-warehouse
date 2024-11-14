@@ -12,6 +12,7 @@ export async function OPTIONS() {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
         'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+        'Content-Type': 'application/json',
       },
     }
   );
@@ -93,6 +94,12 @@ const generateAdminEmailHtml = (data: ContactFormData) => `
             <p class="label">Service Type:</p>
             <p>${data.serviceType}</p>
           </div>
+          ${data.shipmentVolume ? `
+            <div class="field">
+              <p class="label">Shipment Volume:</p>
+              <p>${data.shipmentVolume}</p>
+            </div>
+          ` : ''}
           ${data.startDate ? `
             <div class="field">
               <p class="label">Desired Start Date:</p>
@@ -152,6 +159,11 @@ const generateCustomerEmailHtml = (data: ContactFormData) => `
             <li>We'll prepare a customized quote based on your needs</li>
             <li>A dedicated representative will contact you to discuss the details</li>
           </ol>
+          <p>Here's a summary of your request:</p>
+          <ul>
+            <li>Service Type: ${data.serviceType}</li>
+            ${data.startDate ? `<li>Desired Start Date: ${new Date(data.startDate).toLocaleDateString()}</li>` : ''}
+          </ul>
           <p>If you have any immediate questions, please don't hesitate to reach out to us.</p>
           <p>Best regards,<br>The Saiyana Logistics Team</p>
         </div>
@@ -166,6 +178,7 @@ export async function POST(req: Request) {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+    'Content-Type': 'application/json',
   };
 
   console.log('Received contact form submission');
@@ -174,8 +187,21 @@ export async function POST(req: Request) {
     // Initialize Resend
     const resend = initResend();
     
-    // Parse request body
-    const body: ContactFormData = await req.json();
+    // Parse request body with error handling
+    let body: ContactFormData;
+    try {
+      body = await req.json();
+    } catch (e) {
+      console.error('Error parsing request body:', e);
+      return NextResponse.json(
+        { 
+          success: false, 
+          error: 'Invalid request format' 
+        },
+        { status: 400, headers }
+      );
+    }
+    
     console.log('Form data received:', {
       name: body.name,
       email: body.email,
@@ -220,7 +246,11 @@ export async function POST(req: Request) {
     if (adminEmailError) {
       console.error('Error sending admin email:', adminEmailError);
       return NextResponse.json(
-        { success: false, error: 'Failed to send notification email' },
+        { 
+          success: false, 
+          error: 'Failed to send notification email',
+          details: adminEmailError.message
+        },
         { status: 500, headers }
       );
     }
@@ -236,19 +266,25 @@ export async function POST(req: Request) {
 
     if (customerEmailError) {
       console.error('Error sending customer email:', customerEmailError);
-      return NextResponse.json({ 
-        success: true,
-        warning: 'Quote received, but confirmation email could not be sent'
-      },
-      { headers });
+      // Still return success if admin email was sent
+      return NextResponse.json(
+        { 
+          success: true,
+          warning: 'Quote received, but confirmation email could not be sent',
+          details: customerEmailError.message
+        },
+        { headers }
+      );
     }
 
     console.log('Both emails sent successfully');
-    return NextResponse.json({ 
-      success: true,
-      message: 'Quote request received and confirmation emails sent'
-    },
-    { headers });
+    return NextResponse.json(
+      { 
+        success: true,
+        message: 'Quote request received and confirmation emails sent'
+      },
+      { headers }
+    );
     
   } catch (error) {
     console.error('Unexpected error:', error);

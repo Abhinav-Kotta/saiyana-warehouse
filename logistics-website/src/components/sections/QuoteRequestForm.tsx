@@ -51,6 +51,8 @@ export default function QuoteRequestForm() {
     setSubmissionStatus({ status: 'loading' });
     
     try {
+      console.log('Sending form data:', formState);
+
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
@@ -60,7 +62,18 @@ export default function QuoteRequestForm() {
         body: JSON.stringify(formState),
       });
 
-      const data = await response.json();
+      console.log('Response status:', response.status);
+      
+      const responseText = await response.text();
+      console.log('Response text:', responseText);
+
+      let data;
+      try {
+        data = responseText ? JSON.parse(responseText) : {};
+      } catch (parseError) {
+        console.error('JSON parse error:', parseError);
+        throw new Error('Invalid response from server');
+      }
 
       if (response.ok && data.success) {
         setSubmissionStatus({ 
@@ -75,7 +88,9 @@ export default function QuoteRequestForm() {
       console.error('Form submission error:', error);
       setSubmissionStatus({ 
         status: 'error',
-        message: error instanceof Error ? error.message : 'Failed to send message. Please try again later.'
+        message: error instanceof Error 
+          ? error.message 
+          : 'Failed to send message. Please try again later.'
       });
     }
   };
@@ -92,6 +107,7 @@ export default function QuoteRequestForm() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
+      className="relative"
     >
       <label
         htmlFor={id}
@@ -100,10 +116,11 @@ export default function QuoteRequestForm() {
         {icon}
         {label}
       </label>
+
       {type === 'select' && options ? (
         <select
           id={id}
-          className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all bg-white/50 text-gray-900"
+          className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all bg-white/50 text-gray-900 disabled:opacity-50 disabled:cursor-not-allowed"
           value={formState[id]}
           onChange={(e) =>
             setFormState((prev) => ({ ...prev, [id]: e.target.value }))
@@ -121,7 +138,7 @@ export default function QuoteRequestForm() {
         <textarea
           id={id}
           rows={4}
-          className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all bg-white/50 text-gray-900 placeholder-gray-500"
+          className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all bg-white/50 text-gray-900 placeholder-gray-500 disabled:opacity-50 disabled:cursor-not-allowed"
           value={formState[id]}
           onChange={(e) =>
             setFormState((prev) => ({ ...prev, [id]: e.target.value }))
@@ -134,7 +151,7 @@ export default function QuoteRequestForm() {
         <input
           type={type}
           id={id}
-          className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all bg-white/50 text-gray-900 placeholder-gray-500"
+          className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all bg-white/50 text-gray-900 placeholder-gray-500 disabled:opacity-50 disabled:cursor-not-allowed"
           value={formState[id]}
           onChange={(e) =>
             setFormState((prev) => ({ ...prev, [id]: e.target.value }))
@@ -235,7 +252,7 @@ export default function QuoteRequestForm() {
         >
           <Button 
             type="submit"
-            className="w-full py-3 flex items-center justify-center gap-2 text-lg font-semibold"
+            className="w-full py-3 flex items-center justify-center gap-2 text-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
             disabled={submissionStatus.status === 'loading'}
           >
             {submissionStatus.status === 'loading' ? (
