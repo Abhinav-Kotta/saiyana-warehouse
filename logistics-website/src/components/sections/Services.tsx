@@ -13,7 +13,7 @@ const services = [
   },
   {
     title: 'Transportation',
-    description: 'Integrated shipping solutions with LTL, FTL, and last-mile delivery options',
+    description: 'Integrated shipping solutions with LTL and FTL',
     icon: TruckIcon,
   },
   {

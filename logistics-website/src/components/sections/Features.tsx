@@ -16,13 +16,13 @@ const features = [
   },
   {
     title: 'Dedicated Support',
-    description: 'Professional account management and live assistance',
+    description: 'Dedicated customer support to ensure complete assistance at all times',
     icon: HeadphonesIcon,
   },
   {
-    title: 'Real-Time Visibility',
-    description: 'Inventory tracking and performance analytics',
-    icon: BarChart3,
+    title: 'Pest and fire contro',
+    description: 'We ensure regular pest control & installation of fire extinguishers at all our storage facilities',
+    icon: FireIcon,
   },
 ];
 
