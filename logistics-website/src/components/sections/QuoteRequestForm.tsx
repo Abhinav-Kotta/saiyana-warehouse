@@ -78,7 +78,7 @@ export default function QuoteRequestForm() {
         });
       }
       
-    } catch {
+    } catch (_) {
       setSubmissionStatus({ 
         status: 'error',
         message: 'Failed to send message. Please try again later.'
