@@ -87,7 +87,7 @@ export default function Stats() {
       </div>
 
       <div className="container mx-auto px-6 max-w-6xl">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-16 gap-y-8 text-center">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-20 gap-y-8 text-center">
           {stats.map((stat, index) => (
             <motion.div
               key={stat.label}
