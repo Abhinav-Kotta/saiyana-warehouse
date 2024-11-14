@@ -16,10 +16,9 @@ interface CounterProps {
 }
 
 const stats: Stat[] = [
-  { label: 'Global Warehouses', value: 50, suffix: '+' },
-  { label: 'Countries Connected', value: 30, suffix: '+' },
-  { label: 'Enterprise Clients', value: 1000, suffix: '+' },
-  { label: 'Annual Shipments', value: 1, suffix: 'M+' },
+  { label: 'Years in Industry', value: 25, suffix: '+' },
+  { label: 'Storage Space (sft)', value: 50000, suffix: '+' },
+  { label: 'Customers Served ', value: 30, suffix: '+' },
 ];
 
 const Counter = ({ value, suffix, duration = 2 }: CounterProps) => {
