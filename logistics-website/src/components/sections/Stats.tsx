@@ -62,7 +62,7 @@ const Counter = ({ value, suffix, duration = 2 }: CounterProps) => {
 
 export default function Stats() {
   return (
-    <section className="py-20 bg-gradient-to-r from-primary-600 to-primary-700 relative overflow-hidden">
+    <section className="py-10 bg-gradient-to-r from-primary-600 to-primary-700 relative overflow-hidden">
       {/* Animated background pattern */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 opacity-10">
@@ -86,18 +86,18 @@ export default function Stats() {
         </div>
       </div>
 
-      <div className="container relative mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 md:gap-12 lg:gap-20 py-8">
+      <div className="container max-w-4xl mx-auto px-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-y-10 md:gap-8 text-center">
           {stats.map((stat, index) => (
             <motion.div
               key={stat.label}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.2 }}
-              className="text-center text-white relative group"
+              className="text-white group"
             >
               <motion.div
-                className="text-5xl font-bold mb-3"
+                className="text-4xl font-bold mb-2"
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
