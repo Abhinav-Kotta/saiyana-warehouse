@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ShieldCheck, Boxes, HeadphonesIcon, FireIcon } from 'lucide-react';
+import { ShieldCheck, Boxes, HeadphonesIcon, Flame } from 'lucide-react';
 
 const features = [
   {
@@ -22,7 +22,7 @@ const features = [
   {
     title: 'Pest and fire contro',
     description: 'We ensure regular pest control & installation of fire extinguishers at all our storage facilities',
-    icon: FireIcon,
+    icon: Flame,
   },
 ];
 
