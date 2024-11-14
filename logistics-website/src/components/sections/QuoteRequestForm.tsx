@@ -34,8 +34,7 @@ const initialFormState: FormState = {
 
 const serviceOptions = [
   { value: 'warehousing', label: 'Warehousing' },
-  { value: 'distribution', label: 'Distribution' },
-  { value: 'supply-chain', label: 'Supply Chain Management' },
+  { value: 'c&f', label: 'c&f' },
   { value: 'transportation', label: 'Transportation' },
 ];
 
