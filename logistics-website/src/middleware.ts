@@ -2,8 +2,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-export function middleware(_request: NextRequest) {
-  // Using underscore prefix to indicate intentionally unused parameter
+export function middleware() {
   const response = NextResponse.next();
 
   // Add CORS headers
