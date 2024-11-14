@@ -60,19 +60,35 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-gray-900/80 via-gray-900/70 to-transparent z-10" />
-      
-      {/* Background image */}
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: 'url(/api/placeholder/1200/600)' }}
-      />
+      {/* Scrolling background images */}
+      <div className="absolute inset-0 bg-gray-900 overflow-hidden">
+        <div className="absolute inset-0">
+          <div className="animate-slideshow h-full">
+            <div 
+              className="relative h-full bg-center bg-no-repeat bg-cover float-left w-full"
+              style={{ 
+                backgroundImage: 'url(/close-up-warehouse-view.jpg)',
+                backgroundPosition: '50% 35%',
+              }}
+            />
+            <div 
+              className="relative h-full bg-center bg-no-repeat bg-cover float-left w-full"
+              style={{ 
+                backgroundImage: 'url(/row-of-trucks.PNG)',
+                backgroundPosition: '50% 35%',
+              }}
+            />
+          </div>
+        </div>
+      </div>
 
-      {/* Animated background shapes */}
+      {/* Enhanced gradient overlay - moved after images */}
+      <div className="absolute inset-0 bg-gradient-to-r from-gray-900/95 via-gray-900/80 to-gray-900/40 z-10" />
+
+      {/* Animated background accents */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
-          className="absolute w-96 h-96 rounded-full bg-primary-600/20 blur-3xl"
+          className="absolute w-96 h-96 rounded-full bg-primary-600/10 blur-3xl"
           animate={{
             x: [0, 100, 0],
             y: [0, 50, 0],
@@ -85,7 +101,7 @@ export default function Hero() {
           style={{ top: '10%', left: '30%' }}
         />
         <motion.div
-          className="absolute w-96 h-96 rounded-full bg-secondary-500/10 blur-3xl"
+          className="absolute w-96 h-96 rounded-full bg-yellow-500/5 blur-3xl"
           animate={{
             x: [0, -50, 0],
             y: [0, 100, 0],
@@ -105,13 +121,13 @@ export default function Hero() {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="max-w-4xl mx-auto lg:mr-[35%] relative" // Added relative positioning
+          className="max-w-4xl mx-auto lg:mr-[35%] relative"
         >
           <div className="flex flex-col gap-8">
             {/* Main heading */}
             <motion.div variants={itemVariants} className="space-y-4">
               <motion.div 
-                className="inline-block bg-primary-600/90 text-white px-4 py-1 rounded-full text-sm font-medium"
+                className="inline-block bg-primary-600/90 text-white px-4 py-1 rounded-full text-sm font-medium backdrop-blur-sm"
                 initial={{ scale: 1 }}
                 animate={{ scale: [1, 1.05, 1] }}
                 transition={{ duration: 2, repeat: Infinity }}
@@ -122,46 +138,9 @@ export default function Hero() {
                 className="text-5xl lg:text-6xl font-bold text-white leading-tight"
                 variants={textRevealVariants}
               >
-                Streamline Your <span className="text-primary-500">Supply Chain</span>
+                Streamline Your <span className="text-primary-400">Supply Chain</span>
                 <br />With Saiyana
               </motion.h1>
-            </motion.div>
-
-            {/* S Letter positioned relative to the heading */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1, delay: 0.5 }}
-              className="absolute -right-[40%] top-[0%] z-0"
-            >
-              <svg width="300" height="375" viewBox="0 0 800 1000" className="opacity-50">
-                <defs>
-                  <linearGradient id="sGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="#0ea5e9" stopOpacity="0.3"/>
-                    <stop offset="50%" stopColor="white" stopOpacity="0.5"/>
-                    <stop offset="100%" stopColor="#0ea5e9" stopOpacity="0.3"/>
-                  </linearGradient>
-                </defs>
-                
-                <path
-                  d="M600,750 
-                    C600,850 500,900 350,900 
-                    C200,900 100,850 90,750 
-                    L200,750 
-                    C210,800 250,825 350,825 
-                    C450,825 475,800 475,750 
-                    C475,650 90,700 90,450 
-                    C90,350 190,300 340,300 
-                    C490,300 590,350 600,450 
-                    L490,450 
-                    C480,400 440,375 340,375 
-                    C240,375 215,400 215,450 
-                    C215,550 600,500 600,750 Z"
-                  fill="url(#sGradient)"
-                  stroke="rgba(255,255,255,0.2)"
-                  strokeWidth="2"
-                />
-              </svg>
             </motion.div>
 
             {/* Description */}
@@ -184,7 +163,7 @@ export default function Hero() {
                   variants={floatingIconVariants}
                   initial="initial"
                   animate="float"
-                  className="flex items-center gap-2 text-white"
+                  className="flex items-center gap-2 text-white backdrop-blur-sm bg-gray-900/30 px-4 py-2 rounded-lg"
                 >
                   <feature.icon className="w-5 h-5 text-primary-400" />
                   <span>{feature.text}</span>
