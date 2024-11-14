@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ShieldCheck, Boxes, HeadphonesIcon, BarChart3 } from 'lucide-react';
+import { ShieldCheck, Boxes, HeadphonesIcon, FireIcon } from 'lucide-react';
 
 const features = [
   {
