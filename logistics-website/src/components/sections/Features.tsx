@@ -20,7 +20,7 @@ const features = [
     icon: HeadphonesIcon,
   },
   {
-    title: 'Pest and fire contro',
+    title: 'Pest and fire control',
     description: 'We ensure regular pest control & installation of fire extinguishers at all our storage facilities',
     icon: Flame,
   },
