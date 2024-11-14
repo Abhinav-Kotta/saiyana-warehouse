@@ -18,7 +18,7 @@ interface CounterProps {
 const stats: Stat[] = [
   { label: 'Years in Industry', value: 25, suffix: '+' },
   { label: 'Storage Space (sft)', value: 50000, suffix: '+' },
-  { label: 'Customers Served ', value: 30, suffix: '+' },
+  { label: 'Customers Served', value: 30, suffix: '+' },
 ];
 
 const Counter = ({ value, suffix, duration = 2 }: CounterProps) => {
@@ -87,7 +87,7 @@ export default function Stats() {
       </div>
 
       <div className="container relative mx-auto px-4">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 md:gap-12 lg:gap-20 py-8">
           {stats.map((stat, index) => (
             <motion.div
               key={stat.label}
