@@ -1,87 +1,83 @@
+// components/sections/Contact.tsx
 'use client';
 
-import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Resend } from 'resend';
-
-const resend = new Resend(process.env.RESEND_API_KEY);
+import QuoteRequestForm from './QuoteRequestForm';
 
 export default function Contact() {
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
-  const [status, setStatus] = useState('');
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      await resend.emails.send({
-        from: 'onboarding@resend.dev',
-        to: email,
-        subject: 'New message from your website',
-        html: `<p>${message}</p>`,
-      });
-      setStatus('success');
-    } catch {
-      setStatus('error');
-    }
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+      },
+    },
   };
 
   return (
     <section id="contact" className="py-24 relative overflow-hidden">
-      {/* Background styles... */}
+      {/* Gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-white" />
+      
+      {/* Animated background elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <motion.div
+          className="absolute w-96 h-96 rounded-full bg-primary-500/5 blur-3xl"
+          animate={{
+            x: [0, 50, 0],
+            y: [0, 25, 0],
+          }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+          style={{ top: '20%', right: '10%' }}
+        />
+        <motion.div
+          className="absolute w-96 h-96 rounded-full bg-secondary-500/5 blur-3xl"
+          animate={{
+            x: [0, -30, 0],
+            y: [0, 40, 0],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+          style={{ bottom: '10%', left: '10%' }}
+        />
+      </div>
+
+      {/* Main content */}
       <div className="container relative mx-auto px-4">
         <div className="max-w-3xl mx-auto">
           <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: true }}
-            transition={{ delay: 0.2, duration: 0.8 }}
           >
-            <div className="text-center mb-12">
+            <motion.div variants={itemVariants} className="text-center mb-12">
               <h2 className="text-4xl font-bold mb-4 text-black">Request a Quote</h2>
               <p className="text-black text-lg">
                 Tell us about your logistics needs and we&apos;ll provide a customized solution.
               </p>
-            </div>
+            </motion.div>
             
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <label htmlFor="email" className="block font-medium text-gray-700 mb-2">
-                  Email
-                </label>
-                <input
-                  id="email"
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-4 py-2 border rounded-md focus:ring-primary-500 focus:border-primary-500"
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor="message" className="block font-medium text-gray-700 mb-2">
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  className="w-full px-4 py-2 border rounded-md focus:ring-primary-500 focus:border-primary-500"
-                  rows={4}
-                  required
-                ></textarea>
-              </div>
-              <div>
-                <button
-                  type="submit"
-                  className="px-8 py-2 font-medium text-white bg-primary-600 rounded-md hover:bg-primary-700"
-                >
-                  Send Message
-                </button>
-              </div>
-              {status === 'success' && <p className="text-green-600">Message sent successfully!</p>}
-              {status === 'error' && <p className="text-red-600">Failed to send message. Please try again.</p>}
-            </form>
+            <QuoteRequestForm />
           </motion.div>
         </div>
       </div>
