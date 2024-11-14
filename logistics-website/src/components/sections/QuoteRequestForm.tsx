@@ -33,8 +33,8 @@ const initialFormState: FormState = {
 };
 
 const serviceOptions = [
-  { value: 'warehousing', label: 'Warehousing' },
-  { value: 'c&f', label: 'c&f' },
+  { value: 'C&F Services', label: 'Warehousing' },
+  { value: 'Warehousing', label: 'c&f' },
   { value: 'transportation', label: 'Transportation' },
 ];
 
