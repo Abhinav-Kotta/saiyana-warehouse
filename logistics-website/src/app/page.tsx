@@ -47,7 +47,6 @@ export default function Home() {
       <Hero />
       <Services />
       <Features />
-      <Stats />
       <Partners logos={partnerLogos} />
       <Contact />
     </>
