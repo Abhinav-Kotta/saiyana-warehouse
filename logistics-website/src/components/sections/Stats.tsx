@@ -86,15 +86,15 @@ export default function Stats() {
         </div>
       </div>
 
-      <div className="container mx-auto px-6 max-w-6xl">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-20 gap-y-8 text-center">
+      <div className="container mx-auto px-6 max-w-7xl">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-24 gap-y-8 justify-between text-center">
           {stats.map((stat, index) => (
             <motion.div
               key={stat.label}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.2 }}
-              className="text-white group"
+              className="text-white group w-full"
             >
               <motion.div
                 className="text-6xl font-bold mb-2 w-full"
