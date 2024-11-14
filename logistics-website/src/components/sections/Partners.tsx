@@ -73,7 +73,7 @@ export default function Partners({ logos }: PartnersProps) {
             transition={{ duration: 0.6 }}
             className="text-center"
           >
-            <h2 className="text-3xl font-bold mb-4 text-white">Our Trusted Partners</h2>
+            <h2 className="text-3xl font-bold mb-4 text-white">Trusted Partners</h2>
             <p className="text-lg text-gray-400">
               Successfully serving industry leaders across sectors
             </p>
