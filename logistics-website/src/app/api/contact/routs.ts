@@ -193,10 +193,14 @@ export async function POST(request: Request) {
       subject: `New Quote Request from ${body.companyName}`,
       html: generateAdminEmailHtml(body),
     });
-
+    
     if (adminEmailError) {
+      console.error('Admin email error:', adminEmailError);
       return NextResponse.json(
-        { success: false, error: 'Failed to send notification email' },
+        { 
+          success: false, 
+          error: `Failed to send admin email: ${adminEmailError.message}` 
+        },
         { status: 500, headers }
       );
     }
