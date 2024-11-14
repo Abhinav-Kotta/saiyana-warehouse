@@ -21,7 +21,7 @@ export default function Contact() {
         html: `<p>${message}</p>`,
       });
       setStatus('success');
-    } catch (error) {
+    } catch {
       setStatus('error');
     }
   };
@@ -40,7 +40,7 @@ export default function Contact() {
             <div className="text-center mb-12">
               <h2 className="text-4xl font-bold mb-4 text-black">Request a Quote</h2>
               <p className="text-black text-lg">
-                Tell us about your logistics needs and we'll provide a customized solution.
+                Tell us about your logistics needs and we&apos;ll provide a customized solution.
               </p>
             </div>
             
