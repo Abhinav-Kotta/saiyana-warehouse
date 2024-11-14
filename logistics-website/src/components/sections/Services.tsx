@@ -12,18 +12,18 @@ const services = [
     icon: Package,
   },
   {
-    title: 'Order Fulfillment',
-    description: 'End-to-end pick, pack, and ship services with real-time order tracking',
-    icon: ClipboardCheck,
-  },
-  {
     title: 'Transportation',
     description: 'Integrated shipping solutions with LTL, FTL, and last-mile delivery options',
     icon: TruckIcon,
   },
   {
-    title: 'Technology Solutions',
-    description: 'WMS integration, inventory tracking, and automated reporting systems',
+    title: 'Inventory',
+    description: 'Get daily reports of inward, outward and current stock of your goods.',
+    icon: ClipboardCheck,
+  },
+  {
+    title: 'Manpower',
+    description: 'Loading, unloading jobs and manager for your inventory.',
     icon: CircuitBoard,
   },
 ];

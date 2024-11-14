@@ -139,7 +139,7 @@ export default function Hero() {
                 variants={textRevealVariants}
               >
                 Streamline Your <span className="text-primary-400">Supply Chain</span>
-                <br />With Saiyana
+                <br />With Saiyana 3PL
               </motion.h1>
             </motion.div>
 
