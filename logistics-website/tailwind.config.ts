@@ -9,6 +9,9 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        border: "hsl(var(--border))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
         primary: {
           50: "#f0f9ff",
           100: "#e0f2fe",
@@ -19,6 +22,10 @@ const config: Config = {
         secondary: {
           500: "#f97316",
           600: "#ea580c",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
         },
       },
     },
