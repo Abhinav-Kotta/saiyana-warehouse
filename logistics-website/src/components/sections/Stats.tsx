@@ -86,8 +86,8 @@ export default function Stats() {
         </div>
       </div>
 
-      <div className="container max-w-4xl mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-y-10 md:gap-8 text-center">
+      <div className="container mx-auto px-4 max-w-5xl">
+        <div className="grid grid-cols-1 md:grid-cols-3 text-center gap-8">
           {stats.map((stat, index) => (
             <motion.div
               key={stat.label}
@@ -97,7 +97,7 @@ export default function Stats() {
               className="text-white group"
             >
               <motion.div
-                className="text-4xl font-bold mb-2"
+                className="text-6xl font-bold mb-2 w-full"
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
