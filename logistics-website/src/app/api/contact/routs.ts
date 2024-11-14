@@ -2,22 +2,8 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-// Add OPTIONS method handler
-export async function OPTIONS() {
-  return NextResponse.json(
-    {},
-    {
-      status: 200,
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-        'Content-Type': 'application/json',
-        'Access-Control-Max-Age': '86400',
-      },
-    }
-  );
-}
+export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
 
 interface ContactFormData {
   name: string;
@@ -28,14 +14,6 @@ interface ContactFormData {
   startDate?: string;
   requirements: string;
 }
-
-// Initialize Resend with error handling
-const initResend = () => {
-  if (!process.env.RESEND_API_KEY) {
-    throw new Error('Missing RESEND_API_KEY environment variable');
-  }
-  return new Resend(process.env.RESEND_API_KEY);
-};
 
 const generateAdminEmailHtml = (data: ContactFormData) => `
   <html>
@@ -95,12 +73,6 @@ const generateAdminEmailHtml = (data: ContactFormData) => `
             <p class="label">Service Type:</p>
             <p>${data.serviceType}</p>
           </div>
-          ${data.shipmentVolume ? `
-            <div class="field">
-              <p class="label">Shipment Volume:</p>
-              <p>${data.shipmentVolume}</p>
-            </div>
-          ` : ''}
           ${data.startDate ? `
             <div class="field">
               <p class="label">Desired Start Date:</p>
@@ -160,11 +132,6 @@ const generateCustomerEmailHtml = (data: ContactFormData) => `
             <li>We'll prepare a customized quote based on your needs</li>
             <li>A dedicated representative will contact you to discuss the details</li>
           </ol>
-          <p>Here's a summary of your request:</p>
-          <ul>
-            <li>Service Type: ${data.serviceType}</li>
-            ${data.startDate ? `<li>Desired Start Date: ${new Date(data.startDate).toLocaleDateString()}</li>` : ''}
-          </ul>
           <p>If you have any immediate questions, please don't hesitate to reach out to us.</p>
           <p>Best regards,<br>The Saiyana Logistics Team</p>
         </div>
@@ -173,69 +140,52 @@ const generateCustomerEmailHtml = (data: ContactFormData) => `
   </html>
 `;
 
-export async function POST(req: Request) {
-  // Add CORS headers to all responses
+export async function OPTIONS() {
+  return NextResponse.json(
+    {},
+    {
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'POST, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+      },
+    }
+  );
+}
+
+export async function POST(request: Request) {
   const headers = {
     'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-    'Content-Type': 'application/json',
   };
 
-  console.log('Received contact form submission');
-  
   try {
-    // Initialize Resend
-    const resend = initResend();
-    
-    // Parse request body with error handling
-    let body: ContactFormData;
-    try {
-      body = await req.json();
-    } catch (e) {
-      console.error('Error parsing request body:', e);
+    if (!process.env.RESEND_API_KEY) {
       return NextResponse.json(
-        { 
-          success: false, 
-          error: 'Invalid request format' 
-        },
-        { status: 400, headers }
+        { success: false, error: 'Server configuration error' },
+        { status: 500, headers }
       );
     }
-    
-    console.log('Form data received:', {
-      name: body.name,
-      email: body.email,
-      serviceType: body.serviceType
-    });
 
-    // Validate required fields
+    const resend = new Resend(process.env.RESEND_API_KEY);
+    const body: ContactFormData = await request.json();
+
     if (!body.email || !body.name || !body.companyName || !body.serviceType || !body.requirements) {
-      console.log('Missing required fields');
       return NextResponse.json(
-        { 
-          success: false, 
-          error: 'All fields are required' 
-        },
+        { success: false, error: 'All fields are required' },
         { status: 400, headers }
       );
     }
 
-    // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(body.email)) {
-      console.log('Invalid email format');
       return NextResponse.json(
-        { 
-          success: false, 
-          error: 'Invalid email format' 
-        },
+        { success: false, error: 'Invalid email format' },
         { status: 400, headers }
       );
     }
 
-    // Send email to admin
-    console.log('Sending admin notification email');
     const { error: adminEmailError } = await resend.emails.send({
       from: process.env.FROM_EMAIL || 'onboarding@resend.dev',
       to: process.env.ADMIN_EMAIL || 'test@resend.dev',
@@ -245,19 +195,12 @@ export async function POST(req: Request) {
     });
 
     if (adminEmailError) {
-      console.error('Error sending admin email:', adminEmailError);
       return NextResponse.json(
-        { 
-          success: false, 
-          error: 'Failed to send notification email',
-          details: adminEmailError.message
-        },
+        { success: false, error: 'Failed to send notification email' },
         { status: 500, headers }
       );
     }
 
-    // Send confirmation email to customer
-    console.log('Sending customer confirmation email');
     const { error: customerEmailError } = await resend.emails.send({
       from: process.env.FROM_EMAIL || 'onboarding@resend.dev',
       to: [body.email],
@@ -266,35 +209,19 @@ export async function POST(req: Request) {
     });
 
     if (customerEmailError) {
-      console.error('Error sending customer email:', customerEmailError);
-      // Still return success if admin email was sent
       return NextResponse.json(
-        { 
-          success: true,
-          warning: 'Quote received, but confirmation email could not be sent',
-          details: customerEmailError.message
-        },
+        { success: true, warning: 'Quote received, but confirmation email could not be sent' },
         { headers }
       );
     }
 
-    console.log('Both emails sent successfully');
     return NextResponse.json(
-      { 
-        success: true,
-        message: 'Quote request received and confirmation emails sent'
-      },
+      { success: true, message: 'Quote request received and confirmation emails sent' },
       { headers }
     );
-    
   } catch (error) {
-    console.error('Unexpected error:', error);
     return NextResponse.json(
-      { 
-        success: false, 
-        error: 'Internal server error',
-        details: error instanceof Error ? error.message : 'Unknown error'
-      },
+      { success: false, error: 'Internal server error' },
       { status: 500, headers }
     );
   }
