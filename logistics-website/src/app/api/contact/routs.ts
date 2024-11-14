@@ -2,6 +2,21 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
+// Add OPTIONS method handler
+export async function OPTIONS() {
+  return NextResponse.json(
+    {},
+    {
+      status: 200,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+      },
+    }
+  );
+}
+
 interface ContactFormData {
   name: string;
   email: string;
@@ -146,6 +161,13 @@ const generateCustomerEmailHtml = (data: ContactFormData) => `
 `;
 
 export async function POST(req: Request) {
+  // Add CORS headers to all responses
+  const headers = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+  };
+
   console.log('Received contact form submission');
   
   try {
@@ -168,7 +190,7 @@ export async function POST(req: Request) {
           success: false, 
           error: 'All fields are required' 
         },
-        { status: 400 }
+        { status: 400, headers }
       );
     }
 
@@ -181,7 +203,7 @@ export async function POST(req: Request) {
           success: false, 
           error: 'Invalid email format' 
         },
-        { status: 400 }
+        { status: 400, headers }
       );
     }
 
@@ -199,7 +221,7 @@ export async function POST(req: Request) {
       console.error('Error sending admin email:', adminEmailError);
       return NextResponse.json(
         { success: false, error: 'Failed to send notification email' },
-        { status: 500 }
+        { status: 500, headers }
       );
     }
 
@@ -214,18 +236,19 @@ export async function POST(req: Request) {
 
     if (customerEmailError) {
       console.error('Error sending customer email:', customerEmailError);
-      // We still return success if admin email was sent
       return NextResponse.json({ 
         success: true,
         warning: 'Quote received, but confirmation email could not be sent'
-      });
+      },
+      { headers });
     }
 
     console.log('Both emails sent successfully');
     return NextResponse.json({ 
       success: true,
       message: 'Quote request received and confirmation emails sent'
-    });
+    },
+    { headers });
     
   } catch (error) {
     console.error('Unexpected error:', error);
@@ -235,7 +258,7 @@ export async function POST(req: Request) {
         error: 'Internal server error',
         details: error instanceof Error ? error.message : 'Unknown error'
       },
-      { status: 500 }
+      { status: 500, headers }
     );
   }
 }

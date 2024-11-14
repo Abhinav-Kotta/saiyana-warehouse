@@ -51,37 +51,31 @@ export default function QuoteRequestForm() {
     setSubmissionStatus({ status: 'loading' });
     
     try {
-      console.log('Submitting form data:', formState);
-      
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json',
         },
         body: JSON.stringify(formState),
       });
 
       const data = await response.json();
-      console.log('Response:', { status: response.status, data });
 
       if (response.ok && data.success) {
         setSubmissionStatus({ 
           status: 'success',
-          message: 'Your quote request has been sent successfully! We\'ll get back to you soon.'
+          message: data.message || 'Your quote request has been sent successfully! We\'ll get back to you soon.'
         });
         setFormState(initialFormState);
       } else {
-        setSubmissionStatus({
-          status: 'error',
-          message: data.error || 'Failed to send message. Please try again later.'
-        });
+        throw new Error(data.error || 'Failed to send message');
       }
-      
-    } catch {
-      console.error('Network error while submitting form');
+    } catch (error) {
+      console.error('Form submission error:', error);
       setSubmissionStatus({ 
         status: 'error',
-        message: 'Network error or server unavailable. Please try again later.'
+        message: error instanceof Error ? error.message : 'Failed to send message. Please try again later.'
       });
     }
   };
@@ -94,9 +88,10 @@ export default function QuoteRequestForm() {
     placeholder: string,
     options?: Array<{ value: string; label: string }>
   ) => (
-    <motion.div
-      whileFocus={{ scale: 1.01 }}
-      transition={{ type: "spring", stiffness: 300 }}
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
     >
       <label
         htmlFor={id}
@@ -114,6 +109,7 @@ export default function QuoteRequestForm() {
             setFormState((prev) => ({ ...prev, [id]: e.target.value }))
           }
           required
+          disabled={submissionStatus.status === 'loading'}
         >
           {options.map((option) => (
             <option key={option.value} value={option.value}>
@@ -132,6 +128,7 @@ export default function QuoteRequestForm() {
           }
           placeholder={placeholder}
           required
+          disabled={submissionStatus.status === 'loading'}
         />
       ) : (
         <input
@@ -144,6 +141,7 @@ export default function QuoteRequestForm() {
           }
           placeholder={placeholder}
           required
+          disabled={submissionStatus.status === 'loading'}
         />
       )}
     </motion.div>
@@ -176,6 +174,9 @@ export default function QuoteRequestForm() {
       <motion.form 
         onSubmit={handleSubmit} 
         className="space-y-6 bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-lg border border-gray-100"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
       >
         <div className="grid md:grid-cols-2 gap-6">
           {renderFormField(
@@ -229,8 +230,8 @@ export default function QuoteRequestForm() {
         )}
 
         <motion.div
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
+          whileHover={{ scale: submissionStatus.status !== 'loading' ? 1.02 : 1 }}
+          whileTap={{ scale: submissionStatus.status !== 'loading' ? 0.98 : 1 }}
         >
           <Button 
             type="submit"
