@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Package, TruckIcon, ClipboardCheck, CircuitBoard } from 'lucide-react';
+import { Package, TruckIcon, ClipboardCheck, Users } from 'lucide-react';
 import Card from '@/components/ui/Card';
 
 const services = [
@@ -24,7 +24,7 @@ const services = [
   {
     title: 'Manpower',
     description: 'Loading, unloading jobs and manager for your inventory.',
-    icon: CircuitBoard,
+    icon: Users,
   },
 ];
 
@@ -46,7 +46,7 @@ export default function Services() {
       y: 0,
       transition: {
         duration: 0.6,
-        ease: "easeOut",
+        ease: "easeOut", 
       },
     },
     hover: {
@@ -77,7 +77,7 @@ export default function Services() {
         <motion.div
           className="absolute w-96 h-96 rounded-full bg-secondary-500/5 blur-3xl"
           animate={{
-            x: [0, -30, 0],
+            x: [0, -30, 0], 
             y: [0, 40, 0],
           }}
           transition={{
@@ -98,7 +98,7 @@ export default function Services() {
         >
           <h2 className="text-4xl font-bold mb-4 text-gray-900">3PL Services</h2>
           <p className="text-gray-700 text-lg">
-            End-to-end warehousing and logistics solutions for your business
+            End-to-end warehousing and logistics solutions for your business 
           </p>
         </motion.div>
 
