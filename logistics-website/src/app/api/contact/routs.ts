@@ -2,37 +2,24 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-// Type definitions
 interface ContactFormData {
   name: string;
   email: string;
   companyName: string;
-  serviceType: 'warehousing' | 'distribution' | 'supply-chain' | 'transportation';
+  serviceType: string;
   shipmentVolume?: string;
   startDate?: string;
   requirements: string;
 }
 
-interface EmailResponse {
-  success: boolean;
-  error?: string;
-  warning?: string;
-}
+// Initialize Resend with error handling
+const initResend = () => {
+  if (!process.env.RESEND_API_KEY) {
+    throw new Error('Missing RESEND_API_KEY environment variable');
+  }
+  return new Resend(process.env.RESEND_API_KEY);
+};
 
-// Environment variable validation
-if (!process.env.RESEND_API_KEY) {
-  throw new Error('Missing RESEND_API_KEY environment variable');
-}
-
-// Initialize Resend with API key
-const resend = new Resend(process.env.RESEND_API_KEY);
-
-// Environment variables with fallbacks
-const COMPANY_NAME = process.env.NEXT_PUBLIC_COMPANY_NAME || 'Saiyana Logistics';
-const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'abhinav.kotta@gmail.com';
-const FROM_EMAIL = `${COMPANY_NAME} <${process.env.FROM_EMAIL || 'abhinav.kotta@ucf.edu'}>`;
-
-// Email templates
 const generateAdminEmailHtml = (data: ContactFormData) => `
   <html>
     <head>
@@ -91,12 +78,6 @@ const generateAdminEmailHtml = (data: ContactFormData) => `
             <p class="label">Service Type:</p>
             <p>${data.serviceType}</p>
           </div>
-          ${data.shipmentVolume ? `
-            <div class="field">
-              <p class="label">Shipment Volume:</p>
-              <p>${data.shipmentVolume}</p>
-            </div>
-          ` : ''}
           ${data.startDate ? `
             <div class="field">
               <p class="label">Desired Start Date:</p>
@@ -140,12 +121,6 @@ const generateCustomerEmailHtml = (data: ContactFormData) => `
           border: 1px solid #e2e8f0;
           border-radius: 0 0 5px 5px;
         }
-        .next-steps {
-          background-color: #f0f9ff;
-          padding: 15px;
-          border-radius: 5px;
-          margin: 20px 0;
-        }
       </style>
     </head>
     <body>
@@ -155,44 +130,43 @@ const generateCustomerEmailHtml = (data: ContactFormData) => `
         </div>
         <div class="content">
           <p>Dear ${data.name},</p>
-          <p>Thank you for requesting a quote from ${COMPANY_NAME}. We've received your inquiry and our team will review your requirements promptly.</p>
-          
-          <div class="next-steps">
-            <h2>Here's what happens next:</h2>
-            <ol>
-              <li>Our team will review your requirements within 24 hours</li>
-              <li>We'll prepare a customized quote based on your needs</li>
-              <li>A dedicated representative will contact you to discuss the details</li>
-            </ol>
-          </div>
-
-          <p>Request Details:</p>
-          <ul>
-            <li>Service Type: ${data.serviceType}</li>
-            ${data.startDate ? `<li>Desired Start Date: ${new Date(data.startDate).toLocaleDateString()}</li>` : ''}
-          </ul>
-
-          <p>If you have any immediate questions, please don't hesitate to reach out to us by replying to this email.</p>
-          
-          <p>Best regards,<br>The ${COMPANY_NAME} Team</p>
+          <p>Thank you for requesting a quote from Saiyana Logistics. We've received your inquiry and our team will review your requirements promptly.</p>
+          <p>Here's what happens next:</p>
+          <ol>
+            <li>Our team will review your requirements within 24 hours</li>
+            <li>We'll prepare a customized quote based on your needs</li>
+            <li>A dedicated representative will contact you to discuss the details</li>
+          </ol>
+          <p>If you have any immediate questions, please don't hesitate to reach out to us.</p>
+          <p>Best regards,<br>The Saiyana Logistics Team</p>
         </div>
       </div>
     </body>
   </html>
 `;
 
-export async function POST(req: Request): Promise<NextResponse<EmailResponse>> {
+export async function POST(req: Request) {
+  console.log('Received contact form submission');
+  
   try {
-    // Parse and validate request body
+    // Initialize Resend
+    const resend = initResend();
+    
+    // Parse request body
     const body: ContactFormData = await req.json();
-    const { name, email, companyName, serviceType, requirements } = body;
+    console.log('Form data received:', {
+      name: body.name,
+      email: body.email,
+      serviceType: body.serviceType
+    });
 
-    // Basic validation
-    if (!email || !name || !companyName || !serviceType || !requirements) {
+    // Validate required fields
+    if (!body.email || !body.name || !body.companyName || !body.serviceType || !body.requirements) {
+      console.log('Missing required fields');
       return NextResponse.json(
         { 
           success: false, 
-          error: 'Required fields are missing' 
+          error: 'All fields are required' 
         },
         { status: 400 }
       );
@@ -200,7 +174,8 @@ export async function POST(req: Request): Promise<NextResponse<EmailResponse>> {
 
     // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
+    if (!emailRegex.test(body.email)) {
+      console.log('Invalid email format');
       return NextResponse.json(
         { 
           success: false, 
@@ -210,53 +185,55 @@ export async function POST(req: Request): Promise<NextResponse<EmailResponse>> {
       );
     }
 
-    // Send notification email to admin
+    // Send email to admin
+    console.log('Sending admin notification email');
     const { error: adminEmailError } = await resend.emails.send({
-      from: FROM_EMAIL,
-      to: [ADMIN_EMAIL],
-      replyTo: email,
-      subject: `New Quote Request from ${companyName}`,
+      from: process.env.FROM_EMAIL || 'onboarding@resend.dev',
+      to: process.env.ADMIN_EMAIL || 'test@resend.dev',
+      replyTo: body.email,
+      subject: `New Quote Request from ${body.companyName}`,
       html: generateAdminEmailHtml(body),
     });
 
     if (adminEmailError) {
-      console.error('Error sending admin notification:', adminEmailError);
+      console.error('Error sending admin email:', adminEmailError);
       return NextResponse.json(
-        { 
-          success: false, 
-          error: 'Failed to send notification email' 
-        },
+        { success: false, error: 'Failed to send notification email' },
         { status: 500 }
       );
     }
 
     // Send confirmation email to customer
+    console.log('Sending customer confirmation email');
     const { error: customerEmailError } = await resend.emails.send({
-      from: FROM_EMAIL,
-      to: [email],
-      subject: `Quote Request Received - ${COMPANY_NAME}`,
+      from: process.env.FROM_EMAIL || 'onboarding@resend.dev',
+      to: [body.email],
+      subject: 'Your Quote Request - Saiyana Logistics',
       html: generateCustomerEmailHtml(body),
     });
 
     if (customerEmailError) {
-      console.error('Error sending customer confirmation:', customerEmailError);
+      console.error('Error sending customer email:', customerEmailError);
+      // We still return success if admin email was sent
       return NextResponse.json({ 
         success: true,
-        warning: 'Quote received, but confirmation email could not be sent' 
+        warning: 'Quote received, but confirmation email could not be sent'
       });
     }
 
-    // Success response
+    console.log('Both emails sent successfully');
     return NextResponse.json({ 
-      success: true 
+      success: true,
+      message: 'Quote request received and confirmation emails sent'
     });
     
   } catch (error) {
-    console.error('Error processing request:', error);
+    console.error('Unexpected error:', error);
     return NextResponse.json(
       { 
         success: false, 
-        error: 'Internal server error' 
+        error: 'Internal server error',
+        details: error instanceof Error ? error.message : 'Unknown error'
       },
       { status: 500 }
     );

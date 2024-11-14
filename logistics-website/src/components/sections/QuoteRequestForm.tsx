@@ -51,6 +51,8 @@ export default function QuoteRequestForm() {
     setSubmissionStatus({ status: 'loading' });
     
     try {
+      console.log('Submitting form data:', formState);
+      
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
@@ -59,13 +61,10 @@ export default function QuoteRequestForm() {
         body: JSON.stringify(formState),
       });
 
-      if (!response.ok) {
-        throw new Error('Failed to send message');
-      }
-
       const data = await response.json();
+      console.log('Response:', { status: response.status, data });
 
-      if (data.success) {
+      if (response.ok && data.success) {
         setSubmissionStatus({ 
           status: 'success',
           message: 'Your quote request has been sent successfully! We\'ll get back to you soon.'
@@ -79,32 +78,12 @@ export default function QuoteRequestForm() {
       }
       
     } catch {
+      console.error('Network error while submitting form');
       setSubmissionStatus({ 
         status: 'error',
-        message: 'Failed to send message. Please try again later.'
+        message: 'Network error or server unavailable. Please try again later.'
       });
     }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-      },
-    },
-  };
-
-  const inputVariants = {
-    focus: {
-      scale: 1.01,
-      transition: {
-        type: "spring",
-        stiffness: 300,
-      },
-    },
   };
 
   const renderFormField = (
@@ -115,10 +94,13 @@ export default function QuoteRequestForm() {
     placeholder: string,
     options?: Array<{ value: string; label: string }>
   ) => (
-    <motion.div variants={inputVariants} whileFocus="focus">
+    <motion.div
+      whileFocus={{ scale: 1.01 }}
+      transition={{ type: "spring", stiffness: 300 }}
+    >
       <label
         htmlFor={id}
-        className="block text-sm font-medium text-black mb-2 flex items-center gap-2"
+        className="block text-sm font-medium text-gray-700 mb-2 flex items-center gap-2"
       >
         {icon}
         {label}
@@ -126,7 +108,7 @@ export default function QuoteRequestForm() {
       {type === 'select' && options ? (
         <select
           id={id}
-          className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all bg-white/50 text-black"
+          className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all bg-white/50 text-gray-900"
           value={formState[id]}
           onChange={(e) =>
             setFormState((prev) => ({ ...prev, [id]: e.target.value }))
@@ -143,7 +125,7 @@ export default function QuoteRequestForm() {
         <textarea
           id={id}
           rows={4}
-          className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all bg-white/50 text-black placeholder-black/60"
+          className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all bg-white/50 text-gray-900 placeholder-gray-500"
           value={formState[id]}
           onChange={(e) =>
             setFormState((prev) => ({ ...prev, [id]: e.target.value }))
@@ -155,7 +137,7 @@ export default function QuoteRequestForm() {
         <input
           type={type}
           id={id}
-          className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all bg-white/50 text-black placeholder-black/60"
+          className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all bg-white/50 text-gray-900 placeholder-gray-500"
           value={formState[id]}
           onChange={(e) =>
             setFormState((prev) => ({ ...prev, [id]: e.target.value }))
@@ -247,7 +229,6 @@ export default function QuoteRequestForm() {
         )}
 
         <motion.div
-          variants={itemVariants}
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >
