@@ -39,6 +39,10 @@ const partnerLogos = [
     src: "/images/partners/ZydusWellness_logo.png",
     alt: "Partner Company 8"
   },
+  {
+    src: "/images/partners/and-many-more.PNG",
+    alt: "Partner Company 9"
+  }
 ];
 
 export default function Home() {
