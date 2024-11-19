@@ -1,4 +1,4 @@
-// src/app/api/contact/route.ts
+// src/app/api/contact_page_route/route.ts
 import { Resend } from 'resend';
 import { NextResponse } from 'next/server';
 
@@ -8,6 +8,10 @@ interface ContactFormData {
   name: string;
   email: string;
   message: string;
+  companyName: string;
+  serviceType: string;
+  startDate?: string;
+  requirements: string;
 }
 
 const generateAdminEmailHtml = (data: ContactFormData) => `
@@ -49,11 +53,15 @@ const generateAdminEmailHtml = (data: ContactFormData) => `
     <body>
       <div class="container">
         <div class="header">
-          <h1>New Contact Message</h1>
+          <h1>New Quote Request</h1>
         </div>
         <div class="content">
           <div class="field">
-            <p class="label">Name:</p>
+            <p class="label">Company Name:</p>
+            <p>${data.companyName}</p>
+          </div>
+          <div class="field">
+            <p class="label">Contact Person:</p>
             <p>${data.name}</p>
           </div>
           <div class="field">
@@ -61,8 +69,18 @@ const generateAdminEmailHtml = (data: ContactFormData) => `
             <p>${data.email}</p>
           </div>
           <div class="field">
-            <p class="label">Message:</p>
-            <p>${data.message}</p>
+            <p class="label">Service Type:</p>
+            <p>${data.serviceType}</p>
+          </div>
+          ${data.startDate ? `
+            <div class="field">
+              <p class="label">Desired Start Date:</p>
+              <p>${new Date(data.startDate).toLocaleDateString()}</p>
+            </div>
+          ` : ''}
+          <div class="field">
+            <p class="label">Requirements:</p>
+            <p>${data.requirements}</p>
           </div>
         </div>
       </div>
@@ -102,17 +120,18 @@ const generateCustomerEmailHtml = (data: ContactFormData) => `
     <body>
       <div class="container">
         <div class="header">
-          <h1>Thank You for Contacting Us</h1>
+          <h1>Thank You for Your Interest</h1>
         </div>
         <div class="content">
           <p>Dear ${data.name},</p>
-          <p>Thank you for reaching out to Saiyana Logistics. We've received your message and our team will get back to you shortly.</p>
+          <p>Thank you for requesting a quote from Saiyana Logistics. We've received your inquiry and our team will review your requirements promptly.</p>
           <p>Here's what happens next:</p>
           <ol>
-            <li>Our team will review your message within 24 hours</li>
-            <li>A dedicated representative will contact you to address your inquiry</li>
+            <li>Our team will review your requirements within 24 hours</li>
+            <li>We'll prepare a customized quote based on your needs</li>
+            <li>A dedicated representative will contact you to discuss the details</li>
           </ol>
-          <p>If you have any immediate questions, please don't hesitate to contact us.</p>
+          <p>If you have any immediate questions, please don't hesitate to reach out to us.</p>
           <p>Best regards,<br>The Saiyana Logistics Team</p>
         </div>
       </div>
@@ -122,10 +141,14 @@ const generateCustomerEmailHtml = (data: ContactFormData) => `
 
 export async function POST(request: Request) {
   try {
+    if (!process.env.RESEND_API_KEY) {
+      throw new Error('Missing Resend API key');
+    }
+
     const data: ContactFormData = await request.json();
 
     // Validate the data
-    if (!data.name || !data.email || !data.message) {
+    if (!data.name || !data.email || !data.requirements || !data.companyName || !data.serviceType) {
       return NextResponse.json(
         { error: 'Missing required fields' },
         { status: 400 }
@@ -136,7 +159,7 @@ export async function POST(request: Request) {
     await resend.emails.send({
       from: process.env.FROM_EMAIL!,
       to: process.env.ADMIN_EMAIL!,
-      subject: 'New Contact Form Submission - Saiyana Logistics',
+      subject: 'New Quote Request - Saiyana Logistics',
       html: generateAdminEmailHtml(data),
     });
 
@@ -152,10 +175,10 @@ export async function POST(request: Request) {
       { message: 'Emails sent successfully' },
       { status: 200 }
     );
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error sending email:', error);
     return NextResponse.json(
-      { error: 'Error sending email' },
+      { error: error?.message || 'Error sending email' },
       { status: 500 }
     );
   }

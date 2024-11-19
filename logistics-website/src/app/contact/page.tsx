@@ -69,7 +69,7 @@ export default function ContactPage() {
     setLoading(true);
 
     try {
-      const response = await fetch('/api/contact_page_route', {
+      const response = await fetch('/api/contactPage/route', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
