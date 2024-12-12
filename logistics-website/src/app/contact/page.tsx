@@ -1,13 +1,12 @@
 'use client';
 
 import { useState } from 'react';
-import { Mail, Phone, Clock, MapPin, Copy, ExternalLink, Send } from 'lucide-react';
+import { Send } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Button from '@/components/ui/Button';
 import Card from '@/components/ui/Card';
 
 export default function ContactPage() {
-  const [copySuccess, setCopySuccess] = useState(false);
   const [formState, setFormState] = useState({
     name: '',
     email: '',
@@ -19,21 +18,6 @@ export default function ContactPage() {
     submitted: false,
     error: null as string | null,
   });
-
-  const emailAddress = 'saiyanacfa@gmail.com';
-  const phoneNumber = '+91 9440649884';
-  const address = 'Kowluru Arcade, Opp: Papaji Dhaba Lane, Shivam Rd, New Nallakunta, Hyderabad, Telangana 500044, India';
-  const googleMapsUrl = 'https://maps.app.goo.gl/X9p99j1DyjYbfLzH8';
-
-  const handleCopyEmail = async () => {
-    try {
-      await navigator.clipboard.writeText(emailAddress);
-      setCopySuccess(true);
-      setTimeout(() => setCopySuccess(false), 2000);
-    } catch (err) {
-      console.error('Failed to copy email:', err);
-    }
-  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -88,13 +72,6 @@ export default function ContactPage() {
             </div>
 
             <div className="grid lg:grid-cols-2 gap-12">
-              {/* Contact Information */}
-              <div className="space-y-8">
-                <Card className="p-6">
-                  {/* ... (contact information section remains unchanged) ... */}
-                </Card>
-              </div>
-
               {/* Contact Form */}
               <Card className="p-6">
                 {status.submitted ? (
@@ -109,7 +86,7 @@ export default function ContactPage() {
                       </div>
                       <h3 className="text-2xl font-semibold mb-2">Message Sent!</h3>
                       <p className="text-gray-600">
-                        Thank you for reaching out. We'll get back to you soon.
+                        Thank you for reaching out. We will get back to you soon.
                       </p>
                     </div>
                     <Button
