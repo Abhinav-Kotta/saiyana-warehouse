@@ -1,33 +1,53 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Truck, Package, BarChart3, Globe2, Boxes, Clock, Shield, Users } from 'lucide-react';
+import { Truck, Package, BarChart3, Boxes, Clock, Shield, Users, ClipboardList } from 'lucide-react';
 import Card from '@/components/ui/Card';
 
 const mainServices = [
   {
-    title: '3PL Warehousing',
-    description: 'State-of-the-art facilities with climate control, 24/7 security, and advanced inventory management systems',
+    title: 'C&F Services',
+    description: 'End-to-end Carrying and Forwarding solutions ensuring efficient inventory management and seamless distribution across regions',
+    icon: ClipboardList,
+    features: [
+      'Inventory management and order processing',
+      'Handling and forwarding goods across regions',
+      'Coordination with distributors and retailers',
+      'Timely delivery with focus on accuracy'
+    ]
+  },
+  {
+    title: 'Warehousing Solutions',
+    description: 'Modern warehousing facilities designed with advanced technology for real-time tracking and optimal storage efficiency',
     icon: Package,
-    features: ['Climate-controlled storage', 'Real-time inventory tracking', 'Security monitoring', 'Quality control']
+    features: [
+      'Secure and spacious storage solutions',
+      'Advanced inventory tracking systems',
+      'Flexible storage options',
+      'Cost-effective distribution planning'
+    ]
   },
   {
-    title: 'Distribution Services',
-    description: 'Efficient distribution networks covering major markets with optimized routing and delivery solutions',
+    title: 'Transportation Services',
+    description: 'Reliable and timely transportation services with optimized logistics solutions to minimize transit time and costs',
     icon: Truck,
-    features: ['Last-mile delivery', 'Cross-docking', 'Route optimization', 'Scheduled deliveries']
+    features: [
+      'Last-mile delivery within 18 hours',
+      'Multi-modal transportation options',
+      'Real-time shipment tracking',
+      'Efficient fleet management'
+    ]
   },
   {
-    title: 'Supply Chain Management',
-    description: 'End-to-end supply chain solutions with real-time visibility and performance analytics',
-    icon: BarChart3,
-    features: ['Demand forecasting', 'Inventory optimization', 'Performance analytics', 'Cost management']
-  },
-  {
-    title: 'Global Logistics',
-    description: 'Comprehensive international logistics services with customs clearance and documentation support',
-    icon: Globe2,
-    features: ['Customs clearance', 'International shipping', 'Documentation support', 'Compliance management']
+    title: 'Super Stockist',
+    description: 'Comprehensive super stockist services bridging manufacturers and distributors with efficient bulk inventory management',
+    icon: Boxes,
+    features: [
+      'Efficient bulk inventory management',
+      'Manufacturer-distributor coordination',
+      'Quick order fulfillment',
+      'Streamlined supply chain operations'
+    ]
   }
 ];
 
@@ -43,41 +63,14 @@ const additionalFeatures = [
     description: 'Express delivery services for urgent shipments'
   },
   {
-    icon: Boxes,
-    title: 'Flexible Storage',
-    description: 'Scalable space solutions for varying business needs'
+    icon: BarChart3,
+    title: 'Supply Chain Analytics',
+    description: 'Data-driven insights for operational optimization'
   },
   {
     icon: Users,
     title: 'Expert Support',
     description: '24/7 customer service and dedicated account managers'
-  }
-];
-
-const videos = [
-  {
-    id: 'UW3yxwedj7I',
-    title: 'Warehouse Stock Overview',
-    start: 0,
-    end: 14
-  },
-  {
-    id: 'XK603-FIyaA',
-    title: 'Logistics Operations',
-    start: 513,
-    end: 522
-  },
-  {
-    id: 'XK603-FIyaA',
-    title: 'Warehouse Management',
-    start: 568,
-    end: 577
-  },
-  {
-    id: 'XK603-FIyaA',
-    title: 'Supply Chain Solutions',
-    start: 590,
-    end: 601
   }
 ];
 
@@ -126,38 +119,9 @@ export default function ServicesPage() {
             <div className="text-center mb-16">
               <h1 className="text-4xl font-bold mb-4 text-gray-900">Our Services</h1>
               <p className="text-lg text-gray-700">
-                Comprehensive logistics solutions tailored to your needs
+                Comprehensive logistics solutions tailored to your business needs
               </p>
             </div>
-
-            {/* Video Section */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="mb-20"
-            >
-              <div className="grid md:grid-cols-2 gap-6">
-                {videos.map((video, index) => (
-                  <motion.div
-                    key={`${video.id}-${video.start}`}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                  >
-                    <div className="relative aspect-video w-full overflow-hidden rounded-2xl shadow-lg border border-gray-100">
-                      <iframe
-                        className="absolute inset-0 w-full h-full"
-                        src={`https://www.youtube.com/embed/${video.id}?start=${video.start}&end=${video.end}&autoplay=0&rel=0&modestbranding=1&controls=1&loop=1&playlist=${video.id}`}
-                        title={video.title}
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                      />
-                    </div>
-                    <p className="mt-2 text-sm text-gray-600 text-center font-medium">{video.title}</p>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
 
             {/* Main Services */}
             <div className="mb-20">
@@ -168,10 +132,11 @@ export default function ServicesPage() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: i * 0.1 }}
+                    className="group"
                   >
-                    <Card className="h-full p-6 bg-white shadow-sm border border-gray-100">
+                    <Card className="h-full p-6 bg-white shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-300">
                       <div className="mb-4">
-                        <div className="inline-block p-3 bg-primary-50 rounded-xl">
+                        <div className="inline-block p-3 bg-primary-50 rounded-xl group-hover:bg-primary-100 transition-colors duration-300">
                           <service.icon className="h-6 w-6 text-primary-500" />
                         </div>
                       </div>
@@ -199,13 +164,15 @@ export default function ServicesPage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6 + (i * 0.1) }}
-                  className="text-center p-6 bg-white rounded-2xl shadow-sm border border-gray-100"
+                  className="group"
                 >
-                  <div className="inline-block p-3 bg-primary-50 rounded-xl mb-4">
-                    <feature.icon className="w-6 h-6 text-primary-500" />
+                  <div className="text-center p-6 bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-300">
+                    <div className="inline-block p-3 bg-primary-50 rounded-xl mb-4 group-hover:bg-primary-100 transition-colors duration-300">
+                      <feature.icon className="w-6 h-6 text-primary-500" />
+                    </div>
+                    <div className="text-xl font-semibold text-gray-900 mb-2">{feature.title}</div>
+                    <div className="text-gray-700">{feature.description}</div>
                   </div>
-                  <div className="text-xl font-semibold text-gray-900 mb-2">{feature.title}</div>
-                  <div className="text-gray-700">{feature.description}</div>
                 </motion.div>
               ))}
             </div>

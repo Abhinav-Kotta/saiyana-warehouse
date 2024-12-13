@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import Button from '@/components/ui/Button';
 import { ArrowRight, Boxes, BarChart2, Truck } from 'lucide-react';
 
@@ -58,23 +59,42 @@ export default function Hero() {
     { icon: BarChart2, text: "Supply Chain Optimization" },
   ];
 
+  const scrollToQuote = () => {
+    const headerHeight = 64;
+    const quoteSection = document.getElementById('quote-request-section');
+    if (quoteSection) {
+      const topOffset = quoteSection.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+      window.scrollTo({
+        top: topOffset,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Scrolling background images */}
-      <div className="absolute inset-0 bg-gray-900 overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="animate-slideshow h-full">
+      {/* Background images */}
+      <div className="absolute inset-0 bg-gray-900">
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="animate-slideshow">
             <div 
-              className="relative h-full bg-center bg-no-repeat bg-cover float-left w-full"
+              className="h-full bg-center bg-no-repeat bg-cover float-left w-1/2"
               style={{ 
                 backgroundImage: 'url(/close-up-warehouse-view.jpg)',
                 backgroundPosition: '50% 35%',
               }}
             />
             <div 
-              className="relative h-full bg-center bg-no-repeat bg-cover float-left w-full"
+              className="h-full bg-center bg-no-repeat bg-cover float-left w-1/2"
               style={{ 
                 backgroundImage: 'url(/row-of-trucks.PNG)',
+                backgroundPosition: '50% 35%',
+              }}
+            />
+            <div 
+              className="h-full bg-center bg-no-repeat bg-cover float-left w-1/2"
+              style={{ 
+                backgroundImage: 'url(/close-up-warehouse-view.jpg)',
                 backgroundPosition: '50% 35%',
               }}
             />
@@ -82,7 +102,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Enhanced gradient overlay - moved after images */}
+      {/* Gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-r from-gray-900/95 via-gray-900/80 to-gray-900/40 z-10" />
 
       {/* Animated background accents */}
@@ -179,6 +199,7 @@ export default function Hero() {
               <div className="group">
                 <Button 
                   size="lg"
+                  onClick={scrollToQuote}
                   className="group relative overflow-hidden transition-transform hover:scale-105 active:scale-95"
                 >
                   Request a Quote
@@ -191,13 +212,15 @@ export default function Hero() {
                   </motion.span>
                 </Button>
               </div>
-              <Button 
-                size="lg" 
-                variant="outline" 
-                className="text-white border-white hover:bg-white hover:text-gray-900 backdrop-blur-sm transition-transform hover:scale-105 active:scale-95"
-              >
-                View Services
-              </Button>
+              <Link href="/services">
+                <Button 
+                  size="lg" 
+                  variant="outline" 
+                  className="text-white border-white hover:bg-white hover:text-gray-900 backdrop-blur-sm transition-transform hover:scale-105 active:scale-95"
+                >
+                  View Services
+                </Button>
+              </Link>
             </motion.div>
           </div>
         </motion.div>
