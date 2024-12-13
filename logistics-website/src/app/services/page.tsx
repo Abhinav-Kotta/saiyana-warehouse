@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Truck, Package, BarChart3, Globe2, Boxes, Clock, Shield, Users, ClipboardList } from 'lucide-react';
+import { Truck, Package, BarChart3, Boxes, Clock, Shield, Users, ClipboardList } from 'lucide-react';
 import Card from '@/components/ui/Card';
 
 const mainServices = [
