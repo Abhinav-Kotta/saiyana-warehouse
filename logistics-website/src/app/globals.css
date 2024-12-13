@@ -59,7 +59,6 @@
   }
 }
 
-/* Background Slideshow Animation */
 @keyframes slideRight {
   0%, 20% {
     transform: translateX(0);
@@ -68,25 +67,25 @@
     transform: translateX(-50%);
   }
   50%, 70% {
-    transform: translateX(-50%);
+    transform: translateX(-100%);
   }
   75%, 95% {
-    transform: translateX(-100%);
+    transform: translateX(-150%);
   }
   100% {
-    transform: translateX(-100%);
+    transform: translateX(-150%);
   }
 }
 
 .animate-slideshow {
   display: flex;
-  width: 300%;
+  width: 400%;
   height: 100%;
   animation: slideRight 20s cubic-bezier(0.45, 0, 0.55, 1) infinite;
 }
 
 .animate-slideshow > div {
-  min-width: 33.333%;
+  min-width: 25%;
   height: 100%;
 }
 
