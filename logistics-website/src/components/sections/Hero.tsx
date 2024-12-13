@@ -92,6 +92,13 @@ export default function Hero() {
               }}
             />
           </div>
+          <div 
+            className="h-full bg-center bg-no-repeat bg-cover float-left w-1/3"
+            style={{ 
+              backgroundImage: 'url(/close-up-warehouse-view.jpg)',
+              backgroundPosition: '50% 35%',
+            }}
+          />
         </div>
       </div>
 
