@@ -74,18 +74,18 @@ export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
       {/* Background images */}
-      <div className="absolute inset-0 bg-gray-900 overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="animate-slideshow h-full">
+      <div className="absolute inset-0 bg-gray-900">
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="animate-slideshow">
             <div 
-              className="relative h-full bg-center bg-no-repeat bg-cover float-left w-full"
+              className="h-full bg-center bg-no-repeat bg-cover float-left w-1/2"
               style={{ 
                 backgroundImage: 'url(/close-up-warehouse-view.jpg)',
                 backgroundPosition: '50% 35%',
               }}
             />
             <div 
-              className="relative h-full bg-center bg-no-repeat bg-cover float-left w-full"
+              className="h-full bg-center bg-no-repeat bg-cover float-left w-1/2"
               style={{ 
                 backgroundImage: 'url(/row-of-trucks.PNG)',
                 backgroundPosition: '50% 35%',

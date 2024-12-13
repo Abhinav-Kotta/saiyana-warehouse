@@ -59,7 +59,7 @@
   }
 }
 
-/* Your existing animations */
+/* Background Slideshow Animation */
 @keyframes slideRight {
   0%, 45% {
     transform: translateX(0);
@@ -76,7 +76,7 @@
   display: flex;
   width: 200%;
   height: 100%;
-  animation: slideLeft 10s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  animation: slideRight 10s cubic-bezier(0.45, 0, 0.55, 1) infinite;
 }
 
 .animate-slideshow > div {
