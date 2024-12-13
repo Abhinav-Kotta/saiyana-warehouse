@@ -63,12 +63,6 @@ export default function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/history" className="text-gray-300 hover:text-primary-400 flex items-center gap-2 group">
-                    <span className="w-1.5 h-1.5 bg-primary-500 rounded-full group-hover:w-2 transition-all" />
-                    Our Journey
-                  </Link>
-                </li>
-                <li>
                   <Link href="/contact" className="text-gray-300 hover:text-primary-400 flex items-center gap-2 group">
                     <span className="w-1.5 h-1.5 bg-primary-500 rounded-full group-hover:w-2 transition-all" />
                     Contact Us
