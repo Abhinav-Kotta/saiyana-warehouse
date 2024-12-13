@@ -65,20 +65,21 @@
     transform: translateX(0%);
   }
   100% {
-    transform: translateX(-50%);
+    transform: translateX(-100%);
   }
 }
 
 .animate-slideshow {
   display: flex;
-  width: 200%;
+  width: 400%; /* Adjust width to fit 4 images */
   height: 100%;
-  animation: slideRight 10s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  animation: slideRight 20s linear infinite; /* Adjust timing to maintain smooth scrolling */
 }
 
 .animate-slideshow > div {
-  min-width: 50%;
+  width: 25%; /* Ensure each image takes up 25% of the container */
   height: 100%;
+  flex-shrink: 0; /* Prevent shrinking */
 }
 
 .animate-slideshow:hover {
