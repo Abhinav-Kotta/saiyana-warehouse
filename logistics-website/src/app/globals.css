@@ -64,6 +64,15 @@
   0% {
     transform: translateX(0%);
   }
+  25% {
+    transform: translateX(0%);
+  }
+  50% {
+    transform: translateX(-50%);
+  }
+  75% {
+    transform: translateX(-50%);
+  }
   100% {
     transform: translateX(-100%);
   }
@@ -73,7 +82,7 @@
   display: flex;
   width: 200%; /* Adjust to fit continuous scrolling */
   height: 100%;
-  animation: continuousScrollRight 8s linear infinite;
+  animation: continuousScrollRight 16s linear infinite;
 }
 
 .animate-slideshow > div {
