@@ -73,7 +73,7 @@
   display: flex;
   width: 200%; /* Adjust to fit continuous scrolling */
   height: 100%;
-  animation: continuousScrollRight 2s linear infinite;
+  animation: continuousScrollRight 8s linear infinite;
 }
 
 .animate-slideshow > div {
