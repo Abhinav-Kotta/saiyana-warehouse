@@ -103,6 +103,23 @@ export default function ServicesPage() {
               </p>
             </div>
 
+            {/* Video Section */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mb-20"
+            >
+              <div className="relative aspect-video w-full overflow-hidden rounded-2xl shadow-lg border border-gray-100">
+                <iframe
+                  className="absolute inset-0 w-full h-full"
+                  src="https://www.youtube.com/embed/UW3yxwedj7I?autoplay=0&rel=0&modestbranding=1"
+                  title="Warehouse Stock Footage"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+            </motion.div>
+
             {/* Main Services */}
             <div className="mb-20">
               <div className="grid md:grid-cols-2 gap-8">
