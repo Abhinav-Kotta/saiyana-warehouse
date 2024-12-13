@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
+import { usePathname } from 'next/navigation';
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -15,6 +16,8 @@ const navigation = [
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+  const isHomePage = pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,17 +28,47 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const getHeaderStyles = () => {
+    if (isHomePage) {
+      return scrolled ? 'bg-white shadow-md' : 'bg-transparent';
+    }
+    return 'bg-white shadow-md';
+  };
+
+  const getLinkStyles = () => {
+    if (isHomePage) {
+      return scrolled 
+        ? 'text-gray-700 hover:text-primary-600' 
+        : 'text-white hover:text-gray-200';
+    }
+    return 'text-gray-700 hover:text-primary-600';
+  };
+
+  const getLogoStyles = () => {
+    if (isHomePage) {
+      return scrolled 
+        ? 'text-primary-600' 
+        : 'text-white';
+    }
+    return 'text-primary-600';
+  };
+
+  const getMenuButtonStyles = () => {
+    if (isHomePage) {
+      return scrolled 
+        ? 'text-gray-700' 
+        : 'text-white';
+    }
+    return 'text-gray-700';
+  };
+
   return (
-    <header className={`fixed w-full z-50 transition-all duration-300 ${
-      scrolled ? 'bg-white shadow-md' : 'bg-transparent'
-    }`}>
+    <header className={`fixed w-full z-50 transition-all duration-300 ${getHeaderStyles()}`}>
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <Link 
             href="/" 
-            className={`text-2xl font-bold transition-colors duration-300 ${
-              scrolled ? 'text-primary-600' : 'text-white'
-            }`}
+            className={`text-2xl font-bold transition-colors duration-300 ${getLogoStyles()}`}
           >
             Saiyana 3PL
           </Link>
@@ -45,9 +78,7 @@ export default function Header() {
               <Link
                 key={link.name}
                 href={link.href}
-                className={`transition-colors duration-300 ${
-                  scrolled ? 'text-gray-700 hover:text-primary-600' : 'text-white hover:text-gray-200'
-                }`}
+                className={`transition-colors duration-300 ${getLinkStyles()}`}
               >
                 {link.name}
               </Link>
@@ -56,9 +87,7 @@ export default function Header() {
 
           <button
             type="button"
-            className={`md:hidden transition-colors duration-300 ${
-              scrolled ? 'text-gray-700' : 'text-white'
-            }`}
+            className={`md:hidden transition-colors duration-300 ${getMenuButtonStyles()}`}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             {mobileMenuOpen ? (
