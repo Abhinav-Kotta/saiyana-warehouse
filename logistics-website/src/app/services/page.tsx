@@ -54,33 +54,6 @@ const additionalFeatures = [
   }
 ];
 
-const videos = [
-  {
-    id: 'UW3yxwedj7I',
-    title: 'Warehouse Stock Overview',
-    start: 0,
-    end: 14
-  },
-  {
-    id: 'XK603-FIyaA',
-    title: 'Logistics Operations',
-    start: 513,
-    end: 522
-  },
-  {
-    id: 'XK603-FIyaA',
-    title: 'Warehouse Management',
-    start: 568,
-    end: 577
-  },
-  {
-    id: 'XK603-FIyaA',
-    title: 'Supply Chain Solutions',
-    start: 590,
-    end: 601
-  }
-];
-
 export default function ServicesPage() {
   return (
     <div className="min-h-screen pt-16">
@@ -137,25 +110,47 @@ export default function ServicesPage() {
               className="mb-20"
             >
               <div className="grid md:grid-cols-2 gap-6">
-                {videos.map((video, index) => (
-                  <motion.div
-                    key={`${video.id}-${video.start}`}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                  >
-                    <div className="relative aspect-video w-full overflow-hidden rounded-2xl shadow-lg border border-gray-100">
-                      <iframe
-                        className="absolute inset-0 w-full h-full"
-                        src={`https://www.youtube.com/embed/${video.id}?start=${video.start}&end=${video.end}&autoplay=0&rel=0&modestbranding=1&controls=1&loop=1&playlist=${video.id}`}
-                        title={video.title}
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                      />
-                    </div>
-                    <p className="mt-2 text-sm text-gray-600 text-center font-medium">{video.title}</p>
-                  </motion.div>
-                ))}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 }}
+                  className="group"
+                >
+                  <div className="relative aspect-video w-full overflow-hidden rounded-2xl shadow-lg border border-gray-100">
+                    <video
+                      className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                    >
+                      <source src="/videos/warehouse_overview.mp4" type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                  </div>
+                  <p className="mt-2 text-sm text-gray-600 text-center font-medium">Warehouse Management System</p>
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 }}
+                  className="group"
+                >
+                  <div className="relative aspect-video w-full overflow-hidden rounded-2xl shadow-lg border border-gray-100">
+                    <video
+                      className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                    >
+                      <source src="/videos/operations_compilation.mp4" type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                  </div>
+                  <p className="mt-2 text-sm text-gray-600 text-center font-medium">Daily Operations Overview</p>
+                </motion.div>
               </div>
             </motion.div>
 
@@ -168,10 +163,11 @@ export default function ServicesPage() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: i * 0.1 }}
+                    className="group"
                   >
-                    <Card className="h-full p-6 bg-white shadow-sm border border-gray-100">
+                    <Card className="h-full p-6 bg-white shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-300">
                       <div className="mb-4">
-                        <div className="inline-block p-3 bg-primary-50 rounded-xl">
+                        <div className="inline-block p-3 bg-primary-50 rounded-xl group-hover:bg-primary-100 transition-colors duration-300">
                           <service.icon className="h-6 w-6 text-primary-500" />
                         </div>
                       </div>
@@ -199,13 +195,15 @@ export default function ServicesPage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6 + (i * 0.1) }}
-                  className="text-center p-6 bg-white rounded-2xl shadow-sm border border-gray-100"
+                  className="group"
                 >
-                  <div className="inline-block p-3 bg-primary-50 rounded-xl mb-4">
-                    <feature.icon className="w-6 h-6 text-primary-500" />
+                  <div className="text-center p-6 bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-300">
+                    <div className="inline-block p-3 bg-primary-50 rounded-xl mb-4 group-hover:bg-primary-100 transition-colors duration-300">
+                      <feature.icon className="w-6 h-6 text-primary-500" />
+                    </div>
+                    <div className="text-xl font-semibold text-gray-900 mb-2">{feature.title}</div>
+                    <div className="text-gray-700">{feature.description}</div>
                   </div>
-                  <div className="text-xl font-semibold text-gray-900 mb-2">{feature.title}</div>
-                  <div className="text-gray-700">{feature.description}</div>
                 </motion.div>
               ))}
             </div>
