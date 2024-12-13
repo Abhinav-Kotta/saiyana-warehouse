@@ -60,31 +60,41 @@
 }
 
 /* Background Slideshow Animation */
-@keyframes slideRight {
-  0% {
+@keyframes slideWithPause {
+  0%, 20% { /* Pause on the first image */
     transform: translateX(0%);
   }
-  100% {
+  25%, 45% { /* Slide quickly to the second image */
     transform: translateX(-100%);
+  }
+  50%, 70% { /* Pause on the second image */
+    transform: translateX(-100%);
+  }
+  75%, 95% { /* Slide quickly to the third image */
+    transform: translateX(-200%);
+  }
+  100% { /* Pause on the third image and prepare for loop */
+    transform: translateX(-200%);
   }
 }
 
 .animate-slideshow {
   display: flex;
-  width: 400%; /* Adjust width to fit 4 images */
+  width: 300%; /* Adjust width to fit 3 images */
   height: 100%;
-  animation: slideRight 20s linear infinite; /* Adjust timing to maintain smooth scrolling */
+  animation: slideWithPause 9s cubic-bezier(0.25, 1, 0.5, 1) infinite; /* Adjust timing for pause and slide */
 }
 
 .animate-slideshow > div {
-  width: 25%; /* Ensure each image takes up 25% of the container */
+  width: 33.33%; /* Each image takes up one-third of the container */
   height: 100%;
   flex-shrink: 0; /* Prevent shrinking */
 }
 
 .animate-slideshow:hover {
-  animation-play-state: paused;
+  animation-play-state: paused; /* Pause animation on hover */
 }
+
 
 
 @layer base {
