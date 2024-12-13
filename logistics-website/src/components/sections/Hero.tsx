@@ -5,6 +5,25 @@ import Link from 'next/link';
 import Button from '@/components/ui/Button';
 import { ArrowRight, Boxes, BarChart2, Truck } from 'lucide-react';
 
+const rightScrollStyles = `
+@keyframes slideRight {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-slideshow {
+  animation: slideRight 20s linear infinite;
+}
+
+.animate-slideshow:hover {
+  animation-play-state: paused;
+}
+`;
+
 export default function Hero() {
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -60,9 +79,7 @@ export default function Hero() {
   ];
 
   const scrollToQuote = () => {
-    // Get the header height (assuming it's 64px based on your h-16 class)
     const headerHeight = 64;
-    
     const quoteSection = document.getElementById('quote-request-section');
     if (quoteSection) {
       const topOffset = quoteSection.getBoundingClientRect().top + window.pageYOffset - headerHeight;
@@ -75,29 +92,52 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Scrolling background images */}
+      {/* Custom animation styles */}
+      <style>{rightScrollStyles}</style>
+
+      {/* Background images */}
       <div className="absolute inset-0 bg-gray-900 overflow-hidden">
         <div className="absolute inset-0">
-          <div className="animate-slideshow h-full">
-            <div 
-              className="relative h-full bg-center bg-no-repeat bg-cover float-left w-full"
-              style={{ 
-                backgroundImage: 'url(/close-up-warehouse-view.jpg)',
-                backgroundPosition: '50% 35%',
-              }}
-            />
-            <div 
-              className="relative h-full bg-center bg-no-repeat bg-cover float-left w-full"
-              style={{ 
-                backgroundImage: 'url(/row-of-trucks.PNG)',
-                backgroundPosition: '50% 35%',
-              }}
-            />
+          <div className="flex animate-slideshow" style={{ width: '200%' }}>
+            {/* First set of images */}
+            <div className="flex min-w-full">
+              <div 
+                className="w-1/2 h-full bg-center bg-no-repeat bg-cover"
+                style={{ 
+                  backgroundImage: 'url(/close-up-warehouse-view.jpg)',
+                  backgroundPosition: '50% 35%',
+                }}
+              />
+              <div 
+                className="w-1/2 h-full bg-center bg-no-repeat bg-cover"
+                style={{ 
+                  backgroundImage: 'url(/row-of-trucks.PNG)',
+                  backgroundPosition: '50% 35%',
+                }}
+              />
+            </div>
+            {/* Duplicate set for seamless loop */}
+            <div className="flex min-w-full">
+              <div 
+                className="w-1/2 h-full bg-center bg-no-repeat bg-cover"
+                style={{ 
+                  backgroundImage: 'url(/close-up-warehouse-view.jpg)',
+                  backgroundPosition: '50% 35%',
+                }}
+              />
+              <div 
+                className="w-1/2 h-full bg-center bg-no-repeat bg-cover"
+                style={{ 
+                  backgroundImage: 'url(/row-of-trucks.PNG)',
+                  backgroundPosition: '50% 35%',
+                }}
+              />
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Enhanced gradient overlay - moved after images */}
+      {/* Gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-r from-gray-900/95 via-gray-900/80 to-gray-900/40 z-10" />
 
       {/* Animated background accents */}
@@ -130,7 +170,7 @@ export default function Hero() {
         />
       </div>
 
-      {/* Content */}
+      {/* Main content */}
       <div className="container relative z-20 mx-auto px-4 pt-16">
         <motion.div
           variants={containerVariants}
