@@ -73,7 +73,7 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Scrolling background images */}
+      {/* Background images */}
       <div className="absolute inset-0 bg-gray-900 overflow-hidden">
         <div className="absolute inset-0">
           <div className="animate-slideshow h-full">
@@ -95,7 +95,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Enhanced gradient overlay - moved after images */}
+      {/* Gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-r from-gray-900/95 via-gray-900/80 to-gray-900/40 z-10" />
 
       {/* Animated background accents */}
