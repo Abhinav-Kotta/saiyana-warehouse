@@ -60,7 +60,7 @@ export default function Hero() {
   ];
 
   const scrollToQuote = () => {
-    const contactSection = document.querySelector('#QuoteRequestForm');
+    const contactSection = document.querySelector('#Contact');
     if (contactSection) {
       contactSection.scrollIntoView({ behavior: 'smooth' });
     }
