@@ -98,13 +98,6 @@ export default function Hero() {
                 backgroundPosition: '50% 35%',
               }}
             />
-            <div 
-              className="h-full bg-center bg-no-repeat bg-cover float-left w-1/2"
-              style={{ 
-                backgroundImage: 'url(/row-of-trucks.PNG)',
-                backgroundPosition: '50% 35%',
-              }}
-            />
           </div>
         </div>
       </div>
