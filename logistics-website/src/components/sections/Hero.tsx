@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import Button from '@/components/ui/Button';
 import { ArrowRight, Boxes, BarChart2, Truck } from 'lucide-react';
 
@@ -57,6 +58,13 @@ export default function Hero() {
     { icon: Truck, text: "Distribution Solutions" },
     { icon: BarChart2, text: "Supply Chain Optimization" },
   ];
+
+  const scrollToQuote = () => {
+    const contactSection = document.querySelector('#QuoteRequestForm');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
@@ -179,6 +187,7 @@ export default function Hero() {
               <div className="group">
                 <Button 
                   size="lg"
+                  onClick={scrollToQuote}
                   className="group relative overflow-hidden transition-transform hover:scale-105 active:scale-95"
                 >
                   Request a Quote
@@ -191,13 +200,15 @@ export default function Hero() {
                   </motion.span>
                 </Button>
               </div>
-              <Button 
-                size="lg" 
-                variant="outline" 
-                className="text-white border-white hover:bg-white hover:text-gray-900 backdrop-blur-sm transition-transform hover:scale-105 active:scale-95"
-              >
-                View Services
-              </Button>
+              <Link href="/services">
+                <Button 
+                  size="lg" 
+                  variant="outline" 
+                  className="text-white border-white hover:bg-white hover:text-gray-900 backdrop-blur-sm transition-transform hover:scale-105 active:scale-95"
+                >
+                  View Services
+                </Button>
+              </Link>
             </motion.div>
           </div>
         </motion.div>
