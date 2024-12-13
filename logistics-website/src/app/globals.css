@@ -61,32 +61,26 @@
 
 /* Background Slideshow Animation */
 @keyframes slideRight {
-  0%, 20% {
-    transform: translateX(0);
+  0%, 30% {
+    transform: translateX(0%);
   }
-  25%, 45% {
+  35%, 65% {
     transform: translateX(-50%);
   }
-  50%, 70% {
-    transform: translateX(-50%);
-  }
-  75%, 95% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(-100%);
+  70%, 100% {
+    transform: translateX(0%);
   }
 }
 
 .animate-slideshow {
   display: flex;
-  width: 300%;
+  width: 200%;
   height: 100%;
-  animation: slideRight 20s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  animation: slideRight 10s cubic-bezier(0.45, 0, 0.55, 1) infinite;
 }
 
 .animate-slideshow > div {
-  min-width: 33.333%;
+  min-width: 50%;
   height: 100%;
 }
 
