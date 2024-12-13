@@ -57,32 +57,40 @@
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
   }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
 }
 
 /* Background Slideshow Animation */
 @keyframes slideWithPause {
-  0%, 20% { /* Pause on the first image */
-    transform: translateX(0%);
+  0%, 20% {
+    transform: translateX(0%); /* Pause on the first image */
   }
-  25%, 45% { /* Slide quickly to the second image */
-    transform: translateX(-100%);
+  25%, 45% {
+    transform: translateX(-100%); /* Slide to the second image */
   }
-  50%, 70% { /* Pause on the second image */
-    transform: translateX(-100%);
+  50%, 70% {
+    transform: translateX(-100%); /* Pause on the second image */
   }
-  75%, 95% { /* Slide quickly to the third image */
-    transform: translateX(-200%);
+  75%, 95% {
+    transform: translateX(-200%); /* Slide to the third image */
   }
-  100% { /* Pause on the third image and prepare for loop */
-    transform: translateX(-200%);
+  100% {
+    transform: translateX(-200%); /* Pause on the third image */
   }
 }
 
 .animate-slideshow {
   display: flex;
-  width: 300%; /* Adjust width to fit 3 images */
+  width: 300%; /* Width to fit 3 images */
   height: 100%;
-  animation: slideWithPause 9s cubic-bezier(0.25, 1, 0.5, 1) infinite; /* Adjust timing for pause and slide */
+  animation: slideWithPause 9s cubic-bezier(0.25, 1, 0.5, 1) infinite; /* Adjust timing for smooth pause and slide */
 }
 
 .animate-slideshow > div {
@@ -95,13 +103,8 @@
   animation-play-state: paused; /* Pause animation on hover */
 }
 
-
-
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
+.animate-slideshow img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure images fit properly */
 }
