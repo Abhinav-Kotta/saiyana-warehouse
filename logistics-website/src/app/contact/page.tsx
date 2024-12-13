@@ -7,16 +7,16 @@ import Button from '@/components/ui/Button';
 import Card from '@/components/ui/Card';
 
 export default function ContactPage() {
-  const [formState, setFormState] = useState({
-    name: '',
-    email: '',
-    message: '',
-  });
-
   const [status, setStatus] = useState({
     submitting: false,
     submitted: false,
     error: null as string | null,
+  });
+
+  const [formState, setFormState] = useState({
+    name: '',
+    email: '',
+    message: '',
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -72,6 +72,53 @@ export default function ContactPage() {
             </div>
 
             <div className="grid lg:grid-cols-2 gap-12">
+              {/* Contact Information */}
+              <div className="space-y-8">
+                <Card className="p-6">
+                  <div className="space-y-6">
+                    <div className="flex items-start space-x-4">
+                      <div>
+                        <h3 className="font-semibold mb-2 text-gray-900">Office Location</h3>
+                        <p className="text-gray-600 mb-2">
+                          Kowluru Arcade, Opp: Papaji Dhaba Lane, Shivam Rd, New Nallakunta, 
+                          Hyderabad, Telangana 500044, India
+                        </p>
+                        <a 
+                          href="https://maps.app.goo.gl/X9p99j1DyjYbfLzH8"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center text-primary-600 hover:text-primary-700"
+                        >
+                          Get Directions
+                        </a>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start space-x-4">
+                      <div>
+                        <h3 className="font-semibold mb-2 text-gray-900">Email</h3>
+                        <p className="text-gray-600">saiyanacfa@gmail.com</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start space-x-4">
+                      <div>
+                        <h3 className="font-semibold mb-2 text-gray-900">Phone</h3>
+                        <p className="text-gray-600">+91 9440649884</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start space-x-4">
+                      <div>
+                        <h3 className="font-semibold mb-2 text-gray-900">Working Hours</h3>
+                        <p className="text-gray-600">MON-SAT | 9am to 6pm</p>
+                        <p className="text-gray-600">SUN | 9am to 5pm</p>
+                      </div>
+                    </div>
+                  </div>
+                </Card>
+              </div>
+
               {/* Contact Form */}
               <Card className="p-6">
                 {status.submitted ? (
