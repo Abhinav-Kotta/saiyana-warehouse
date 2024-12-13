@@ -36,6 +36,7 @@ const serviceOptions = [
   { value: 'C&F Services', label: 'C&F Services' },
   { value: 'Warehousing', label: 'Warehousing' },
   { value: 'transportation', label: 'Transportation' },
+  { value: 'Super Stockist', label: 'Super Stockist' },
 ];
 
 export default function QuoteRequestForm() {
