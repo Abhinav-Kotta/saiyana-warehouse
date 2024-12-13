@@ -60,9 +60,16 @@ export default function Hero() {
   ];
 
   const scrollToQuote = () => {
-    const contactSection = document.querySelector('#Contact');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
+    // Get the header height (assuming it's 64px based on your h-16 class)
+    const headerHeight = 64;
+    
+    const quoteSection = document.getElementById('quote-request-section');
+    if (quoteSection) {
+      const topOffset = quoteSection.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+      window.scrollTo({
+        top: topOffset,
+        behavior: 'smooth'
+      });
     }
   };
 
