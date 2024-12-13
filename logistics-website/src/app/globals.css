@@ -61,14 +61,17 @@
 
 /* Background Slideshow Animation */
 @keyframes slideRight {
-  0%, 45% {
+  0% {
     transform: translateX(0);
   }
-  50%, 95% {
+  45% {
+    transform: translateX(0);
+  }
+  95% {
     transform: translateX(-50%);
   }
   100% {
-    transform: translateX(0);
+    transform: translateX(-50%);
   }
 }
 
