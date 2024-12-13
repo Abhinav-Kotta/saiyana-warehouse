@@ -54,6 +54,33 @@ const additionalFeatures = [
   }
 ];
 
+const videos = [
+  {
+    id: 'UW3yxwedj7I',
+    title: 'Warehouse Stock Overview',
+    start: 0,
+    end: 14
+  },
+  {
+    id: 'XK603-FIyaA',
+    title: 'Logistics Operations',
+    start: 513,
+    end: 522
+  },
+  {
+    id: 'XK603-FIyaA',
+    title: 'Warehouse Management',
+    start: 568,
+    end: 577
+  },
+  {
+    id: 'XK603-FIyaA',
+    title: 'Supply Chain Solutions',
+    start: 590,
+    end: 601
+  }
+];
+
 export default function ServicesPage() {
   return (
     <div className="min-h-screen pt-16">
@@ -109,14 +136,26 @@ export default function ServicesPage() {
               animate={{ opacity: 1, y: 0 }}
               className="mb-20"
             >
-              <div className="relative aspect-video w-full overflow-hidden rounded-2xl shadow-lg border border-gray-100">
-                <iframe
-                  className="absolute inset-0 w-full h-full"
-                  src="https://www.youtube.com/embed/UW3yxwedj7I?autoplay=0&rel=0&modestbranding=1"
-                  title="Warehouse Stock Footage"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
+              <div className="grid md:grid-cols-2 gap-6">
+                {videos.map((video, index) => (
+                  <motion.div
+                    key={`${video.id}-${video.start}`}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                  >
+                    <div className="relative aspect-video w-full overflow-hidden rounded-2xl shadow-lg border border-gray-100">
+                      <iframe
+                        className="absolute inset-0 w-full h-full"
+                        src={`https://www.youtube.com/embed/${video.id}?start=${video.start}&end=${video.end}&autoplay=0&rel=0&modestbranding=1&controls=1&loop=1&playlist=${video.id}`}
+                        title={video.title}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      />
+                    </div>
+                    <p className="mt-2 text-sm text-gray-600 text-center font-medium">{video.title}</p>
+                  </motion.div>
+                ))}
               </div>
             </motion.div>
 
