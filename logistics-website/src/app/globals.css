@@ -61,14 +61,11 @@
 
 /* Background Slideshow Animation */
 @keyframes slideRight {
-  0%, 30% {
+  0% {
     transform: translateX(0%);
   }
-  35%, 65% {
+  100% {
     transform: translateX(-50%);
-  }
-  70%, 100% {
-    transform: translateX(0%);
   }
 }
 
@@ -87,6 +84,7 @@
 .animate-slideshow:hover {
   animation-play-state: paused;
 }
+
 
 @layer base {
   * {
