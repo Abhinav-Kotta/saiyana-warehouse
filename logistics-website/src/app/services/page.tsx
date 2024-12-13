@@ -124,7 +124,7 @@ export default function ServicesPage() {
                       muted
                       playsInline
                     >
-                      <source src="warehouse_overview.mp4" type="video/mp4" />
+                      <source src="./warehouse_overview.mp4" type="video/mp4" />
                       Your browser does not support the video tag.
                     </video>
                   </div>
@@ -145,7 +145,7 @@ export default function ServicesPage() {
                       muted
                       playsInline
                     >
-                      <source src="operations_compilation.mp4" type="video/mp4" />
+                      <source src="./operations_compilation.mp4" type="video/mp4" />
                       Your browser does not support the video tag.
                     </video>
                   </div>
