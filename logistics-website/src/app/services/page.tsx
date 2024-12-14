@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { 
   Truck, Package, BarChart3, Boxes, Clock, Shield, Users, 
