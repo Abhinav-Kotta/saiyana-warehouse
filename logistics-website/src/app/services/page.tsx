@@ -153,20 +153,25 @@ export default function ServicesPage() {
               <p className="text-gray-600 mb-8">Comprehensive solutions for your logistics needs</p>
               
               {/* Subtle Video Integration */}
-              <div className="mb-12 rounded-xl overflow-hidden shadow-lg max-w-3xl mx-auto bg-gray-900">
-                <video
-                  ref={videoRef}
-                  className="w-full aspect-video object-cover opacity-90"
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                >
-                  <source src="/videos/operations_compilation.mp4" type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-                <div className="p-4 bg-gray-900 text-center">
-                  <p className="text-sm text-gray-400">Example of modern warehouse operations</p>
+              <div className="mb-12 max-w-2xl mx-auto">
+                <div className="relative rounded-lg overflow-hidden shadow-md bg-gray-50 border border-gray-100">
+                  <video
+                    ref={videoRef}
+                    className="w-full h-48 object-cover opacity-80"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                  >
+                    <source src="/videos/operations_compilation.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900/30 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-3 text-center">
+                    <p className="text-xs text-gray-400 font-light">
+                      Illustrative example of modern warehouse operations
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
