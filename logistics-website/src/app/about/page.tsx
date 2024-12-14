@@ -14,8 +14,52 @@ const stats = [
 export default function AboutPage() {
   return (
     <div className="min-h-screen pt-16">
+      {/* Hero Section */}
+      <section className="relative py-20 bg-gray-900 overflow-hidden">
+        <div className="absolute inset-0 overflow-hidden">
+          <motion.div
+            className="absolute w-96 h-96 rounded-full bg-primary-500/10 blur-3xl"
+            animate={{
+              x: [0, 100, 0],
+              y: [0, 50, 0],
+            }}
+            transition={{
+              duration: 20,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+            style={{ top: '10%', left: '30%' }}
+          />
+          <motion.div
+            className="absolute w-96 h-96 rounded-full bg-secondary-500/10 blur-3xl"
+            animate={{
+              x: [0, -50, 0],
+              y: [0, 100, 0],
+            }}
+            transition={{
+              duration: 15,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+            style={{ bottom: '10%', right: '20%' }}
+          />
+        </div>
+        <div className="container relative mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="max-w-3xl mx-auto text-center text-white"
+          >
+            <h1 className="text-5xl font-bold mb-6">About Saiyana Group</h1>
+            <p className="text-xl text-gray-300">
+              Pioneering logistics excellence since 1996
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Content Section */}
       <section className="py-24 relative overflow-hidden">
-        {/* Background elements */}
         <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-white" />
         <div className="absolute inset-0 overflow-hidden">
           <motion.div
@@ -52,14 +96,6 @@ export default function AboutPage() {
             animate={{ opacity: 1, y: 0 }}
             className="max-w-6xl mx-auto"
           >
-            {/* Hero Section */}
-            <div className="text-center mb-16">
-              <h1 className="text-4xl font-bold mb-4 text-gray-900">About Saiyana Group</h1>
-              <p className="text-lg text-gray-700">
-                Pioneering logistics excellence since 1996
-              </p>
-            </div>
-
             {/* Founder and Company Story */}
             <div className="grid lg:grid-cols-2 gap-12 items-center mb-20">
               <motion.div
@@ -120,7 +156,7 @@ export default function AboutPage() {
               {stats.map((stat) => (
                 <div
                   key={stat.label}
-                  className="text-center p-6 bg-white rounded-2xl shadow-sm border border-gray-100"
+                  className="text-center p-6 bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-300"
                 >
                   <div className="inline-block p-3 bg-primary-50 rounded-xl mb-4">
                     <stat.icon className="w-6 h-6 text-primary-500" />

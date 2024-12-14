@@ -59,6 +59,51 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen pt-16">
+      {/* Hero Section */}
+      <section className="relative py-20 bg-gray-900 overflow-hidden">
+        <div className="absolute inset-0 overflow-hidden">
+          <motion.div
+            className="absolute w-96 h-96 rounded-full bg-primary-500/10 blur-3xl"
+            animate={{
+              x: [0, 100, 0],
+              y: [0, 50, 0],
+            }}
+            transition={{
+              duration: 20,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+            style={{ top: '10%', left: '30%' }}
+          />
+          <motion.div
+            className="absolute w-96 h-96 rounded-full bg-secondary-500/10 blur-3xl"
+            animate={{
+              x: [0, -50, 0],
+              y: [0, 100, 0],
+            }}
+            transition={{
+              duration: 15,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+            style={{ bottom: '10%', right: '20%' }}
+          />
+        </div>
+        <div className="container relative mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="max-w-3xl mx-auto text-center text-white"
+          >
+            <h1 className="text-5xl font-bold mb-6">Contact Us</h1>
+            <p className="text-xl text-gray-300">
+              Get in touch with our team for any inquiries
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Content Section */}
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <motion.div
@@ -66,11 +111,6 @@ export default function ContactPage() {
             animate={{ opacity: 1, y: 0 }}
             className="max-w-6xl mx-auto"
           >
-            <div className="text-center mb-12">
-              <h1 className="text-4xl font-bold mb-4 text-gray-900">Contact Us</h1>
-              <p className="text-gray-600">Get in touch with our team</p>
-            </div>
-
             <div className="grid lg:grid-cols-2 gap-12">
               {/* Contact Information */}
               <div className="space-y-8">
