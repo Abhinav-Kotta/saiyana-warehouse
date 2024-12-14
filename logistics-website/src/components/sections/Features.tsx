@@ -8,21 +8,25 @@ const features = [
     title: 'Secure Storage',
     description: '24/7 monitored facilities with inventory protection',
     icon: ShieldCheck,
+    iconColor: 'text-emerald-400', // Green for security/safety
   },
   {
     title: 'Flexible Space',
     description: 'Scalable warehousing with multi-client capabilities',
     icon: Boxes,
+    iconColor: 'text-blue-400', // Blue for flexibility/scalability
   },
   {
     title: 'Dedicated Support',
     description: 'Dedicated customer support to ensure complete assistance at all times',
     icon: HeadphonesIcon,
+    iconColor: 'text-purple-400', // Purple for service/support
   },
   {
     title: 'Pest and fire control',
     description: 'We ensure regular pest control & installation of fire extinguishers at all our storage facilities',
     icon: Flame,
+    iconColor: 'text-orange-400', // Orange for fire-related
   },
 ];
 
@@ -93,9 +97,9 @@ export default function Features() {
               className="text-center group"
             >
               <div className="mb-6 inline-block relative">
-                <div className="absolute inset-0 bg-primary-500/20 blur-xl rounded-full transform group-hover:scale-110 transition-transform" />
+                <div className={`absolute inset-0 ${feature.iconColor.replace('text', 'bg')}/20 blur-xl rounded-full transform group-hover:scale-110 transition-transform`} />
                 <div className="relative p-5 bg-gray-800 rounded-2xl border border-gray-700">
-                  <feature.icon className="h-8 w-8 text-primary-400" />
+                  <feature.icon className={`h-8 w-8 ${feature.iconColor}`} />
                 </div>
               </div>
               <h3 className="text-xl font-semibold mb-3 text-white">{feature.title}</h3>
