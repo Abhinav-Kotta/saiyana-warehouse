@@ -30,14 +30,18 @@ const services = [
 ];
 
 export default function Services() {
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const videoRef1 = useRef<HTMLVideoElement>(null);
+  const videoRef2 = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.play().catch(error => {
-        console.log("Video autoplay failed:", error);
-      });
-    }
+    // Play both videos
+    [videoRef1, videoRef2].forEach(ref => {
+      if (ref.current) {
+        ref.current.play().catch(error => {
+          console.log("Video autoplay failed:", error);
+        });
+      }
+    });
   }, []);
 
   const containerVariants = {
@@ -119,18 +123,35 @@ export default function Services() {
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
-            className="lg:col-span-2 w-fit rounded-lg overflow-hidden shadow-lg"
+            className="lg:col-span-2 flex flex-col gap-4"
           >
-            <video
-              ref={videoRef}
-              className="h-48 rounded-lg"
-              loop
-              muted
-              playsInline
-            >
-              <source src="/videos/operations_compilation.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
+            {/* First video */}
+            <div className="w-fit rounded-lg overflow-hidden shadow-lg">
+              <video
+                ref={videoRef1}
+                className="h-48 rounded-lg"
+                loop
+                muted
+                playsInline
+              >
+                <source src="/videos/operations_compilation.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            
+            {/* Second video */}
+            <div className="w-fit rounded-lg overflow-hidden shadow-lg">
+              <video
+                ref={videoRef2}
+                className="h-48 rounded-lg"
+                loop
+                muted
+                playsInline
+              >
+                <source src="/videos/operations_compilation.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
           </motion.div>
 
           {/* Services Grid */}
