@@ -69,7 +69,7 @@ export default function Services() {
   };
 
   return (
-    <section className="py-24 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
+    <section className="py-12 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
@@ -105,25 +105,25 @@ export default function Services() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-16"
+          className="text-center max-w-3xl mx-auto mb-8"
         >
-          <h2 className="text-4xl font-bold mb-4 text-gray-900">3PL Services</h2>
-          <p className="text-gray-700 text-lg">
+          <h2 className="text-3xl font-bold mb-2 text-gray-900">3PL Services</h2>
+          <p className="text-gray-700 text-base">
             End-to-end warehousing and logistics solutions for your business
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-5 gap-8">
+        <div className="grid lg:grid-cols-5 gap-6">
           {/* Video Section */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
-            className="lg:col-span-2 relative rounded-xl overflow-hidden shadow-xl h-full flex items-center"
+            className="lg:col-span-2 relative rounded-lg overflow-hidden shadow-lg h-full flex items-center"
           >
             <video
               ref={videoRef}
-              className="w-full h-64 object-cover rounded-xl"
+              className="w-full h-48 object-cover rounded-lg"
               loop
               muted
               playsInline
@@ -139,7 +139,7 @@ export default function Services() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="lg:col-span-3 grid md:grid-cols-2 gap-6"
+            className="lg:col-span-3 grid md:grid-cols-2 gap-4"
           >
             {services.map((service) => (
               <motion.div
@@ -148,14 +148,14 @@ export default function Services() {
                 whileHover="hover"
                 className="group"
               >
-                <Card className="h-full p-6 backdrop-blur-sm bg-white/90 hover:shadow-lg transition-all duration-300 border border-gray-100">
-                  <div className="mb-4 inline-block p-3 bg-primary-50 rounded-xl group-hover:bg-primary-100 transition-colors duration-300">
-                    <service.icon className="h-8 w-8 text-primary-500" />
+                <Card className="h-full p-4 backdrop-blur-sm bg-white/90 hover:shadow-md transition-all duration-300 border border-gray-100">
+                  <div className="mb-2 inline-block p-2 bg-primary-50 rounded-lg group-hover:bg-primary-100 transition-colors duration-300">
+                    <service.icon className="h-6 w-6 text-primary-500" />
                   </div>
-                  <h3 className="text-xl font-semibold mb-3 text-gray-900 group-hover:text-primary-600 transition-colors duration-300">
+                  <h3 className="text-base font-semibold mb-1 text-gray-900 group-hover:text-primary-600 transition-colors duration-300">
                     {service.title}
                   </h3>
-                  <p className="text-gray-700">
+                  <p className="text-sm text-gray-700">
                     {service.description}
                   </p>
                 </Card>
