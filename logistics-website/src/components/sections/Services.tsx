@@ -1,5 +1,6 @@
 'use client';
 
+import { useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Package, TruckIcon, ClipboardCheck, Users } from 'lucide-react';
 import Card from '@/components/ui/Card';
@@ -29,6 +30,16 @@ const services = [
 ];
 
 export default function Services() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.play().catch(error => {
+        console.log("Video autoplay failed:", error);
+      });
+    }
+  }, []);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -46,7 +57,7 @@ export default function Services() {
       y: 0,
       transition: {
         duration: 0.6,
-        ease: "easeOut", 
+        ease: "easeOut",
       },
     },
     hover: {
@@ -59,7 +70,7 @@ export default function Services() {
 
   return (
     <section className="py-24 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
-      {/* Decorative elements */}
+      {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
           className="absolute w-96 h-96 rounded-full bg-primary-500/5 blur-3xl"
@@ -77,7 +88,7 @@ export default function Services() {
         <motion.div
           className="absolute w-96 h-96 rounded-full bg-secondary-500/5 blur-3xl"
           animate={{
-            x: [0, -30, 0], 
+            x: [0, -30, 0],
             y: [0, 40, 0],
           }}
           transition={{
@@ -98,38 +109,60 @@ export default function Services() {
         >
           <h2 className="text-4xl font-bold mb-4 text-gray-900">3PL Services</h2>
           <p className="text-gray-700 text-lg">
-            End-to-end warehousing and logistics solutions for your business 
+            End-to-end warehousing and logistics solutions for your business
           </p>
         </motion.div>
 
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
-        >
-          {services.map((service) => (
-            <motion.div
-              key={service.title}
-              variants={cardVariants}
-              whileHover="hover"
-              className="group"
+        <div className="grid lg:grid-cols-2 gap-12">
+          {/* Video Section */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            className="relative rounded-xl overflow-hidden shadow-xl"
+          >
+            <video
+              ref={videoRef}
+              className="w-full h-full object-cover rounded-xl"
+              loop
+              muted
+              playsInline
             >
-              <Card className="h-full p-6 backdrop-blur-sm bg-white/90 hover:shadow-lg transition-all duration-300 border border-gray-100">
-                <div className="mb-4 inline-block p-3 bg-primary-50 rounded-xl group-hover:bg-primary-100 transition-colors duration-300">
-                  <service.icon className="h-8 w-8 text-primary-500" />
-                </div>
-                <h3 className="text-xl font-semibold mb-3 text-gray-900 group-hover:text-primary-600 transition-colors duration-300">
-                  {service.title}
-                </h3>
-                <p className="text-gray-700">
-                  {service.description}
-                </p>
-              </Card>
-            </motion.div>
-          ))}
-        </motion.div>
+              <source src="/videos/operations_compilation.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </motion.div>
+
+          {/* Services Grid */}
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid grid-cols-2 gap-6"
+          >
+            {services.map((service) => (
+              <motion.div
+                key={service.title}
+                variants={cardVariants}
+                whileHover="hover"
+                className="group"
+              >
+                <Card className="h-full p-6 backdrop-blur-sm bg-white/90 hover:shadow-lg transition-all duration-300 border border-gray-100">
+                  <div className="mb-4 inline-block p-3 bg-primary-50 rounded-xl group-hover:bg-primary-100 transition-colors duration-300">
+                    <service.icon className="h-8 w-8 text-primary-500" />
+                  </div>
+                  <h3 className="text-xl font-semibold mb-3 text-gray-900 group-hover:text-primary-600 transition-colors duration-300">
+                    {service.title}
+                  </h3>
+                  <p className="text-gray-700">
+                    {service.description}
+                  </p>
+                </Card>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
       </div>
     </section>
   );
