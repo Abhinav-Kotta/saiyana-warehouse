@@ -96,7 +96,7 @@ export default function ServicesPage() {
 
   return (
     <div className="min-h-screen pt-16">
-      {/* Hero Section */}
+      {/* Hero Section - remains exactly the same */}
       <section className="relative py-20 bg-gray-900 overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
           <motion.div
@@ -140,7 +140,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Main Services Section with Video Integration */}
+      {/* Main Services Section */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <motion.div
@@ -151,32 +151,9 @@ export default function ServicesPage() {
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold mb-4">Core Services</h2>
               <p className="text-gray-600 mb-8">Comprehensive solutions for your logistics needs</p>
-              
-              {/* Subtle Video Integration */}
-              <div className="mb-12 max-w-2xl mx-auto">
-                <div className="relative rounded-lg overflow-hidden shadow-md bg-gray-50 border border-gray-100">
-                  <video
-                    ref={videoRef}
-                    className="w-full h-48 object-cover opacity-80"
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                  >
-                    <source src="/videos/operations_compilation.mp4" type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
-                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900/30 to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-3 text-center">
-                    <p className="text-xs text-gray-400 font-light">
-                      Illustrative example of modern warehouse operations
-                    </p>
-                  </div>
-                </div>
-              </div>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="grid md:grid-cols-2 gap-8 mb-16">
               {mainServices.map((service, i) => (
                 <motion.div
                   key={service.title}
@@ -205,11 +182,29 @@ export default function ServicesPage() {
                 </motion.div>
               ))}
             </div>
+
+            {/* Video Section - Moved below services */}
+            <div className="mb-12 rounded-xl overflow-hidden shadow-lg max-w-3xl mx-auto bg-gray-900">
+              <video
+                ref={videoRef}
+                className="w-full aspect-video object-cover opacity-90"
+                autoPlay
+                loop
+                muted
+                playsInline
+              >
+                <source src="/videos/operations_compilation.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+              <div className="p-4 bg-gray-900 text-center">
+                <p className="text-sm text-gray-400">Example of modern warehouse operations</p>
+              </div>
+            </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Additional Features Section */}
+      {/* Additional Features Section - remains exactly the same */}
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <motion.div
