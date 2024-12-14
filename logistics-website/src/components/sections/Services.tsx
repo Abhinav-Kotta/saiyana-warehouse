@@ -119,18 +119,20 @@ export default function Services() {
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
-            className="lg:col-span-2 relative rounded-lg overflow-hidden shadow-lg h-full flex items-center"
+            className="lg:col-span-2"
           >
-            <video
-              ref={videoRef}
-              className="w-full h-48 object-cover rounded-lg"
-              loop
-              muted
-              playsInline
-            >
-              <source src="/videos/operations_compilation.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
+            <div className="rounded-lg overflow-hidden shadow-lg">
+              <video
+                ref={videoRef}
+                className="w-full h-[25rem] object-cover"
+                loop
+                muted
+                playsInline
+              >
+                <source src="/videos/warehouse_overview.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
           </motion.div>
 
           {/* Services Grid */}
