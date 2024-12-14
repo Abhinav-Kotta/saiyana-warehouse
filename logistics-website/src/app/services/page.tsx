@@ -241,7 +241,7 @@ export default function ServicesPage() {
                   title="Warehouse Operations"
                   description="Watch our efficient warehouse management system in action"
                   videoSrc="/videos/operations_compilation.mp4"
-                  posterSrc="/images/warehouse_operations.jpg"
+                  posterSrc="/images/warehouse_operations.webp"
                 />
               </motion.div>
             </div>
