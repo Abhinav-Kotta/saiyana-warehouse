@@ -119,11 +119,11 @@ export default function Services() {
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
-            className="lg:col-span-2 relative rounded-lg overflow-hidden shadow-lg h-full flex items-center"
+            className="lg:col-span-2 w-fit rounded-lg overflow-hidden shadow-lg"
           >
             <video
               ref={videoRef}
-              className="w-full h-48 object-cover rounded-lg"
+              className="h-48 rounded-lg"
               loop
               muted
               playsInline
