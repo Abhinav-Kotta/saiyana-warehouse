@@ -113,17 +113,17 @@ export default function Services() {
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
+        <div className="grid lg:grid-cols-5 gap-8">
           {/* Video Section */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
-            className="relative rounded-xl overflow-hidden shadow-xl"
+            className="lg:col-span-2 relative rounded-xl overflow-hidden shadow-xl h-full flex items-center"
           >
             <video
               ref={videoRef}
-              className="w-full h-full object-cover rounded-xl"
+              className="w-full h-64 object-cover rounded-xl"
               loop
               muted
               playsInline
@@ -139,7 +139,7 @@ export default function Services() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="grid grid-cols-2 gap-6"
+            className="lg:col-span-3 grid md:grid-cols-2 gap-6"
           >
             {services.map((service) => (
               <motion.div
