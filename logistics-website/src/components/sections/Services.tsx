@@ -134,7 +134,7 @@ export default function Services() {
                 muted
                 playsInline
               >
-                <source src="/videos/operations_compilation.mp4" type="video/mp4" />
+                <source src="/videos/warehouse_overview.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
             </div>
