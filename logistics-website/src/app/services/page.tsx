@@ -207,48 +207,6 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Video Showcase Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="max-w-6xl mx-auto"
-          >
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold mb-4">Experience Our Facilities</h2>
-              <p className="text-gray-600">Take a virtual tour of our state-of-the-art warehousing operations</p>
-            </div>
-            <div className="grid md:grid-cols-2 gap-8">
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.2 }}
-              >
-                <VideoSection
-                  title="Warehouse Overview"
-                  description="Explore our modern warehousing facilities and infrastructure"
-                  videoSrc="/videos/warehouse_overview.mp4"
-                  posterSrc="/images/warehouse_overview.jpg"
-                />
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.4 }}
-              >
-                <VideoSection
-                  title="Warehouse Operations"
-                  description="Watch our efficient warehouse management system in action"
-                  videoSrc="/videos/operations_compilation.mp4"
-                  posterSrc="/images/warehouse_operations.webp"
-                />
-              </motion.div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
       {/* Main Services Section */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
@@ -294,8 +252,50 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Additional Features Section */}
+      {/* Video Showcase Section */}
       <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="max-w-6xl mx-auto"
+          >
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold mb-4">Experience Our Facilities</h2>
+              <p className="text-gray-600">Take a virtual tour of our state-of-the-art warehousing operations</p>
+            </div>
+            <div className="grid md:grid-cols-2 gap-8">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.2 }}
+              >
+                <VideoSection
+                  title="Warehouse Overview"
+                  description="Explore our modern warehousing facilities and infrastructure"
+                  videoSrc="/videos/warehouse_overview.mp4"
+                  posterSrc="/images/warehouse_overview.jpg"
+                />
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.4 }}
+              >
+                <VideoSection
+                  title="Warehouse Operations"
+                  description="Watch our efficient warehouse management system in action"
+                  videoSrc="/videos/operations_compilation.mp4"
+                  posterSrc="/images/warehouse_operations.webp"
+                />
+              </motion.div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Additional Features Section */}
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
