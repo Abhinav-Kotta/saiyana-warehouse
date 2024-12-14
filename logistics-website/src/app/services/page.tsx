@@ -4,16 +4,9 @@ import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { 
   Truck, Package, BarChart3, Boxes, Clock, Shield, Users, 
-  ClipboardList, Play, Pause 
+  ClipboardList
 } from 'lucide-react';
 import Card from '@/components/ui/Card';
-
-interface VideoSectionProps {
-  title: string;
-  description: string;
-  videoSrc: string;
-  posterSrc?: string;
-}
 
 interface ServiceFeature {
   title: string;
@@ -27,68 +20,6 @@ interface AdditionalFeature {
   title: string;
   description: string;
 }
-
-const VideoSection: React.FC<VideoSectionProps> = ({ 
-  title, 
-  description, 
-  videoSrc, 
-  posterSrc 
-}) => {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  const togglePlay = () => {
-    if (videoRef.current) {
-      if (isPlaying) {
-        videoRef.current.pause();
-      } else {
-        videoRef.current.play();
-      }
-      setIsPlaying(!isPlaying);
-    }
-  };
-
-  return (
-    <div className="relative group rounded-2xl overflow-hidden bg-gray-900">
-      <video
-        ref={videoRef}
-        className="w-full aspect-video object-cover"
-        poster={posterSrc}
-        onClick={togglePlay}
-        onEnded={() => setIsPlaying(false)}
-      >
-        <source src={videoSrc} type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-      
-      {!isPlaying && (
-        <div 
-          className="absolute inset-0 bg-gray-900/60 flex items-center justify-center cursor-pointer"
-          onClick={togglePlay}
-        >
-          <div className="relative z-10 flex flex-col items-center text-white">
-            <div className="w-16 h-16 rounded-full bg-primary-500/20 flex items-center justify-center mb-4 group-hover:bg-primary-500/30 transition-colors">
-              <Play className="w-8 h-8 text-white" />
-            </div>
-            <h3 className="text-xl font-semibold mb-2">{title}</h3>
-            <p className="text-sm text-gray-300 text-center max-w-md px-4">{description}</p>
-          </div>
-        </div>
-      )}
-
-      {isPlaying && (
-        <div 
-          className="absolute inset-0 bg-transparent flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity cursor-pointer"
-          onClick={togglePlay}
-        >
-          <div className="w-16 h-16 rounded-full bg-gray-900/60 flex items-center justify-center">
-            <Pause className="w-8 h-8 text-white" />
-          </div>
-        </div>
-      )}
-    </div>
-  );
-};
 
 const mainServices: ServiceFeature[] = [
   {
@@ -161,6 +92,8 @@ const additionalFeatures: AdditionalFeature[] = [
 ];
 
 export default function ServicesPage() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
   return (
     <div className="min-h-screen pt-16">
       {/* Hero Section */}
@@ -207,7 +140,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Main Services Section */}
+      {/* Main Services Section with Video Integration */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <motion.div
@@ -217,8 +150,27 @@ export default function ServicesPage() {
           >
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold mb-4">Core Services</h2>
-              <p className="text-gray-600">Comprehensive solutions for your logistics needs</p>
+              <p className="text-gray-600 mb-8">Comprehensive solutions for your logistics needs</p>
+              
+              {/* Subtle Video Integration */}
+              <div className="mb-12 rounded-xl overflow-hidden shadow-lg max-w-3xl mx-auto bg-gray-900">
+                <video
+                  ref={videoRef}
+                  className="w-full aspect-video object-cover opacity-90"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                >
+                  <source src="/videos/operations_compilation.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+                <div className="p-4 bg-gray-900 text-center">
+                  <p className="text-sm text-gray-400">Example of modern warehouse operations</p>
+                </div>
+              </div>
             </div>
+
             <div className="grid md:grid-cols-2 gap-8">
               {mainServices.map((service, i) => (
                 <motion.div
@@ -252,50 +204,8 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Video Showcase Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="max-w-6xl mx-auto"
-          >
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold mb-4">Experience Our Facilities</h2>
-              <p className="text-gray-600">Take a virtual tour of our state-of-the-art warehousing operations</p>
-            </div>
-            <div className="grid md:grid-cols-2 gap-8">
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.2 }}
-              >
-                <VideoSection
-                  title="Warehouse Overview"
-                  description="Explore our modern warehousing facilities and infrastructure"
-                  videoSrc="/videos/warehouse_overview.mp4"
-                  posterSrc="/images/warehouse_overview.jpg"
-                />
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.4 }}
-              >
-                <VideoSection
-                  title="Warehouse Operations"
-                  description="Watch our efficient warehouse management system in action"
-                  videoSrc="/videos/operations_compilation.mp4"
-                  posterSrc="/images/warehouse_operations.jpg"
-                />
-              </motion.div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
       {/* Additional Features Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
