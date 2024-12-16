@@ -76,27 +76,27 @@ export default function Footer() {
               <h3 className="text-lg font-semibold mb-6">Our Solutions</h3>
               <ul className="space-y-4">
                 <li>
-                  <Link href="/services#warehousing" className="text-gray-300 hover:text-primary-400 flex items-center gap-2 group">
+                  <Link href="/services" className="text-gray-300 hover:text-primary-400 flex items-center gap-2 group">
                     <span className="w-1.5 h-1.5 bg-primary-500 rounded-full group-hover:w-2 transition-all" />
                     Warehousing Solutions
                   </Link>
                 </li>
                 <li>
-                  <Link href="/services#distribution" className="text-gray-300 hover:text-primary-400 flex items-center gap-2 group">
+                  <Link href="/services" className="text-gray-300 hover:text-primary-400 flex items-center gap-2 group">
                     <span className="w-1.5 h-1.5 bg-primary-500 rounded-full group-hover:w-2 transition-all" />
-                    Distribution Services
+                    C&F Solutions
                   </Link>
                 </li>
                 <li>
-                  <Link href="/services#logistics" className="text-gray-300 hover:text-primary-400 flex items-center gap-2 group">
+                  <Link href="/services" className="text-gray-300 hover:text-primary-400 flex items-center gap-2 group">
                     <span className="w-1.5 h-1.5 bg-primary-500 rounded-full group-hover:w-2 transition-all" />
-                    Logistics Management
+                    Transportation Services
                   </Link>
                 </li>
                 <li>
-                  <Link href="/services#retail" className="text-gray-300 hover:text-primary-400 flex items-center gap-2 group">
+                  <Link href="/services" className="text-gray-300 hover:text-primary-400 flex items-center gap-2 group">
                     <span className="w-1.5 h-1.5 bg-primary-500 rounded-full group-hover:w-2 transition-all" />
-                    Retail Solutions
+                    Super Stockist
                   </Link>
                 </li>
               </ul>
