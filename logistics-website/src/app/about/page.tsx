@@ -1,8 +1,9 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Building2, Clock, Users, BarChart } from 'lucide-react';
 import Image from 'next/image';
+import { useState, useEffect } from 'react';
 
 const stats = [
   { label: 'Founded', value: '1996', icon: Building2 },
@@ -11,7 +12,25 @@ const stats = [
   { label: 'Years Experience', value: '27+', icon: Users },
 ];
 
+const carouselImages = [
+  { src: '/images/about_pg_1.jpeg', alt: 'Warehouse Facility View 1' },
+  { src: '/images/about_pg_2.jpeg', alt: 'Warehouse Facility View 2' },
+  { src: '/images/about_pg_3.jpeg', alt: 'Warehouse Facility View 3' },
+  { src: '/images/about_pg_4.jpeg', alt: 'Warehouse Facility View 4' },
+  { src: '/images/about_pg_5.jpeg', alt: 'Warehouse Facility View 5' },
+  { src: '/images/about_pg_6.jpeg', alt: 'Warehouse Facility View 6' }
+];
+
 export default function AboutPage() {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % carouselImages.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <div className="min-h-screen pt-16">
       {/* Hero Section */}
@@ -97,12 +116,12 @@ export default function AboutPage() {
             className="max-w-6xl mx-auto"
           >
             {/* Founder and Company Story */}
-            <div className="grid lg:grid-cols-2 gap-12 items-center mb-20">
+            <div className="grid lg:grid-cols-12 gap-12 items-center mb-20">
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.2 }}
-                className="space-y-6"
+                className="lg:col-span-5 space-y-6"
               >
                 <div className="prose prose-lg">
                   <p className="text-gray-700 leading-relaxed mb-6">
@@ -124,23 +143,48 @@ export default function AboutPage() {
                 </div>
               </motion.div>
 
-              {/* Founder Image Space */}
+              {/* Warehouse Carousel Space */}
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.4 }}
-                className="relative"
+                className="lg:col-span-7 relative"
               >
-                <div className="aspect-[3/4] rounded-2xl bg-gray-100 overflow-hidden">
-                  <div className="relative w-full h-full">
-                    <Image 
-                      src="/api/placeholder/600/800"
-                      alt="Namburi Sekhar - Founder of Saiyana Group"
-                      fill
-                      className="object-cover"
-                      priority
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-gray-900/40 to-transparent" />
+                <div className="aspect-[16/9] rounded-2xl bg-gray-100 overflow-hidden relative group shadow-xl">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={currentImageIndex}
+                      initial={{ opacity: 0, scale: 1.05 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.8 }}
+                      className="absolute inset-0"
+                    >
+                      <Image 
+                        src={carouselImages[currentImageIndex].src}
+                        alt={carouselImages[currentImageIndex].alt}
+                        fill
+                        className="object-cover"
+                        priority={currentImageIndex === 0}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-gray-900/40 to-transparent" />
+                    </motion.div>
+                  </AnimatePresence>
+
+                  {/* Carousel Indicators */}
+                  <div className="absolute bottom-6 left-0 right-0 flex justify-center gap-2 z-10">
+                    {carouselImages.map((_, index) => (
+                      <button
+                        key={index}
+                        onClick={() => setCurrentImageIndex(index)}
+                        className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                          index === currentImageIndex 
+                            ? 'bg-white w-6' 
+                            : 'bg-white/50 hover:bg-white/80'
+                        }`}
+                        aria-label={`Go to slide ${index + 1}`}
+                      />
+                    ))}
                   </div>
                 </div>
               </motion.div>
