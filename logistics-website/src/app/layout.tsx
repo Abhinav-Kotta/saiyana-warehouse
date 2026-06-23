@@ -9,13 +9,13 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Saiyana - Pharmaceutical Care Solutions",
-  description: "Professional pharmaceutical care and distribution services. Located in Hyderabad, providing quality healthcare solutions across India.",
-  keywords: "pharmaceutical, healthcare, medicine distribution, Hyderabad, pharmaceutical care",
-  authors: [{ name: "Saiyana" }],
+  title: "Saiyana Group - Warehousing & 3PL Logistics Solutions",
+  description: "Pioneering warehousing, C&F services, 3PL logistics, and super stockist services. Located in Hyderabad, providing logistics excellence across India since 1996.",
+  keywords: "warehousing, 3pl logistics, logistics, C&F services, super stockist, supply chain solutions, Hyderabad, India",
+  authors: [{ name: "Saiyana Group" }],
   openGraph: {
-    title: "Saiyana - Pharmaceutical Care Solutions",
-    description: "Professional pharmaceutical care and distribution services in Hyderabad",
+    title: "Saiyana Group - Warehousing & 3PL Logistics Solutions",
+    description: "Pioneering warehousing, C&F services, 3PL logistics, and super stockist services in Hyderabad, India since 1996.",
     type: "website",
   }
 };
