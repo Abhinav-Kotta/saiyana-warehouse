@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion, useAnimationControls } from 'framer-motion';
 
 interface LogoConfig {
@@ -13,20 +13,35 @@ interface PartnersProps {
 }
 
 export default function Partners({ logos }: PartnersProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const animatedContainerRef = useRef<HTMLDivElement>(null);
   const controls = useAnimationControls();
+  const [isMobile, setIsMobile] = useState(false);
 
-  // Double the logos to create seamless loop
+  // Double the logos to create seamless loop (desktop only)
   const doubledLogos = [...logos, ...logos];
 
+  // Detect mobile viewport
   useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Desktop auto-scroll animation
+  useEffect(() => {
+    if (isMobile) return;
+
     const startAnimation = async () => {
-      if (!containerRef.current) return;
+      if (!animatedContainerRef.current) return;
       
-      const containerWidth = containerRef.current.offsetWidth;
+      const containerWidth = animatedContainerRef.current.scrollWidth / 2;
       
       await controls.start({
-        x: [-containerWidth / 2, -containerWidth],
+        x: [0, -containerWidth],
         transition: {
           duration: 20,
           ease: "linear",
@@ -36,7 +51,11 @@ export default function Partners({ logos }: PartnersProps) {
     };
 
     startAnimation();
-  }, [controls]);
+
+    return () => {
+      controls.stop();
+    };
+  }, [controls, isMobile]);
 
   const getLogoStyles = (src: string): React.CSSProperties => {
     if (src.includes('rorito-logo')) {
@@ -50,17 +69,78 @@ export default function Partners({ logos }: PartnersProps) {
 
   const getLogoClasses = (src: string): string => {
     if (src.includes('amway-logo')) {
-      return 'h-24 w-44';
+      return 'w-32 md:w-48';
     }
     if (src.includes('rorito-logo')) {
-      return 'h-20 w-36 bg-blend-multiply';
+      return 'w-28 md:w-40 bg-blend-multiply';
     }
-    return 'h-20 w-36';
+    return 'w-28 md:w-40';
   };
 
+  // Mobile: native touch-scrollable layout
+  if (isMobile) {
+    return (
+      <section className="relative overflow-hidden bg-gray-900">
+        <div className="relative py-10">
+          <div className="container mx-auto px-4 mb-6">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="text-center"
+            >
+              <h2 className="text-2xl font-bold mb-2 text-white">Trusted Partners</h2>
+              <p className="text-sm text-gray-400">
+                Successfully serving industry leaders across sectors
+              </p>
+            </motion.div>
+          </div>
+
+          {/* Touch-scrollable container */}
+          <div
+            ref={scrollContainerRef}
+            className="flex items-center gap-4 px-4 py-4 overflow-x-auto scroll-smooth hide-scrollbar"
+            style={{
+              WebkitOverflowScrolling: 'touch',
+              scrollSnapType: 'x mandatory',
+            }}
+          >
+            {logos.map((logo, index) => (
+              <div
+                key={index}
+                className={`flex-shrink-0 ${getLogoClasses(logo.src)}`}
+                style={{ scrollSnapAlign: 'center' }}
+              >
+                <div className="p-3 rounded-xl bg-white flex items-center justify-center h-20">
+                  <img
+                    src={logo.src}
+                    alt={logo.alt}
+                    className="max-h-full max-w-full object-contain"
+                    style={getLogoStyles(logo.src)}
+                    loading="eager"
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Scroll hint indicator */}
+          <div className="flex justify-center mt-3 gap-1">
+            {logos.map((_, index) => (
+              <div
+                key={index}
+                className="w-1.5 h-1.5 rounded-full bg-gray-600"
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // Desktop: auto-scrolling animation
   return (
     <section className="relative overflow-hidden bg-gray-900">
-      {/* Main content */}
       <div className="relative py-24">
         {/* Edge fades */}
         <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-gray-900 to-transparent z-10" />
@@ -80,15 +160,16 @@ export default function Partners({ logos }: PartnersProps) {
           </motion.div>
         </div>
 
-        <div className="relative" ref={containerRef}>
+        <div className="relative overflow-hidden">
           <motion.div
+            ref={animatedContainerRef}
             className="flex items-center space-x-16 py-8"
             animate={controls}
           >
             {doubledLogos.map((logo, index) => (
               <motion.div
                 key={index}
-                className={`flex-shrink-0 relative ${getLogoClasses(logo.src)}`}
+                className={`flex-shrink-0 ${getLogoClasses(logo.src)}`}
                 whileHover={{ 
                   scale: 1.05,
                   transition: { 
@@ -98,11 +179,11 @@ export default function Partners({ logos }: PartnersProps) {
                   }
                 }}
               >
-                <div className="p-4 rounded-xl bg-white">
+                <div className="p-4 rounded-xl bg-white flex items-center justify-center h-24 md:h-28">
                   <img
                     src={logo.src}
                     alt={logo.alt}
-                    className="h-full w-full object-contain"
+                    className="max-h-full max-w-full object-contain"
                     style={getLogoStyles(logo.src)}
                     loading="eager"
                   />

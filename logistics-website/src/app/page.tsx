@@ -45,10 +45,10 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <Partners logos={partnerLogos} />
       <Services />
       <Features />
       <Stats />
-      <Partners logos={partnerLogos} />
       <Contact />
     </>
   );

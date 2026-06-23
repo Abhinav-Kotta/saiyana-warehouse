@@ -18,9 +18,9 @@ export default function Footer() {
       </div>
 
       {/* Main footer content */}
-      <div className="relative pt-20 pb-12">
+      <div className="relative pt-12 md:pt-20 pb-12">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-4 gap-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
             {/* Company Overview */}
             <div>
               <h3 className="text-xl font-bold mb-6 text-white flex items-center gap-2">
@@ -28,7 +28,7 @@ export default function Footer() {
                 Saiyana Group
               </h3>
               <p className="text-gray-300 mb-6">
-                Founded in 1996 by Namburi Sekhar, Saiyana Group has evolved from 
+                Founded in 1996 by Sri Namburi Sekhar, Saiyana Group has evolved from 
                 stationery product marketing to becoming pioneers in warehousing and 
                 logistics. We pride ourselves on building lasting relationships and 
                 delivering cost-effective solutions for distributors and retailers.
@@ -121,9 +121,15 @@ export default function Footer() {
                 </li>
                 <li className="flex gap-3 items-center text-gray-300">
                   <Phone className="w-5 h-5 text-primary-400 flex-shrink-0" />
-                  <a href="tel:+919440649884" className="hover:text-primary-400">
-                    +91 9440649884
-                  </a>
+                  <div className="flex flex-wrap items-center gap-x-1">
+                    <a href="tel:+919849005937" className="hover:text-primary-400">
+                      +91 9849005937
+                    </a>
+                    <span>/</span>
+                    <a href="tel:+919440649884" className="hover:text-primary-400">
+                      +91 9440649884
+                    </a>
+                  </div>
                 </li>
                 <li className="flex gap-3 items-center text-gray-300">
                   <Clock className="w-5 h-5 text-primary-400 flex-shrink-0" />

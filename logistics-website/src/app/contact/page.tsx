@@ -60,7 +60,7 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen pt-16">
       {/* Hero Section */}
-      <section className="relative py-20 bg-gray-900 overflow-hidden">
+      <section className="relative py-12 md:py-20 bg-gray-900 overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
           <motion.div
             className="absolute w-96 h-96 rounded-full bg-primary-500/10 blur-3xl"
@@ -95,8 +95,8 @@ export default function ContactPage() {
             animate={{ opacity: 1, y: 0 }}
             className="max-w-3xl mx-auto text-center text-white"
           >
-            <h1 className="text-5xl font-bold mb-6">Contact Us</h1>
-            <p className="text-xl text-gray-300">
+            <h1 className="text-3xl md:text-5xl font-bold mb-4 md:mb-6">Contact Us</h1>
+            <p className="text-lg md:text-xl text-gray-300">
               Get in touch with our team for any inquiries
             </p>
           </motion.div>
@@ -104,14 +104,14 @@ export default function ContactPage() {
       </section>
 
       {/* Content Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-12 md:py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="max-w-6xl mx-auto"
           >
-            <div className="grid lg:grid-cols-2 gap-12">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
               {/* Contact Information */}
               <div className="space-y-8">
                 <Card className="p-6">
@@ -144,7 +144,7 @@ export default function ContactPage() {
                     <div className="flex items-start space-x-4">
                       <div>
                         <h3 className="font-semibold mb-2 text-gray-900">Phone</h3>
-                        <p className="text-gray-600">+91 9440649884</p>
+                        <p className="text-gray-600">+91 9849005937 / +91 9440649884</p>
                       </div>
                     </div>
 

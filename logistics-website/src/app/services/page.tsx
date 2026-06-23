@@ -97,7 +97,7 @@ export default function ServicesPage() {
   return (
     <div className="min-h-screen pt-16">
       {/* Hero Section */}
-      <section className="relative py-20 bg-gray-900 overflow-hidden">
+      <section className="relative py-12 md:py-20 bg-gray-900 overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
           <motion.div
             className="absolute w-96 h-96 rounded-full bg-primary-500/10 blur-3xl"
@@ -132,8 +132,8 @@ export default function ServicesPage() {
             animate={{ opacity: 1, y: 0 }}
             className="max-w-3xl mx-auto text-center text-white"
           >
-            <h1 className="text-5xl font-bold mb-6">Our Services</h1>
-            <p className="text-xl text-gray-300">
+            <h1 className="text-3xl md:text-5xl font-bold mb-4 md:mb-6">Our Services</h1>
+            <p className="text-lg md:text-xl text-gray-300">
               Comprehensive logistics solutions tailored to optimize your supply chain
             </p>
           </motion.div>
@@ -141,7 +141,7 @@ export default function ServicesPage() {
       </section>
 
       {/* Main Services Section with Video Integration */}
-      <section className="py-20 bg-white">
+      <section className="py-12 md:py-20 bg-white">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -171,7 +171,7 @@ export default function ServicesPage() {
               </div>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
               {mainServices.map((service, i) => (
                 <motion.div
                   key={service.title}
@@ -205,7 +205,7 @@ export default function ServicesPage() {
       </section>
 
       {/* Additional Features Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-12 md:py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -216,7 +216,7 @@ export default function ServicesPage() {
               <h2 className="text-3xl font-bold mb-4">Additional Features</h2>
               <p className="text-gray-600">Enhanced capabilities to support your business</p>
             </div>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
               {additionalFeatures.map((feature, i) => (
                 <motion.div
                   key={feature.title}

@@ -136,18 +136,18 @@ export default function Hero() {
       </div>
 
       {/* Content */}
-      <div className="container relative z-20 mx-auto px-4 pt-16">
+      <div className="container relative z-20 mx-auto px-4 pt-20 md:pt-16">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="max-w-4xl mx-auto lg:mr-[35%] relative"
+          className="max-w-4xl mx-auto lg:mr-[35%] relative px-2 sm:px-0"
         >
           <div className="flex flex-col gap-8">
             {/* Main heading */}
             <motion.div variants={itemVariants} className="space-y-4">
               <motion.div 
-                className="inline-block bg-primary-600/90 text-white px-4 py-1 rounded-full text-sm font-medium backdrop-blur-sm"
+                className="inline-block bg-primary-600/90 text-white px-3 py-1 rounded-full text-xs sm:text-sm font-medium backdrop-blur-sm"
                 initial={{ scale: 1 }}
                 animate={{ scale: [1, 1.05, 1] }}
                 transition={{ duration: 2, repeat: Infinity }}
@@ -155,7 +155,7 @@ export default function Hero() {
                 Advanced 3PL Solutions
               </motion.div>
               <motion.h1 
-                className="text-5xl lg:text-6xl font-bold text-white leading-tight"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight"
                 variants={textRevealVariants}
               >
                 Streamline Your <span className="text-primary-400">Supply Chain</span>
@@ -166,7 +166,7 @@ export default function Hero() {
             {/* Description */}
             <motion.p 
               variants={itemVariants}
-              className="text-lg lg:text-xl text-gray-200 max-w-2xl"
+              className="text-base sm:text-lg lg:text-xl text-gray-200 max-w-2xl"
             >
               Comprehensive warehousing and third-party logistics solutions tailored 
               to optimize your distribution network and enhance operational efficiency.
@@ -183,7 +183,7 @@ export default function Hero() {
                   variants={floatingIconVariants}
                   initial="initial"
                   animate="float"
-                  className="flex items-center gap-2 text-white backdrop-blur-sm bg-gray-900/30 px-4 py-2 rounded-lg"
+                  className="flex items-center gap-2 text-white backdrop-blur-sm bg-gray-900/30 px-3 py-2 rounded-lg text-sm sm:text-base"
                 >
                   <feature.icon className="w-5 h-5 text-primary-400" />
                   <span>{feature.text}</span>
@@ -194,7 +194,7 @@ export default function Hero() {
             {/* CTA Buttons */}
             <motion.div 
               variants={itemVariants}
-              className="flex gap-4"
+              className="flex flex-col sm:flex-row gap-3 sm:gap-4"
             >
               <div className="group">
                 <Button 

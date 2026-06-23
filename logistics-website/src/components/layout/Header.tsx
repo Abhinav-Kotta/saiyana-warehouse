@@ -110,7 +110,7 @@ export default function Header() {
                 <Link
                   key={link.name}
                   href={link.href}
-                  className="block py-2 text-gray-700 hover:text-primary-600"
+                  className="block py-3 text-base text-gray-700 hover:text-primary-600"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {link.name}

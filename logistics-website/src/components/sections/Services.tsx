@@ -69,7 +69,7 @@ export default function Services() {
   };
 
   return (
-    <section className="py-12 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
+    <section className="py-8 md:py-12 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
@@ -105,15 +105,15 @@ export default function Services() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-8"
+          className="text-center max-w-3xl mx-auto mb-6 md:mb-8"
         >
-          <h2 className="text-3xl font-bold mb-2 text-gray-900">3PL Services</h2>
+          <h2 className="text-2xl md:text-3xl font-bold mb-2 text-gray-900">3PL Services</h2>
           <p className="text-gray-700 text-base">
             End-to-end warehousing and logistics solutions for your business
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-5 gap-6">
+        <div className="grid lg:grid-cols-5 gap-4 md:gap-6">
           {/* Video Section */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -124,7 +124,7 @@ export default function Services() {
             <div className="rounded-lg overflow-hidden shadow-lg">
               <video
                 ref={videoRef}
-                className="w-full h-[25rem] object-cover"
+                className="w-full h-[15rem] md:h-[25rem] object-cover"
                 loop
                 muted
                 playsInline

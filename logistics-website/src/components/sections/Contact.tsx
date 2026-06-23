@@ -27,7 +27,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="quote-request-section" className="py-24 relative overflow-hidden">
+    <section id="quote-request-section" className="py-16 md:py-24 relative overflow-hidden">
       {/* Gradient background */}
       <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-white" />
       
@@ -71,8 +71,8 @@ export default function Contact() {
             viewport={{ once: true }}
           >
             <motion.div variants={itemVariants} className="text-center mb-12">
-              <h2 className="text-4xl font-bold mb-4 text-black">Request a Quote</h2>
-              <p className="text-black text-lg">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-black">Request a Quote</h2>
+              <p className="text-black text-base md:text-lg">
                 Tell us about your logistics needs and we&apos;ll provide a customized solution.
               </p>
             </motion.div>

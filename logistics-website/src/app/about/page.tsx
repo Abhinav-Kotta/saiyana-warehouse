@@ -34,7 +34,7 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen pt-16">
       {/* Hero Section */}
-      <section className="relative py-20 bg-gray-900 overflow-hidden">
+      <section className="relative py-12 md:py-20 bg-gray-900 overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
           <motion.div
             className="absolute w-96 h-96 rounded-full bg-primary-500/10 blur-3xl"
@@ -69,8 +69,8 @@ export default function AboutPage() {
             animate={{ opacity: 1, y: 0 }}
             className="max-w-3xl mx-auto text-center text-white"
           >
-            <h1 className="text-5xl font-bold mb-6">About Saiyana Group</h1>
-            <p className="text-xl text-gray-300">
+            <h1 className="text-3xl md:text-5xl font-bold mb-4 md:mb-6">About Saiyana Group</h1>
+            <p className="text-lg md:text-xl text-gray-300">
               Pioneering logistics excellence since 1996
             </p>
           </motion.div>
@@ -78,7 +78,7 @@ export default function AboutPage() {
       </section>
 
       {/* Content Section */}
-      <section className="py-24 relative overflow-hidden">
+      <section className="py-12 md:py-24 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-white" />
         <div className="absolute inset-0 overflow-hidden">
           <motion.div
@@ -116,7 +116,7 @@ export default function AboutPage() {
             className="max-w-6xl mx-auto"
           >
             {/* Founder and Company Story */}
-            <div className="grid lg:grid-cols-12 gap-12 items-center mb-20">
+            <div className="grid lg:grid-cols-12 gap-8 md:gap-12 items-center mb-12 md:mb-20">
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -126,7 +126,7 @@ export default function AboutPage() {
                 <div className="prose prose-lg">
                   <p className="text-gray-700 leading-relaxed mb-6">
                     <span className="font-semibold text-gray-900">Saiyana Group</span> was 
-                    established by <span className="font-semibold text-gray-900">Namburi Sekhar</span>, 
+                    established by <span className="font-semibold text-gray-900">Sri Namburi Sekhar</span>, 
                     who holds a Postgraduate Diploma in Management from Jain Institute, Chennai.
                   </p>
                   <p className="text-gray-700 leading-relaxed mb-6">
@@ -195,7 +195,7 @@ export default function AboutPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 }}
-              className="grid grid-cols-2 lg:grid-cols-4 gap-8"
+              className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8"
             >
               {stats.map((stat) => (
                 <div

@@ -53,7 +53,7 @@ export default function Features() {
   };
 
   return (
-    <section className="py-20 bg-gray-900 relative overflow-hidden">
+    <section className="py-12 md:py-20 bg-gray-900 relative overflow-hidden">
       {/* Animated background */}
       <div className="absolute inset-0">
         <motion.div
@@ -75,10 +75,10 @@ export default function Features() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-16"
+          className="text-center max-w-3xl mx-auto mb-10 md:mb-16"
         >
-          <h2 className="text-4xl font-bold mb-4 text-white">Why Choose Saiyana</h2>
-          <p className="text-gray-400 text-lg">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Why Choose Saiyana</h2>
+          <p className="text-gray-400 text-base md:text-lg">
             Your trusted partner in third-party logistics excellence
           </p>
         </motion.div>
@@ -88,7 +88,7 @@ export default function Features() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8"
         >
           {features.map((feature) => (
             <motion.div
