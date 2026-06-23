@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import { motion, useAnimationControls } from 'framer-motion';
 
 interface LogoConfig {
@@ -18,7 +18,12 @@ export default function Partners({ logos }: PartnersProps) {
   const controls = useAnimationControls();
   const [isMobile, setIsMobile] = useState(false);
 
-  // Double the logos to create seamless loop (desktop only)
+  // Refs for mobile auto-scroll
+  const autoScrollRef = useRef<number | null>(null);
+  const isTouchingRef = useRef(false);
+  const scrollSpeedRef = useRef(0.5); // pixels per frame
+
+  // Double the logos to create seamless loop
   const doubledLogos = [...logos, ...logos];
 
   // Detect mobile viewport
@@ -30,6 +35,60 @@ export default function Partners({ logos }: PartnersProps) {
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
+
+  // Mobile auto-scroll using native scrollLeft
+  const startAutoScroll = useCallback(() => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+
+    const tick = () => {
+      if (!isTouchingRef.current && container) {
+        container.scrollLeft += scrollSpeedRef.current;
+
+        // When we've scrolled past the first set of logos, jump back seamlessly
+        const halfScroll = container.scrollWidth / 2;
+        if (container.scrollLeft >= halfScroll) {
+          container.scrollLeft -= halfScroll;
+        }
+      }
+      autoScrollRef.current = requestAnimationFrame(tick);
+    };
+
+    autoScrollRef.current = requestAnimationFrame(tick);
+  }, []);
+
+  useEffect(() => {
+    if (!isMobile) return;
+
+    const container = scrollContainerRef.current;
+    if (!container) return;
+
+    // Start auto-scroll
+    startAutoScroll();
+
+    // Touch handlers: pause on touch, resume on release
+    const handleTouchStart = () => {
+      isTouchingRef.current = true;
+    };
+
+    const handleTouchEnd = () => {
+      // Small delay before resuming so the momentum scroll feels natural
+      setTimeout(() => {
+        isTouchingRef.current = false;
+      }, 2000);
+    };
+
+    container.addEventListener('touchstart', handleTouchStart, { passive: true });
+    container.addEventListener('touchend', handleTouchEnd, { passive: true });
+
+    return () => {
+      if (autoScrollRef.current) {
+        cancelAnimationFrame(autoScrollRef.current);
+      }
+      container.removeEventListener('touchstart', handleTouchStart);
+      container.removeEventListener('touchend', handleTouchEnd);
+    };
+  }, [isMobile, startAutoScroll]);
 
   // Desktop auto-scroll animation
   useEffect(() => {
@@ -77,7 +136,7 @@ export default function Partners({ logos }: PartnersProps) {
     return 'w-28 md:w-40';
   };
 
-  // Mobile: native touch-scrollable layout
+  // Mobile: auto-scrolling + touch-to-pause scrollable layout
   if (isMobile) {
     return (
       <section className="relative overflow-hidden bg-gray-900">
@@ -96,20 +155,18 @@ export default function Partners({ logos }: PartnersProps) {
             </motion.div>
           </div>
 
-          {/* Touch-scrollable container */}
+          {/* Auto-scrolling + touch-scrollable container */}
           <div
             ref={scrollContainerRef}
-            className="flex items-center gap-4 px-4 py-4 overflow-x-auto scroll-smooth hide-scrollbar"
+            className="flex items-center gap-4 px-4 py-4 overflow-x-auto hide-scrollbar"
             style={{
               WebkitOverflowScrolling: 'touch',
-              scrollSnapType: 'x mandatory',
             }}
           >
-            {logos.map((logo, index) => (
+            {doubledLogos.map((logo, index) => (
               <div
                 key={index}
                 className={`flex-shrink-0 ${getLogoClasses(logo.src)}`}
-                style={{ scrollSnapAlign: 'center' }}
               >
                 <div className="p-3 rounded-xl bg-white flex items-center justify-center h-20">
                   <img
@@ -121,16 +178,6 @@ export default function Partners({ logos }: PartnersProps) {
                   />
                 </div>
               </div>
-            ))}
-          </div>
-
-          {/* Scroll hint indicator */}
-          <div className="flex justify-center mt-3 gap-1">
-            {logos.map((_, index) => (
-              <div
-                key={index}
-                className="w-1.5 h-1.5 rounded-full bg-gray-600"
-              />
             ))}
           </div>
         </div>
